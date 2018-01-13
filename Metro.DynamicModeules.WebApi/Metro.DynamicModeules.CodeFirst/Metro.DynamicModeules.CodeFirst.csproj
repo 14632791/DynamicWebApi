@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B719B76F-7EC1-4CDC-B755-80B13E4A92D3}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Metro.DynamicModeules.CodeFirst</RootNamespace>
+    <AssemblyName>Metro.DynamicModeules.CodeFirst</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity.Design" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Models\CSFramework3NormalContext.cs" />
+    <Compile Include="Models\CSFramework3SystemContext.cs" />
+    <Compile Include="Models\Mapping\dtpropertyMap.cs" />
+    <Compile Include="Models\Mapping\log_SOMap.cs" />
+    <Compile Include="Models\Mapping\log_SOsMap.cs" />
+    <Compile Include="Models\Mapping\sysdiagramMap.cs" />
+    <Compile Include="Models\Mapping\sys_BusinessTablesMap.cs" />
+    <Compile Include="Models\Mapping\sys_DataSNMap.cs" />
+    <Compile Include="Models\Mapping\sys_DocSNMap.cs" />
+    <Compile Include="Models\Mapping\sys_FieldNameDefsMap.cs" />
+    <Compile Include="Models\Mapping\sys_ModulesMap.cs" />
+    <Compile Include="Models\Mapping\tb_AccountIDsMap.cs" />
+    <Compile Include="Models\Mapping\tb_APMap.cs" />
+    <Compile Include="Models\Mapping\tb_APsMap.cs" />
+    <Compile Include="Models\Mapping\tb_ARMap.cs" />
+    <Compile Include="Models\Mapping\tb_ARsMap.cs" />
+    <Compile Include="Models\Mapping\tb_AttachFileMap.cs" />
+    <Compile Include="Models\Mapping\tb_CommDataDictTypeMap.cs" />
+    <Compile Include="Models\Mapping\tb_CommonDataDictMap.cs" />
+    <Compile Include="Models\Mapping\tb_CompanyInfoMap.cs" />
+    <Compile Include="Models\Mapping\tb_CurrencyMap.cs" />
+    <Compile Include="Models\Mapping\tb_CustomerAttributeMap.cs" />
+    <Compile Include="Models\Mapping\tb_CustomerMap.cs" />
+    <Compile Include="Models\Mapping\tb_DataSetMap.cs" />
+    <Compile Include="Models\Mapping\tb_IAMap.cs" />
+    <Compile Include="Models\Mapping\tb_IAsMap.cs" />
+    <Compile Include="Models\Mapping\tb_ICMap.cs" />
+    <Compile Include="Models\Mapping\tb_ICsMap.cs" />
+    <Compile Include="Models\Mapping\tb_INMap.cs" />
+    <Compile Include="Models\Mapping\tb_INsMap.cs" />
+    <Compile Include="Models\Mapping\tb_IOMap.cs" />
+    <Compile Include="Models\Mapping\tb_IOsMap.cs" />
+    <Compile Include="Models\Mapping\tb_LocationMap.cs" />
+    <Compile Include="Models\Mapping\tb_LogDtlMap.cs" />
+    <Compile Include="Models\Mapping\tb_LogFieldsMap.cs" />
+    <Compile Include="Models\Mapping\tb_LoginLogMap.cs" />
+    <Compile Include="Models\Mapping\tb_LogMap.cs" />
+    <Compile Include="Models\Mapping\tb_MyAuthorityItemMap.cs" />
+    <Compile Include="Models\Mapping\tb_MyFormTagNameMap.cs" />
+    <Compile Include="Models\Mapping\tb_MyMenuMap.cs" />
+    <Compile Include="Models\Mapping\tb_MyUserGroupMap.cs" />
+    <Compile Include="Models\Mapping\tb_MyUserGroupReMap.cs" />
+    <Compile Include="Models\Mapping\tb_MyUserMap.cs" />
+    <Compile Include="Models\Mapping\tb_MyUserRoleMap.cs" />
+    <Compile Include="Models\Mapping\tb_PayTypeMap.cs" />
+    <Compile Include="Models\Mapping\tb_PersonMap.cs" />
+    <Compile Include="Models\Mapping\tb_POMap.cs" />
+    <Compile Include="Models\Mapping\tb_POsMap.cs" />
+    <Compile Include="Models\Mapping\tb_ProductCategoryMap.cs" />
+    <Compile Include="Models\Mapping\tb_ProductMap.cs" />
+    <Compile Include="Models\Mapping\tb_SOMap.cs" />
+    <Compile Include="Models\Mapping\tb_SOsMap.cs" />
+    <Compile Include="Models\Mapping\vw_APsMap.cs" />
+    <Compile Include="Models\Mapping\vw_ARsMap.cs" />
+    <Compile Include="Models\Mapping\vw_CommonDataDictsMap.cs" />
+    <Compile Include="Models\Mapping\vw_IAsMap.cs" />
+    <Compile Include="Models\Mapping\vw_ICsMap.cs" />
+    <Compile Include="Models\Mapping\vw_INsMap.cs" />
+    <Compile Include="Models\Mapping\vw_IOsMap.cs" />
+    <Compile Include="Models\Mapping\vw_LogOPTypeMap.cs" />
+    <Compile Include="Models\Mapping\vw_POsMap.cs" />
+    <Compile Include="Models\Mapping\vw_SOsMap.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="CodeTemplates\ReverseEngineerCodeFirst\Context.tt" />
+    <Content Include="CodeTemplates\ReverseEngineerCodeFirst\Entity.tt" />
+    <Content Include="CodeTemplates\ReverseEngineerCodeFirst\Mapping.tt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\failDynamicModeules\Metro.DynamicModeules\Metro.DynamicModeules.Models\Metro.DynamicModeules.Models.csproj">
+      <Project>{937e0d53-9696-48ab-b12f-736bc6d43f15}</Project>
+      <Name>Metro.DynamicModeules.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
