@@ -7,8 +7,14 @@ using System.Xml.Linq;
 
 namespace Metro.DynamicModeules.Interface.Service.Base
 {
-    public interface IServiceBase<TModel>
+    public interface IServiceBase<TModel>: ICommonServiceBase<TModel>
          where TModel : class
+    {
+        bool Commit(bool isSave = true);
+    }
+
+    public interface ICommonServiceBase<TModel>
+        where TModel : class
     {
         /// <summary>
         /// 根据主键获取单个实体
@@ -34,7 +40,7 @@ namespace Metro.DynamicModeules.Interface.Service.Base
         /// </summary>
         /// <param name="where"></param>
         /// <param name="dic"></param>
-        bool Update(Expression<Func<TModel, bool>> where, Dictionary<string, object> dic, bool isSave = true);
+        bool Update(XElement xmlPredicate, Dictionary<string, object> dic, bool isSave = true);
 
         /// <summary>
         /// 删除
@@ -44,8 +50,7 @@ namespace Metro.DynamicModeules.Interface.Service.Base
         bool Delete(bool isSave, IEnumerable<TModel> entities);
         bool Delete(TModel model, bool isSave = true);
 
-
-        bool Commit(bool isSave = true);
+        
         IEnumerable<TModel> GetSearchList(XElement xmlPredicate);
         IEnumerable<TModel> GetSearchListByPage<TKey>(XElement xmlPredicate, XElement xmlOrderBy, int pageSize, int pageIndex, out int totalRow);
 

@@ -286,11 +286,12 @@ namespace Metro.DynamicModeules.Service.Base
         /// </summary>
         /// <param name="where"></param>
         /// <param name="dic"></param>
-        public bool Update(Expression<Func<TModel, bool>> where, Dictionary<string, object> dic, bool isSave = true)
+        public bool Update(XElement xmlPredicate,  Dictionary<string, object> dic, bool isSave = true)
         {
             Monitor.Enter(_objLock);
             try
             {
+                Expression<Func<TModel, bool>> where= SerializeHelper.DeserializeExpression<TModel, bool>(xmlPredicate);
                 IEnumerable<TModel> result = DbContext.Set<TModel>().Where(where).ToList();
                 if (null == result || result.Count() <= 0) return false;
                 Type type = typeof(TModel);
