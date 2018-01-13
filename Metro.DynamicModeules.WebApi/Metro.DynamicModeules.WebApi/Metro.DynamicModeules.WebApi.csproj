@@ -178,6 +178,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\ApiControllerBase.cs" />
+    <Compile Include="Controllers\BusinessTablesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Filter\AuthFilterAttribute.cs" />
@@ -258,6 +259,10 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\failDynamicModeules\Metro.DynamicModeules\Metro.DynamicModeules.Models\Metro.DynamicModeules.Models.csproj">
+      <Project>{937E0D53-9696-48AB-B12F-736BC6D43F15}</Project>
+      <Name>Metro.DynamicModeules.Models</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Metro.DynamicModeules.Interface\Metro.DynamicModeules.Interface.csproj">
       <Project>{66b7a24b-9fb9-4436-a269-f6740e700c03}</Project>
       <Name>Metro.DynamicModeules.Interface</Name>
