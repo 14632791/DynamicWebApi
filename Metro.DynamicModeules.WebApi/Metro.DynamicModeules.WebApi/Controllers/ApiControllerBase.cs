@@ -19,16 +19,62 @@ namespace Metro.DynamicModeules.WebApi.Controllers
     public class ApiControllerBase<TModel> : ApiController, ICommonServiceBase<TModel> where TModel:class
     {
         protected ServiceBase<TModel> _service;
+        public ApiControllerBase(ServiceBase<TModel> service)
+        {
+            _service = service;
+        }
 
         public object[] Add(TModel model, bool isSave = true)
         {
-            throw new NotImplementedException();
+            return _service.Add(model, isSave);
         }
 
         public bool Add(IEnumerable<TModel> paramList, bool isSave = true)
         {
-            throw new NotImplementedException();
+            return _service.Add(paramList, isSave);
         }
+
+        public bool Delete(bool isSave, params object[] keyValues)
+        {
+            return _service.Delete(isSave, keyValues);
+        }
+
+        public bool Delete(bool isSave, IEnumerable<TModel> entities)
+        {
+            return _service.Delete(isSave, entities);
+        }
+
+        public bool Delete(TModel model, bool isSave = true)
+        {
+            return _service.Delete(model, isSave);
+        }
+
+        public TModel Get(params object[] keyValues)
+        {
+            return _service.Get(keyValues);
+        }
+
+        public IEnumerable<TModel> GetSearchList(XElement xmlPredicate)
+        {
+            return _service.GetSearchList(xmlPredicate);
+        }
+
+        public IEnumerable<TModel> GetSearchListByPage<TKey>(XElement xmlPredicate, XElement xmlOrderBy, int pageSize, int pageIndex, out int totalRow)
+        {
+            return _service.GetSearchListByPage<TKey>(xmlPredicate, xmlOrderBy, pageSize, pageIndex, out totalRow);
+        }
+
+        public bool Update(TModel model, bool isSave = true)
+        {
+            return _service.Update(model, isSave);
+        }
+
+
+        public bool Update(XElement xmlPredicate, Dictionary<string, object> dic, bool isSave = true)
+        {
+            return _service.Update(xmlPredicate,dic, isSave);
+        }
+
         #region 默认封装
         public ApiResult Api<TRequest>(TRequest request, Func<TRequest, ResultObject> handle)
         {
@@ -93,48 +139,6 @@ namespace Metro.DynamicModeules.WebApi.Controllers
             });
         }
 
-       
-
-        public bool Delete(bool isSave, params object[] keyValues)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Delete(bool isSave, IEnumerable<TModel> entities)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Delete(TModel model, bool isSave = true)
-        {
-            throw new NotImplementedException();
-        }
-
-        public TModel Get(params object[] keyValues)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<TModel> GetSearchList(XElement xmlPredicate)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<TModel> GetSearchListByPage<TKey>(XElement xmlPredicate, XElement xmlOrderBy, int pageSize, int pageIndex, out int totalRow)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Update(TModel model, bool isSave = true)
-        {
-            throw new NotImplementedException();
-        }
-
-       
-        public bool Update(XElement xmlPredicate, Dictionary<string, object> dic, bool isSave = true)
-        {
-            throw new NotImplementedException();
-        }
 
         #endregion
     }

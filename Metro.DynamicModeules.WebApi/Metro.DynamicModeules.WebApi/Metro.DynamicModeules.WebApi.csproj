@@ -262,6 +262,10 @@
       <Project>{66b7a24b-9fb9-4436-a269-f6740e700c03}</Project>
       <Name>Metro.DynamicModeules.Interface</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Metro.DynamicModeules.Service\Metro.DynamicModeules.Service.csproj">
+      <Project>{309AE467-67FA-4578-B25E-784E23E9266D}</Project>
+      <Name>Metro.DynamicModeules.Service</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
