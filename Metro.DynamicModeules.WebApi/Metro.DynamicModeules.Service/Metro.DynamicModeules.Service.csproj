@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="Base\ServiceBase.cs" />
     <Compile Include="BusinessTablesService.cs" />
+    <Compile Include="PayTypeService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

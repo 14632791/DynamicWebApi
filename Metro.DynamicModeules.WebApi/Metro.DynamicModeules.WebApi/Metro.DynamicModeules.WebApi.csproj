@@ -180,6 +180,7 @@
     <Compile Include="Controllers\ApiControllerBase.cs" />
     <Compile Include="Controllers\BusinessTablesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PayTypeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Filter\AuthFilterAttribute.cs" />
     <Compile Include="Global.asax.cs">
