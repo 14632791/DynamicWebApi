@@ -3,25 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
+using System.Xml.Linq;
 
 namespace Metro.DynamicModeules.Interface.Service.Base
 {
     public interface IServiceBase<TModel>
-         where TModel : class, new()
+         where TModel : class
     {
         /// <summary>
         /// 根据主键获取单个实体
         /// </summary>
         /// <returns></returns>
         TModel Get(params object[] keyValues);
-        //List<TModel> Get(TModel serach, out int totalCount);
 
         /// <summary>
         /// 增加,成功后返回主键，失败返回null
         /// </summary>
         /// <returns></returns>
         object[] Add(TModel model, bool isSave = true);
-        void Add(IEnumerable<TModel> paramList);
+        bool Add(IEnumerable<TModel> paramList, bool isSave = true);
 
 
         /// <summary>
@@ -34,20 +34,20 @@ namespace Metro.DynamicModeules.Interface.Service.Base
         /// </summary>
         /// <param name="where"></param>
         /// <param name="dic"></param>
-        void Update(Expression<Func<TModel, bool>> where, Dictionary<string, object> dic);
+        bool Update(Expression<Func<TModel, bool>> where, Dictionary<string, object> dic, bool isSave = true);
 
         /// <summary>
         /// 删除
         /// </summary>
         /// <returns></returns>
         bool Delete(bool isSave, params object[] keyValues);
-        void Delete(params TModel[] paramList);
+        bool Delete(bool isSave, IEnumerable<TModel> entities);
         bool Delete(TModel model, bool isSave = true);
 
 
         bool Commit(bool isSave = true);
-        IEnumerable<TModel> GetSearchList(Expression<Func<TModel, bool>> where);
-        IEnumerable<TModel> GetSearchListByPage<TKey>(Expression<Func<TModel, bool>> where, Expression<Func<TModel, TKey>> orderBy, int pageSize, int pageIndex, out int totalRow);
+        IEnumerable<TModel> GetSearchList(XElement xmlPredicate);
+        IEnumerable<TModel> GetSearchListByPage<TKey>(XElement xmlPredicate, XElement xmlOrderBy, int pageSize, int pageIndex, out int totalRow);
 
     }
 }

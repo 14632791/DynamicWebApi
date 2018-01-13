@@ -13,13 +13,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Metro.DynamicModeules.Common;
 using System.Reflection;
 using Metro.DynamicModeules.CodeFirst.Models;
+using System.Xml.Linq;
 
 namespace Metro.DynamicModeules.Service.Base
 {
     public abstract class ServiceBase<TModel> : IServiceBase<TModel>
-          where TModel : class, new()
+          where TModel : class
     {
-       
+
         /// <summary>
         /// 重新给Context赋值，在Commit()执行之前警慎使用
         /// </summary>
@@ -89,16 +90,18 @@ namespace Metro.DynamicModeules.Service.Base
         /// 实体新增但不保存
         /// </summary>
         /// <param name="model"></param>
-        public void Add(IEnumerable<TModel> paramList)
+        public bool Add(IEnumerable<TModel> paramList, bool isSave = true)
         {
             Monitor.Enter(_objLock);
             try
             {
                 DbContext.Set<TModel>().AddRange(paramList);
+                return Commit(isSave);
             }
             catch (Exception e)
             {
                 LogHelper.Error(string.Format("BaseService-Add 实体类型：{0},内容：{1}", typeof(TModel).Name, paramList.JsonSe()), e);
+                return false;
             }
             finally
             {
@@ -118,7 +121,7 @@ namespace Metro.DynamicModeules.Service.Base
             try
             {
                 DbContext.Entry<TModel>(efModel).State = EntityState.Added;
-               if (Commit(isSave))
+                if (Commit(isSave))
                 {
                     return GetPrimaryKey(efModel);
                 }
@@ -143,14 +146,17 @@ namespace Metro.DynamicModeules.Service.Base
         /// <summary>
         /// 实体查询
         /// </summary>
-        public IEnumerable<TModel> GetSearchList(System.Linq.Expressions.Expression<Func<TModel, bool>> where)
+        public IEnumerable<TModel> GetSearchList(XElement xmlPredicate)
         {
             //Monitor.Enter(_objLock);
             try
-            {
-                DbContext context = GetContext();//解决缓存问题，所以new 
-                IQueryable<TModel> lstEf = context.Set<TModel>().Where(where);
-                return lstEf;
+            { //将xml反序列化为linq
+                Expression<Func<TModel, bool>> where = SerializeHelper.DeserializeExpression<TModel, bool>(xmlPredicate);
+                using (DbContext context = GetContext())//解决缓存问题，所以new 
+                {
+                    IEnumerable<TModel> lstEf = context.Set<TModel>().Where(where).ToList();
+                    return lstEf;
+                }
             }
             catch (Exception e)
             {
@@ -172,44 +178,31 @@ namespace Metro.DynamicModeules.Service.Base
         /// <param name="pageSize"></param>
         /// <param name="pageIndex">第一页从0开始</param>
         /// <returns></returns>
-        public IEnumerable<TModel> GetSearchListByPage<TKey>(Expression<Func<TModel, bool>> where, Expression<Func<TModel, TKey>> orderBy, int pageSize, int pageIndex)
+        public IEnumerable<TModel> GetSearchListByPage<TKey>(XElement xmlPredicate, XElement xmlOrderBy, int pageSize, int pageIndex, out int totalRow)
         {
+            totalRow = 0;
             try
             {
-                DbContext context = GetContext();//解决缓存问题，所以new 
-                var lstEf = context.Set<TModel>().Where(where).OrderByDescending(orderBy).Skip((pageIndex) * pageSize).Take(pageSize).ToList();
-                int total = lstEf.Count;
-                return lstEf;
+                //将xml反序列化为linq
+                Expression<Func<TModel, bool>> where = SerializeHelper.DeserializeExpression<TModel, bool>(xmlPredicate);
+                Expression<Func<TModel, TKey>> orderBy = SerializeHelper.DeserializeExpression<TModel, TKey>(xmlOrderBy);
+                using (DbContext context = GetContext())//解决缓存问题，所以new 
+                {
+                    var lstEf = context.Set<TModel>().Where(where).OrderByDescending(orderBy).Skip((pageIndex) * pageSize).Take(pageSize).ToList();
+                    totalRow = lstEf.Count();
+                    return lstEf;
+                }
             }
             catch (Exception e)
             {
                 LogHelper.Error("BaseService-GetSearchListByPage<TKey>,类型： " + GetTableName(), e);
-                return new List<TModel>();
+                return null;// new List<TModel>();
             }
             finally
             {
             }
         }
 
-        public IEnumerable<TModel> GetSearchListByPage<TKey>(Expression<Func<TModel, bool>> where, Expression<Func<TModel, TKey>> orderBy, int pageSize, int pageIndex, out int totalRow)
-        {
-            totalRow = 0;
-            //Monitor.Enter(_objLock);
-            try
-            {
-                totalRow = DbContext.Set<TModel>().Where(where).Count();
-                return GetSearchListByPage(where, orderBy, pageSize, pageIndex);
-            }
-            catch (Exception e)
-            {
-                LogHelper.Error("BaseService-GetSearchListByPage<TKey>,类型： " + GetTableName(), e);
-                return new List<TModel>();
-            }
-            finally
-            {
-                //Monitor.Exit(_objLock);
-            }
-        }
 
         #endregion
 
@@ -219,21 +212,23 @@ namespace Metro.DynamicModeules.Service.Base
         /// 删除多个实体，但不保存
         /// </summary>
         /// <param name="model"></param>
-        public virtual void Delete(params TModel[] paramList)
+        public virtual bool Delete(bool isSave, IEnumerable<TModel> entities)
         {
             try
             {
-                if (null == paramList) return;
-                foreach (var model in paramList)
-                {
-                    if (null == model) continue;
-                    DbContext.Entry<TModel>(model).State = EntityState.Deleted;
-                }
-                // Commit();
+                if (null == entities) return false;
+                DbContext.Set<TModel>().RemoveRange(entities);
+                //foreach (var model in entities)
+                //{
+                //    if (null == model) continue;
+                //    DbContext.Entry<TModel>(model).State = EntityState.Deleted;
+                //}
+                return Commit(isSave);
             }
             catch (Exception e)
             {
-                LogHelper.Error(string.Format("BaseService-Delete 实体类型：{0},内容：{1}", typeof(TModel).Name, paramList.JsonSe()), e);
+                LogHelper.Error(string.Format("BaseService-Delete 实体类型：{0},内容：{1}", typeof(TModel).Name, entities.JsonSe()), e);
+                return false;
             }
         }
 
@@ -291,13 +286,13 @@ namespace Metro.DynamicModeules.Service.Base
         /// </summary>
         /// <param name="where"></param>
         /// <param name="dic"></param>
-        public void Update(Expression<Func<TModel, bool>> where, Dictionary<string, object> dic)
+        public bool Update(Expression<Func<TModel, bool>> where, Dictionary<string, object> dic, bool isSave = true)
         {
             Monitor.Enter(_objLock);
             try
             {
                 IEnumerable<TModel> result = DbContext.Set<TModel>().Where(where).ToList();
-                if (null == result || result.Count() <= 0) return;
+                if (null == result || result.Count() <= 0) return false;
                 Type type = typeof(TModel);
                 List<PropertyInfo> propertyList = type.GetProperties(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance).ToList();
                 //遍历结果集
@@ -314,11 +309,12 @@ namespace Metro.DynamicModeules.Service.Base
                         }
                     }
                 }
-                // Commit();
+                return Commit(isSave);
             }
             catch (Exception e)
             {
                 LogHelper.Error(string.Format("BaseService-Update：{0},内容：{1}", typeof(TModel).Name, dic.JsonSe()), e);
+                return false;
             }
             finally
             {
@@ -381,12 +377,12 @@ namespace Metro.DynamicModeules.Service.Base
         public virtual bool Commit(bool isSave = true)
         {
             if (!isSave) return true;
-            Monitor.Enter(_objLock);
+            //Monitor.Enter(_objLock);
             try
             {
                 bool bResult = false;
-                if (null == _dbContext) return bResult;
-                bResult = _dbContext.SaveChanges() > 0;
+                //if (null == _dbContext) return bResult;
+                bResult = DbContext.SaveChanges() > 0;
                 return bResult;
             }
             catch (Exception e)
@@ -400,7 +396,7 @@ namespace Metro.DynamicModeules.Service.Base
                 {
                     RefreshContext();
                 }
-                Monitor.Exit(_objLock);
+                //Monitor.Exit(_objLock);
             }
         }
 
@@ -532,10 +528,8 @@ namespace Metro.DynamicModeules.Service.Base
     }
     internal static class AttributeExtensions
     {
-        public static TValue GetAttributeValue<TAttribute, TValue>(
-            this Type type,
-            Func<TAttribute, TValue> valueSelector)
-            where TAttribute : Attribute
+        public static TValue GetAttributeValue<TAttribute, TValue>(this Type type,
+            Func<TAttribute, TValue> valueSelector) where TAttribute : Attribute
         {
             var att = type.GetCustomAttributes(
                 typeof(TAttribute), true
