@@ -12,8 +12,15 @@ namespace Metro.DynamicModeules.WebApi.Controllers
 {
     public class PayTypeController : ApiControllerBase<tb_PayType>
     {
-        public PayTypeController(PayTypeService service) : base(service)
+
+        public void PostAll([FromBody]string value)
         {
+            var model = _service.Find(new object[] { "CASH" });
+        }
+
+        protected override ServiceBase<tb_PayType> GetService()
+        {
+            return new PayTypeService();
         }
     }
 }

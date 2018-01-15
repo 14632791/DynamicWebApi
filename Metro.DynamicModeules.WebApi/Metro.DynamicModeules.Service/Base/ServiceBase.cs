@@ -20,7 +20,10 @@ namespace Metro.DynamicModeules.Service.Base
     public abstract class ServiceBase<TModel> : IServiceBase<TModel>
           where TModel : class
     {
-
+        public ServiceBase()
+        {
+            EntitiesType  = EntitiesType.NormalContext;
+        }
         /// <summary>
         /// 重新给Context赋值，在Commit()执行之前警慎使用
         /// </summary>
@@ -72,7 +75,7 @@ namespace Metro.DynamicModeules.Service.Base
         /// <summary>
         /// 连接哪个DB
         /// </summary>
-        protected EntitiesType EntitiesType { get; set; } = EntitiesType.NormalContext;
+        protected EntitiesType EntitiesType { get; set; } 
         protected readonly object _objLock = new object();
 
         //internal DbSet<TModel> _dbset = null;
@@ -264,11 +267,11 @@ namespace Metro.DynamicModeules.Service.Base
         /// <param name="gid"></param>
         /// <param name="isSave"></param>
         /// <returns></returns>
-        public virtual bool Delete(bool isSave, params object[] keyValues)
+        public virtual bool Delete(bool isSave,  object[] keyValues)
         {
             try
             {
-                TModel model = Get(keyValues);
+                TModel model = Find(keyValues);
                 if (null == model) return true;
                 return Delete(model, isSave);
             }
@@ -492,7 +495,7 @@ namespace Metro.DynamicModeules.Service.Base
         /// </summary>
         /// <param name="gid"></param>
         /// <returns></returns>
-        public virtual TModel Get(params object[] keyValues)
+        public virtual TModel Find( object[] keyValues)
         {
             try
             {
@@ -514,9 +517,9 @@ namespace Metro.DynamicModeules.Service.Base
             switch (EntitiesType)
             {
                 case EntitiesType.NormalContext:
-                    return new CSFramework3SystemContext();
-                case EntitiesType.SystemContext:
                     return new CSFramework3NormalContext();
+                case EntitiesType.SystemContext:
+                    return new CSFramework3SystemContext();
                 default:
                     return null;
             }

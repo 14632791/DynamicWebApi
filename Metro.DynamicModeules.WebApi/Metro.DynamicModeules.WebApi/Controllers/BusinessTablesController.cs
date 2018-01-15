@@ -12,8 +12,9 @@ namespace Metro.DynamicModeules.WebApi.Controllers
 {
     public class BusinessTablesController : ApiControllerBase<sys_BusinessTables>
     {
-        public BusinessTablesController(BusinessTablesService service) : base(service)
+        protected override ServiceBase<sys_BusinessTables> GetService()
         {
+            return new BusinessTablesService();
         }
     }
 }

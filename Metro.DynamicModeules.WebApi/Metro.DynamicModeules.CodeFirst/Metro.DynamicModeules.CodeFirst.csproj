@@ -44,6 +44,8 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity.Design" />
     <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -51,6 +53,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Demo\Model1.cs" />
+    <Compile Include="Demo\sys_DataSN.cs" />
+    <Compile Include="Demo\sys_DocSN.cs" />
     <Compile Include="Models\CSFramework3NormalContext.cs" />
     <Compile Include="Models\CSFramework3SystemContext.cs" />
     <Compile Include="Models\Mapping\dtpropertyMap.cs" />

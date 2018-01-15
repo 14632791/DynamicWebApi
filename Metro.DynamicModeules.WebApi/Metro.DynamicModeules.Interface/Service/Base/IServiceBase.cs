@@ -20,7 +20,7 @@ namespace Metro.DynamicModeules.Interface.Service.Base
         /// 根据主键获取单个实体
         /// </summary>
         /// <returns></returns>
-        TModel Get(params object[] keyValues);
+        TModel Find(object[] keyValues);
 
         /// <summary>
         /// 增加,成功后返回主键，失败返回null
@@ -46,7 +46,7 @@ namespace Metro.DynamicModeules.Interface.Service.Base
         /// 删除
         /// </summary>
         /// <returns></returns>
-        bool Delete(bool isSave, params object[] keyValues);
+        bool Delete(bool isSave,  object[] keyValues);
         bool Delete(bool isSave, IEnumerable<TModel> entities);
         bool Delete(TModel model, bool isSave = true);
 
