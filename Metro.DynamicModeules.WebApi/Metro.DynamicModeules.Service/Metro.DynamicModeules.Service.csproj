@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="Base\ServiceBase.cs" />
     <Compile Include="BusinessTablesService.cs" />
+    <Compile Include="NormalEntity.cs" />
     <Compile Include="PayTypeService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -60,10 +61,6 @@
     <ProjectReference Include="..\..\..\failDynamicModeules\Metro.DynamicModeules\Metro.DynamicModeules.Models\Metro.DynamicModeules.Models.csproj">
       <Project>{937e0d53-9696-48ab-b12f-736bc6d43f15}</Project>
       <Name>Metro.DynamicModeules.Models</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Metro.DynamicModeules.CodeFirst\Metro.DynamicModeules.CodeFirst.csproj">
-      <Project>{b719b76f-7ec1-4cdc-b755-80b13e4a92d3}</Project>
-      <Name>Metro.DynamicModeules.CodeFirst</Name>
     </ProjectReference>
     <ProjectReference Include="..\Metro.DynamicModeules.Interface\Metro.DynamicModeules.Interface.csproj">
       <Project>{66B7A24B-9FB9-4436-A269-F6740E700C03}</Project>

@@ -1,18 +1,15 @@
-﻿using Metro.DynamicModeules.Interface.Service.Base;
+﻿using Metro.DynamicModeules.Common;
+using Metro.DynamicModeules.Interface.Service.Base;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Linq.Expressions;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data;
 using System.Data.Common;
 using System.Data.Entity;
-using System.Threading;
-using System.ComponentModel.DataAnnotations.Schema;
-using Metro.DynamicModeules.Common;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
-using Metro.DynamicModeules.CodeFirst.Models;
+using System.Threading;
 using System.Xml.Linq;
 
 namespace Metro.DynamicModeules.Service.Base
@@ -517,9 +514,9 @@ namespace Metro.DynamicModeules.Service.Base
             switch (EntitiesType)
             {
                 case EntitiesType.NormalContext:
-                    return new CSFramework3NormalContext();
+                    return new NormalEntity();
                 case EntitiesType.SystemContext:
-                    return new CSFramework3SystemContext();
+                    return new NormalEntity();
                 default:
                     return null;
             }

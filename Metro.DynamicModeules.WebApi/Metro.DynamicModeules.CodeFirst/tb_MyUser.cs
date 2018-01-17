@@ -1,0 +1,59 @@
+namespace Metro.DynamicModeules.CodeFirst
+{
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity.Spatial;
+
+    public partial class tb_MyUser
+    {
+        [Key]
+        public int isid { get; set; }
+
+        [Required]
+        [StringLength(30)]
+        public string Account { get; set; }
+
+        [StringLength(100)]
+        public string NovellAccount { get; set; }
+
+        [StringLength(100)]
+        public string DomainName { get; set; }
+
+        [Required]
+        [StringLength(20)]
+        public string UserName { get; set; }
+
+        [StringLength(50)]
+        public string Address { get; set; }
+
+        [StringLength(50)]
+        public string Tel { get; set; }
+
+        [StringLength(40)]
+        public string Email { get; set; }
+
+        [StringLength(100)]
+        public string Password { get; set; }
+
+        public DateTime? LastLoginTime { get; set; }
+
+        public DateTime? LastLogoutTime { get; set; }
+
+        public short? IsLocked { get; set; }
+
+        public DateTime? CreateTime { get; set; }
+
+        [StringLength(1)]
+        public string FlagAdmin { get; set; }
+
+        [StringLength(1)]
+        public string FlagOnline { get; set; }
+
+        public int? LoginCounter { get; set; }
+
+        [StringLength(250)]
+        public string DataSets { get; set; }
+    }
+}
