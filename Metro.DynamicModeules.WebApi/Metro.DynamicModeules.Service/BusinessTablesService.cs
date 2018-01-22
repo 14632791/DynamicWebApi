@@ -7,11 +7,6 @@ namespace Metro.DynamicModeules.Service
     {
         public BusinessTablesService()
         {
-        }
-
-        protected override object[] GetPrimaryKey(sys_BusinessTables entity)
-        {
-            return new object[] { entity.isid };
-        }
+        }        
     }
 }

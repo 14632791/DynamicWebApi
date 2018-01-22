@@ -11,8 +11,24 @@ namespace Metro.DynamicModeules.Interface.Service.Base
          where TModel : class
     {
         bool Commit(bool isSave = true);
+        bool Update(Expression<Func<TModel, bool>> where, Dictionary<string, object> dic, bool isSave = true);
+        IEnumerable<TModel> GetSearchList(Expression<Func<TModel, bool>> where);
+        IEnumerable<TModel> GetSearchListByPage<TKey>(Expression<Func<TModel, bool>> where, Expression<Func<TModel, TKey>> xmlOrderBy, int pageSize, int pageIndex, out int totalRow);
     }
+    public interface IApiControllerBase<TModel> : ICommonServiceBase<TModel>
+         where TModel : class
+    {
+        /// <summary>
+        /// 按照条件修改数据,但不保存
+        /// </summary>
+        /// <param name="where"></param>
+        /// <param name="dic"></param>
+        bool Update(XElement xmlPredicate, Dictionary<string, object> dic, bool isSave = true);
 
+        IEnumerable<TModel> GetSearchList(XElement xmlPredicate);
+        IEnumerable<TModel> GetSearchListByPage<TKey>(XElement xmlPredicate, XElement xmlOrderBy, int pageSize, int pageIndex, out int totalRow);
+
+    }
     public interface ICommonServiceBase<TModel>
         where TModel : class
     {
@@ -35,24 +51,13 @@ namespace Metro.DynamicModeules.Interface.Service.Base
         /// </summary>
         /// <returns></returns>
         bool Update(TModel model, bool isSave = true);
-        /// <summary>
-        /// 按照条件修改数据,但不保存
-        /// </summary>
-        /// <param name="where"></param>
-        /// <param name="dic"></param>
-        bool Update(XElement xmlPredicate, Dictionary<string, object> dic, bool isSave = true);
-
+       
         /// <summary>
         /// 删除
         /// </summary>
         /// <returns></returns>
         bool Delete(bool isSave,  object[] keyValues);
         bool Delete(bool isSave, IEnumerable<TModel> entities);
-        bool Delete(TModel model, bool isSave = true);
-
-        
-        IEnumerable<TModel> GetSearchList(XElement xmlPredicate);
-        IEnumerable<TModel> GetSearchListByPage<TKey>(XElement xmlPredicate, XElement xmlOrderBy, int pageSize, int pageIndex, out int totalRow);
-
+        bool Delete(TModel model, bool isSave = true);       
     }
 }

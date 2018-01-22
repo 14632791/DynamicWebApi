@@ -12,13 +12,14 @@ using Metro.DynamicModeules.Service.Base;
 using System.IO;
 using System.Text;
 using System.Web.Http;
+using Metro.DynamicModeules.Common;
 
 namespace Metro.DynamicModeules.WebApi.Controllers
 {
     /// <summary>
     /// API控制器基类
     /// </summary>
-    public abstract class ApiControllerBase<TModel> : ApiController, ICommonServiceBase<TModel> where TModel : class
+    public abstract class ApiControllerBase<TModel> : ApiController, IApiControllerBase<TModel> where TModel : class
     {
         #region 私有方法
         /// <summary>
@@ -73,19 +74,22 @@ namespace Metro.DynamicModeules.WebApi.Controllers
         }
 
         [System.Web.Mvc.HttpPut]
-        public TModel Find( object[] keyValues)
+        public TModel Find(object[] keyValues)
         {
             return _service.Find(keyValues);
         }
 
         public IEnumerable<TModel> GetSearchList(XElement xmlPredicate)
         {
-            return _service.GetSearchList(xmlPredicate);
+            Expression<Func<TModel, bool>> where = SerializeHelper.DeserializeExpression<TModel, bool>(xmlPredicate);
+            return _service.GetSearchList(where);
         }
 
         public IEnumerable<TModel> GetSearchListByPage<TKey>(XElement xmlPredicate, XElement xmlOrderBy, int pageSize, int pageIndex, out int totalRow)
-        {
-            return _service.GetSearchListByPage<TKey>(xmlPredicate, xmlOrderBy, pageSize, pageIndex, out totalRow);
+        {                //将xml反序列化为linq
+            Expression<Func<TModel, bool>> where = SerializeHelper.DeserializeExpression<TModel, bool>(xmlPredicate);
+            Expression<Func<TModel, TKey>> orderBy = SerializeHelper.DeserializeExpression<TModel, TKey>(xmlOrderBy);
+            return _service.GetSearchListByPage<TKey>(where, orderBy, pageSize, pageIndex, out totalRow);
         }
 
         public bool Update(TModel model, bool isSave = true)
@@ -96,7 +100,8 @@ namespace Metro.DynamicModeules.WebApi.Controllers
 
         public bool Update(XElement xmlPredicate, Dictionary<string, object> dic, bool isSave = true)
         {
-            return _service.Update(xmlPredicate, dic, isSave);
+            Expression<Func<TModel, bool>> where = SerializeHelper.DeserializeExpression<TModel, bool>(xmlPredicate);
+            return _service.Update(where, dic, isSave);
         }
 
         #endregion
