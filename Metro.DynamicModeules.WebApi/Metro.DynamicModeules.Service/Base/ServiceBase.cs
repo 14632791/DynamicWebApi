@@ -154,7 +154,7 @@ namespace Metro.DynamicModeules.Service.Base
             //Monitor.Enter(_objLock);
             try
             { //将xml反序列化为linq
-               using (DbContext context = GetContext())//解决缓存问题，所以new 
+                using (DbContext context = GetContext())//解决缓存问题，所以new 
                 {
                     IEnumerable<TModel> lstEf = context.Set<TModel>().Where(where).ToList();
                     return lstEf;
@@ -170,7 +170,7 @@ namespace Metro.DynamicModeules.Service.Base
                 //Monitor.Exit(_objLock);
             }
         }
-              
+
 
         /// <summary>
         /// 实体分页查询
@@ -286,7 +286,7 @@ namespace Metro.DynamicModeules.Service.Base
         /// </summary>
         /// <param name="where"></param>
         /// <param name="dic"></param>
-      
+
         public bool Update(Expression<Func<TModel, bool>> where, Dictionary<string, object> dic, bool isSave = true)
         {
             Monitor.Enter(_objLock);
@@ -406,6 +406,11 @@ namespace Metro.DynamicModeules.Service.Base
         protected virtual string GetTableName()
         {
             string name = typeof(TModel).GetAttributeValue((TableAttribute ta) => ta.Name);
+            if (string.IsNullOrEmpty(name))
+            {
+                Type type = typeof(TModel);
+                name = type.Name;
+            }
             return name;
         }
 
@@ -537,7 +542,7 @@ namespace Metro.DynamicModeules.Service.Base
                 default:
                     return null;
             }
-        }        
+        }
     }
     public enum EntitiesType
     {

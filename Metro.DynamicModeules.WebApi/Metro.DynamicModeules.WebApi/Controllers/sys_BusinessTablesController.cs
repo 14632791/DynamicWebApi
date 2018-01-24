@@ -10,7 +10,7 @@ using Metro.DynamicModeules.Service;
 
 namespace Metro.DynamicModeules.WebApi.Controllers
 {
-    public class BusinessTablesController : ApiControllerBase<sys_BusinessTables>
+    public class sys_BusinessTablesController : ApiControllerBase<sys_BusinessTables>
     {
         protected override ServiceBase<sys_BusinessTables> GetService()
         {

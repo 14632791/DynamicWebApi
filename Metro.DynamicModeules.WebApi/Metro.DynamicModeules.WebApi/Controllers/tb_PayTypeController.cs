@@ -10,7 +10,7 @@ using Metro.DynamicModeules.Service;
 
 namespace Metro.DynamicModeules.WebApi.Controllers
 {
-    public class PayTypeController : ApiControllerBase<tb_PayType>
+    public class tb_PayTypeController : ApiControllerBase<tb_PayType>
     {
 
         public void PostAll([FromBody]string value)
