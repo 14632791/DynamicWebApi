@@ -10,11 +10,17 @@ using Metro.DynamicModeules.Service;
 
 namespace Metro.DynamicModeules.WebApi.Controllers
 {
-    public class sys_BusinessTablesController : ApiControllerBase<sys_BusinessTables>
+    public class PayTypeController : ApiControllerBase<tb_PayType>
     {
-        protected override ServiceBase<sys_BusinessTables> GetService()
+
+        public void PostAll([FromBody]string value)
         {
-            return new BusinessTablesService();
+            var model = _service.Find(new object[] { "CASH" });
+        }
+
+        protected override ServiceBase<tb_PayType> GetService()
+        {
+            return new PayTypeService();
         }
     }
 }

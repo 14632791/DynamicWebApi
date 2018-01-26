@@ -27,7 +27,7 @@ namespace Metro.DynamicModeules.Interface.Service.Base
         /// <param name="dic"></param>
         Task<bool> Update(XElement xmlPredicate, Dictionary<string, object> dic, bool isSave = true);
 
-        Task<List<TModel>> GetSearchList(XElement xmlPredicate);
+        List<TModel> GetSearchList(XElement xmlPredicate);
         Task<List<TModel>> GetSearchListByPage<TKey>(XElement xmlPredicate, XElement xmlOrderBy, int pageSize, int pageIndex);//, out int totalRow);
         Task<long> GetListCount(XElement xmlPredicate);
     }

@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Base\ServiceBase.cs" />
+    <Compile Include="MyUserService.cs" />
     <Compile Include="BusinessTablesService.cs" />
     <Compile Include="NormalEntity.cs" />
     <Compile Include="PayTypeService.cs" />
