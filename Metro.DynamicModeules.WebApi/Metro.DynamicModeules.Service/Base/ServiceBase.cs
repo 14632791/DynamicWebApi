@@ -17,7 +17,12 @@ using System.Threading.Tasks;
 using Metro.DynamicModeules.Models;
 namespace Metro.DynamicModeules.Service.Base
 {
-    public abstract class ServiceBase<TModel> : IServiceBase<TModel>
+    /// <summary>
+    /// 如果要扩展功能，请自建子类
+    /// </summary>
+    /// <typeparam name="TModel"></typeparam>
+    public class ServiceBase<TModel> : IServiceBase<TModel>
+
           where TModel : class
     {
         public ServiceBase()
@@ -57,6 +62,7 @@ namespace Metro.DynamicModeules.Service.Base
             }
         }
         protected DbContext _dbContext;
+
         #region 私有变量
         /// <summary>
         /// 连接哪个DB
@@ -79,13 +85,13 @@ namespace Metro.DynamicModeules.Service.Base
         /// 实体新增但不保存
         /// </summary>
         /// <param name="model"></param>
-        public async Task<bool> Add(IEnumerable<TModel> paramList, bool isSave = true)
+        public bool Add(TModel[] paramList, bool isSave = true)
         {
             Monitor.Enter(_objLock);
             try
             {
                 DbContext.Set<TModel>().AddRange(paramList);
-                return await Commit(isSave);
+                return Commit(isSave);
             }
             catch (Exception e)
             {
@@ -104,13 +110,13 @@ namespace Metro.DynamicModeules.Service.Base
         /// <param name="efModel"></param>
         /// <param name="isSave"></param>
         /// <returns></returns>
-        public virtual async Task<object[]> Add(TModel efModel, bool isSave = true)
+        public virtual object[] Add(TModel efModel, bool isSave = true)
         {
             Monitor.Enter(_objLock);
             try
             {
                 DbContext.Entry(efModel).State = EntityState.Added;
-                bool commit =await Commit(isSave);
+                bool commit = Commit(isSave);
                 if (commit)
                 {
                     return efModel.GetPrimaryKey();
@@ -136,14 +142,15 @@ namespace Metro.DynamicModeules.Service.Base
         /// <summary>
         /// 实体查询
         /// </summary>
-        public async Task<List<TModel>> GetSearchList(Expression<Func<TModel, bool>> where)
+        public TModel[] GetSearchList(Expression<Func<TModel, bool>> where)
         {
             //Monitor.Enter(_objLock);
             try
             { //将xml反序列化为linq
                 using (DbContext context = GetContext())//解决缓存问题，所以new 
                 {
-                    return await context.Set<TModel>().Where(where).ToListAsync();
+                    var list = context.Set<TModel>().Where(where).ToArray();
+                    return list;
                 }
             }
             catch (Exception e)
@@ -162,14 +169,14 @@ namespace Metro.DynamicModeules.Service.Base
         /// </summary>
         /// <param name="where"></param>
         /// <returns></returns>
-        public async Task<long> GetListCount(Expression<Func<TModel, bool>> where)
+        public long GetListCount(Expression<Func<TModel, bool>> where)
         {
             //Monitor.Enter(_objLock);
             try
             { //将xml反序列化为linq
                 using (DbContext context = GetContext())//解决缓存问题，所以new 
                 {
-                    return await context.Set<TModel>().LongCountAsync(where);
+                    return context.Set<TModel>().LongCount(where);
                 }
             }
             catch (Exception e)
@@ -191,14 +198,14 @@ namespace Metro.DynamicModeules.Service.Base
         /// <param name="pageSize"></param>
         /// <param name="pageIndex">第一页从0开始</param>
         /// <returns></returns>
-        public async Task<List<TModel>> GetSearchListByPage<TKey>(Expression<Func<TModel, bool>> where, Expression<Func<TModel, TKey>> orderBy, int pageSize, int pageIndex)//, out int totalRow)
+        public TModel[] GetSearchListByPage<TKey>(Expression<Func<TModel, bool>> where, Expression<Func<TModel, TKey>> orderBy, int pageSize, int pageIndex)//, out int totalRow)
         {
             //totalRow = 0;
             try
             {
                 using (DbContext context = GetContext())//解决缓存问题，所以new 
                 {
-                    var lstEf = await context.Set<TModel>().Where(where).OrderByDescending(orderBy).Skip((pageIndex) * pageSize).Take(pageSize).ToListAsync();
+                    var lstEf = context.Set<TModel>().Where(where).OrderByDescending(orderBy).Skip((pageIndex) * pageSize).Take(pageSize).ToArray();
                     //totalRow = lstEf.Count;
                     return lstEf;
                 }
@@ -206,7 +213,7 @@ namespace Metro.DynamicModeules.Service.Base
             catch (Exception e)
             {
                 LogHelper.Error("BaseService-GetSearchListByPage<TKey>,类型： " + ModelHandle.GetTableName<TModel>(), e);
-                return null;// new List<TModel>();
+                return null;// new TModel[]();
             }
             finally
             {
@@ -222,13 +229,13 @@ namespace Metro.DynamicModeules.Service.Base
         /// 删除多个实体，但不保存
         /// </summary>
         /// <param name="model"></param>
-        public virtual async Task<bool> Delete(bool isSave, IEnumerable<TModel> entities)
+        public virtual bool Delete(bool isSave, TModel[] entities)
         {
             try
             {
                 if (null == entities) return false;
                 DbContext.Set<TModel>().RemoveRange(entities);
-                return await Commit(isSave);
+                return Commit(isSave);
             }
             catch (Exception e)
             {
@@ -243,14 +250,14 @@ namespace Metro.DynamicModeules.Service.Base
         /// <param name="model"></param>
         /// <param name="isSave">是否保存</param>
         /// <returns></returns>       
-        public async Task<bool> Delete(TModel efModel, bool isSave)
+        public bool Delete(TModel efModel, bool isSave)
         { //解决造成相同键的多个对象问题
             Monitor.Enter(_objLock);
             try
             {
                 if (null == efModel) return true;
                 DbContext.Entry(efModel).State = EntityState.Deleted;
-                return await Commit(isSave);
+                return Commit(isSave);
             }
             catch (Exception e)
             {
@@ -269,13 +276,13 @@ namespace Metro.DynamicModeules.Service.Base
         /// <param name="gid"></param>
         /// <param name="isSave"></param>
         /// <returns></returns>
-        public virtual async Task<bool> Delete(bool isSave, object[] keyValues)
+        public virtual bool Delete(bool isSave, object[] keyValues)
         {
             try
             {
-                var model = await Find(keyValues);
+                var model = Find(keyValues);
                 if (null == model) return true;
-                return await Delete(model, isSave);
+                return Delete(model, isSave);
             }
             catch (Exception e)
             {
@@ -292,12 +299,12 @@ namespace Metro.DynamicModeules.Service.Base
         /// <param name="where"></param>
         /// <param name="dic"></param>
 
-        public async Task<bool> Update(Expression<Func<TModel, bool>> where, Dictionary<string, object> dic, bool isSave = true)
+        public bool Update(Expression<Func<TModel, bool>> where, Dictionary<string, object> dic, bool isSave = true)
         {
             Monitor.Enter(_objLock);
             try
             {
-                var result = await DbContext.Set<TModel>().Where(where).ToListAsync();
+                var result = DbContext.Set<TModel>().Where(where).ToList();
                 if (null == result || result.Count <= 0) return false;
                 Type type = typeof(TModel);
                 List<PropertyInfo> propertyList = type.GetProperties(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance).ToList();
@@ -315,7 +322,7 @@ namespace Metro.DynamicModeules.Service.Base
                         }
                     }
                 }
-                return await Commit(isSave);
+                return Commit(isSave);
             }
             catch (Exception e)
             {
@@ -328,7 +335,7 @@ namespace Metro.DynamicModeules.Service.Base
             }
         }
 
-        public async Task<bool> Update(TModel efModel, bool isSave)
+        public bool Update(TModel efModel, bool isSave)
         {
             Monitor.Enter(_objLock);
             try
@@ -358,7 +365,7 @@ namespace Metro.DynamicModeules.Service.Base
                     default:
                         break;
                 }
-                return await Commit(isSave && isUpdate);
+                return Commit(isSave && isUpdate);
             }
             catch (Exception e)
             {
@@ -378,7 +385,7 @@ namespace Metro.DynamicModeules.Service.Base
         /// 提交所做的更改同时释放资源
         /// </summary>
         /// <returns></returns>
-        public virtual async Task<bool> Commit(bool isSave = true)
+        public virtual bool Commit(bool isSave = true)
         {
             if (!isSave)
             {
@@ -386,7 +393,7 @@ namespace Metro.DynamicModeules.Service.Base
             }
             try
             {
-                return await DbContext.SaveChangesAsync() > 0;
+                return DbContext.SaveChanges() > 0;
             }
             catch (Exception e)
             {
@@ -443,7 +450,7 @@ namespace Metro.DynamicModeules.Service.Base
         /// <param name="sql"></param>
         /// <param name="parameter"></param>
         /// <returns></returns>
-        protected async Task<List<TModel>> SqlQuery(string sql, DbParameter[] parameter = null)
+        protected TModel[] SqlQuery(string sql, DbParameter[] parameter = null)
         {
             try
             {
@@ -458,7 +465,7 @@ namespace Metro.DynamicModeules.Service.Base
                     {
                         lstModel = context.Database.SqlQuery<TModel>(sql, parameter);
                     }
-                    return await lstModel.ToListAsync();
+                    return lstModel.ToArray();
                 }
             }
             catch (Exception e)
@@ -469,18 +476,18 @@ namespace Metro.DynamicModeules.Service.Base
         }
         #endregion
 
-               
+
         /// <summary>
         /// 根据主键获得实体
         /// </summary>
         /// <param name="gid"></param>
         /// <returns></returns>
-        public virtual async Task<TModel> Find(object[] keyValues)
+        public virtual TModel Find(object[] keyValues)
         {
             try
             {
                 DbContext context = GetContext();//解决缓存问题，所以new 
-                return await context.Set<TModel>().FindAsync(keyValues);
+                return context.Set<TModel>().Find(keyValues);
             }
             catch (Exception e)
             {
@@ -512,5 +519,5 @@ namespace Metro.DynamicModeules.Service.Base
     }
 
 
-   
+
 }

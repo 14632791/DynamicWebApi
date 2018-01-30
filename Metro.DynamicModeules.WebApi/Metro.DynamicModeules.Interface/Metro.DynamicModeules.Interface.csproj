@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResultObject.cs" />
+    <Compile Include="Service\Base\IServiceAsyncBase.cs" />
     <Compile Include="Service\Base\IServiceBase.cs" />
   </ItemGroup>
   <ItemGroup />

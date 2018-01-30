@@ -183,6 +183,7 @@
     <Compile Include="Controllers\MyUserController.cs" />
     <Compile Include="Controllers\PayTypeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Converter\JsonDateTimeConverter.cs" />
     <Compile Include="Filter\AuthFilterAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

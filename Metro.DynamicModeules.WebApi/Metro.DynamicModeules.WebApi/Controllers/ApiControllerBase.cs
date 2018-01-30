@@ -1,4 +1,5 @@
 ﻿using Metro.DynamicModeules.Common;
+using Metro.DynamicModeules.Common.ExpressionSerialization;
 using Metro.DynamicModeules.Interface.Service.Base;
 using Metro.DynamicModeules.Service.Base;
 using System;
@@ -44,72 +45,72 @@ namespace Metro.DynamicModeules.WebApi.Controllers
         protected abstract ServiceBase<TModel> GetService();
 
         [System.Web.Http.HttpPost]
-        public async Task<object[]> Add(TModel model, bool isSave = true)
+        public object[] Add(TModel model, bool isSave = true)
         {
-            return await _service.Add(model, isSave);
+            return _service.Add(model, isSave);
         }
 
         [System.Web.Http.HttpPost]
         [System.Web.Http.ActionName("Add1")]
-        public async Task<bool> Add(IEnumerable<TModel> paramList, bool isSave = true)
+        public bool Add(TModel[] paramList, bool isSave = true)
         {
-            return await _service.Add(paramList, isSave);
+            return _service.Add(paramList, isSave);
         }
         [System.Web.Http.HttpPost]
-        public async Task<bool> Delete(bool isSave, params object[] keyValues)
+        public bool Delete(bool isSave, params object[] keyValues)
         {
-            return await _service.Delete(isSave, keyValues);
+            return _service.Delete(isSave, keyValues);
         }
 
         [System.Web.Http.HttpPost]
         [System.Web.Http.ActionName("Delete1")]
-        public async Task<bool> Delete(bool isSave, IEnumerable<TModel> entities)
+        public bool Delete(bool isSave, TModel[] entities)
         {
-            return await _service.Delete(isSave, entities);
+            return _service.Delete(isSave, entities);
         }
         [System.Web.Http.ActionName("Delete2")]
-        public async Task<bool> Delete(TModel model, bool isSave = true)
+        public bool Delete(TModel model, bool isSave = true)
         {
-            return await _service.Delete(model, isSave);
+            return _service.Delete(model, isSave);
         }
 
         [System.Web.Http.HttpPost]
-        public async Task<TModel> Find(object[] keyValues)
+        public TModel Find(object[] keyValues)
         {
-            return await _service.Find(keyValues);
+            return _service.Find(keyValues);
         }
         [System.Web.Http.HttpPost]
-        public List<TModel> GetSearchList(XElement xmlPredicate)
+        public TModel[] GetSearchList(XElement xmlPredicate)
         {
             Expression<Func<TModel, bool>> where = SerializeHelper.DeserializeExpression<TModel, bool>(xmlPredicate);
             var predicate = SerializeHelper.DeserializeExpression<TModel, bool>(xmlPredicate);
-            return _service.GetSearchList(where).Result;
+            return _service.GetSearchList(where);
         }
 
         [System.Web.Http.HttpPost]
-        public async Task<long> GetListCount([FromBody]XElement xmlPredicate)
+        public long GetListCount([FromBody]XElement xmlPredicate)
         {
             Expression<Func<TModel, bool>> where = SerializeHelper.DeserializeExpression<TModel, bool>(xmlPredicate);
-            return await _service.GetListCount(where);
+            return _service.GetListCount(where);
         }
 
         [System.Web.Http.HttpPost]
-        public async Task<List<TModel>> GetSearchListByPage<TKey>(XElement xmlPredicate, XElement xmlOrderBy, int pageSize, int pageIndex)//, out int totalRow)
+        public TModel[] GetSearchListByPage<TKey>(XElement xmlPredicate, XElement xmlOrderBy, int pageSize, int pageIndex)//, out int totalRow)
         {                //将xml反序列化为linq
             Expression<Func<TModel, bool>> where = SerializeHelper.DeserializeExpression<TModel, bool>(xmlPredicate);
             Expression<Func<TModel, TKey>> orderBy = SerializeHelper.DeserializeExpression<TModel, TKey>(xmlOrderBy);
-            return await _service.GetSearchListByPage<TKey>(where, orderBy, pageSize, pageIndex);
+            return _service.GetSearchListByPage<TKey>(where, orderBy, pageSize, pageIndex);
         }
         [System.Web.Http.HttpPost]
-        public async Task<bool> Update(TModel model, bool isSave = true)
+        public bool Update(TModel model, bool isSave = true)
         {
-            return await _service.Update(model, isSave);
+            return _service.Update(model, isSave);
         }
         [System.Web.Http.HttpPost]
-        public async Task<bool> Update(XElement xmlPredicate, Dictionary<string, object> dic, bool isSave = true)
+        public bool Update(XElement xmlPredicate, Dictionary<string, object> dic, bool isSave = true)
         {
             Expression<Func<TModel, bool>> where = SerializeHelper.DeserializeExpression<TModel, bool>(xmlPredicate);
-            return await _service.Update(where, dic, isSave);
+            return _service.Update(where, dic, isSave);
         }
 
 
@@ -171,7 +172,7 @@ namespace Metro.DynamicModeules.WebApi.Controllers
         ///// <param name="request"></param>
         ///// <param name="handle"></param>
         ///// <returns></returns>
-        //public Task<ApiResult> ApiAsync<TRequest, TResponse>(TRequest request, Func<TRequest, Task<TResponse>> handle) where TResponse : ResultObject
+        //public ApiResult> ApiAsync<TRequest, TResponse>(TRequest request, Func<TRequest, TResponse>> handle) where TResponse : ResultObject
         //{
         //    return handle(request).ContinueWith(x =>
         //   {
