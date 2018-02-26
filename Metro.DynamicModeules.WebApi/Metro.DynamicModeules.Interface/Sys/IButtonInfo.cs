@@ -1,0 +1,65 @@
+﻿using MahApps.Metro.IconPacks;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace Metro.DynamicModeules.Interface.Sys
+{
+    /// <summary>
+    /// 点击按钮触发的Click事件
+    /// </summary>    
+    public delegate void OnButtonClick(IButtonInfo sender);
+
+    /// <summary>
+    /// 自定义按钮接口
+    /// </summary>
+    public interface IButtonInfo
+    {
+        /// <summary>
+        /// 按钮名称
+        /// </summary>
+        string Name { get; set; }
+
+        /// <summary>
+        /// 按钮标题
+        /// </summary>
+        string Caption { get; set; }
+
+        /// <summary>
+        /// 按钮矢量图片类型
+        /// </summary>
+        PackIconModernKind TKind { get; set; }
+
+        /// <summary>
+        /// 显示顺序
+        /// </summary>
+        int Index { get; set; }
+
+        /// <summary>
+        /// 按钮对象
+        /// </summary>
+        object Button { get; }
+
+        /// <summary>
+        /// 禁止/可用
+        /// </summary>
+        bool Enable { get; set; }
+
+        /// <summary>
+        /// 按钮权限值
+        /// </summary>
+        int Authority { get; set; }
+
+        /// <summary>
+        /// 自定义标记
+        /// </summary>
+        object Tag { get; set; }
+
+        /// <summary>
+        /// 本次Click事件是否发生错误
+        /// </summary>
+        bool ErrorOccurred { get; set; }
+
+    }
+}
