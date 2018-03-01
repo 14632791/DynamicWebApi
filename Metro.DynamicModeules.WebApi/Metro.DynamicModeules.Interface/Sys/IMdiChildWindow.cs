@@ -30,7 +30,7 @@ namespace Metro.DynamicModeules.Interface.Sys
         /// <summary>
         /// 子窗体的按钮列表
         /// </summary>
-        IList<IButtonInfo> Buttons { get; }
+        List<IButtonInfo> Buttons { get; }
 
         /// <summary>
         /// 初始化子窗体的按钮
@@ -53,7 +53,7 @@ namespace Metro.DynamicModeules.Interface.Sys
     /// </summary>
     public interface ISystemButtons
     {
-        IList<IButtonInfo> GetSystemButtons();
+        List<IButtonInfo> GetSystemButtons();
         void DoClose(IButtonInfo button); //关闭窗体
         void DoHelp(IButtonInfo button); //打开帮助
     }
@@ -67,7 +67,7 @@ namespace Metro.DynamicModeules.Interface.Sys
         /// 按钮列表
         /// </summary>
         /// <returns></returns>
-        IList<IButtonInfo> GetPrintableButtons();
+        List<IButtonInfo> GetPrintableButtons();
         /// <summary>
         /// 打开打印窗体
         /// </summary>

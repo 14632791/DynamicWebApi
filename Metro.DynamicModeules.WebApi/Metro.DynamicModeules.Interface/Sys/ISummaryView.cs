@@ -10,7 +10,7 @@ namespace Metro.DynamicModeules.Interface.Sys
     /// <summary>
     /// 数据窗体主表资料显示视图
     /// </summary>
-    public interface ISummaryView<T>
+    public interface ISummaryView<T>  where T : class,new()
     {
         /// <summary>
         /// 记录数

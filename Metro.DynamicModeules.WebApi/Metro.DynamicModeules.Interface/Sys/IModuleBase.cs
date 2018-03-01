@@ -17,7 +17,7 @@ namespace Metro.DynamicModeules.Interface.Sys
         /// 模块信息
         /// </summary>
         /// <returns></returns>
-        sys_Modules ModuleID { get; }
+        sys_Modules Module { get; }
 
 
 
