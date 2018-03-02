@@ -15,7 +15,7 @@ namespace Metro.DynamicModeules.WebApi.Controllers
     /// <summary>
     /// API控制器基类
     /// </summary>
-    public abstract class ApiControllerBase<TModel> : ApiController, IApiControllerBase<TModel> where TModel : class
+    public class ApiControllerBase<TModel> : ApiController, IApiControllerBase<TModel> where TModel : class
     {
         #region 私有方法
         /// <summary>
@@ -42,7 +42,10 @@ namespace Metro.DynamicModeules.WebApi.Controllers
         #region 实现service的方法
         public object JsonHelper { get; private set; }
 
-        protected abstract ServiceBase<TModel> GetService();
+        protected virtual ServiceBase<TModel> GetService()
+        {
+            return new ServiceBase<TModel>();
+        }
 
         [System.Web.Http.HttpPost]
         public object[] Add(TModel model, bool isSave = true)
