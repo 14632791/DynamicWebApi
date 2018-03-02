@@ -1,12 +1,7 @@
 ﻿using Metro.DynamicModeules.Models;
-using Metro.DynamicModeules.Models.Mvvm;
-using System;
-using System.Collections.Generic;
+using Metro.DynamicModeules.Models.ViewModel;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 
 namespace Metro.DynamicModeules.Interface.Sys
 {
@@ -55,4 +50,5 @@ namespace Metro.DynamicModeules.Interface.Sys
 
         void Initialize();
     }
-}
+    
+    }
