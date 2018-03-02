@@ -38,6 +38,6 @@ namespace Metro.DynamicModeules.Interface.Sys
         /// <param name="size">按钮大小</param>
         /// <param name="clickEvent">按钮的Click事件</param>
         /// <returns></returns>
-        IButtonInfo CreateButton(string name, string caption, PackIconModernKind kind, Size size, OnButtonClick clickEvent);
+        IButtonInfo CreateButton(string name, string caption, PackIconModernKind kind, Size size, Action<IButtonInfo> clickEvent);
     }
 }

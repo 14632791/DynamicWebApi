@@ -1,6 +1,8 @@
 ﻿using Metro.DynamicModeules.Models;
+using Metro.DynamicModeules.Models.Mvvm;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Windows.Controls;
@@ -17,22 +19,24 @@ namespace Metro.DynamicModeules.Interface.Sys
         /// 模块信息
         /// </summary>
         /// <returns></returns>
-        sys_Modules Module { get; }
-
-
+        sys_Modules Module { get; set; }
 
         /// <summary>
         /// 模块主窗体的菜单
         /// </summary>
         /// <returns></returns>
-        MenuItem GetModuleMenu();
+        ObservableCollection<MenuModel> Menus { get; set; }
 
         /// <summary>
         /// 模块主窗体功能按钮所在的容器 
         /// </summary>
         /// <returns></returns>
-        Control GetContainer();
+        Control Container { get; set; }
 
+        /// <summary>
+        /// 要显示的图标
+        /// </summary>
+        object Icon { get; set; }
         /// <summary>
         /// 设置模块的权限
         /// </summary>
