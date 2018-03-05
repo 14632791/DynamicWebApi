@@ -20,7 +20,7 @@ namespace Metro.DynamicModeules.Interface.Sys
         /// 模块主窗体的菜单
         /// </summary>
         /// <returns></returns>
-        ObservableCollection<MenuModel> Menus { get; set; }
+        //ObservableCollection<MenuModel> Menus { get; set; }
 
         /// <summary>
         /// 模块主窗体功能按钮所在的容器 
