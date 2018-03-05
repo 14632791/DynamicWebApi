@@ -179,9 +179,11 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\ApiControllerBase.cs" />
     <Compile Include="Controllers\SysBusinessTablesController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MyUserController.cs" />
     <Compile Include="Controllers\PayTypeController.cs" />
+    <Compile Include="Controllers\UserGroupReController.cs" />
+    <Compile Include="Controllers\UserRoleController.cs" />
+    <Compile Include="Controllers\UserGroupController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Converter\JsonDateTimeConverter.cs" />
     <Compile Include="Filter\AuthFilterAttribute.cs" />
