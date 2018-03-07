@@ -16,7 +16,7 @@ namespace Metro.DynamicModeules.Interface.Sys
         /// <summary>
         ///主窗体的工具栏 
         /// </summary>
-        IToolbarRegister MdiToolbar { get; set; }
+        //IToolbarRegister MdiToolbar { get; set; }
 
         /// <summary>
         /// 主窗体的观察者

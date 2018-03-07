@@ -29,6 +29,24 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="ControlzEx, Version=3.0.2.4, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\failDynamicModeules\Metro.DynamicModeules\packages\ControlzEx.3.0.2.4\lib\net40\ControlzEx.dll</HintPath>
@@ -70,17 +88,13 @@
     <Compile Include="Sys\IModuleBase.cs" />
     <Compile Include="Sys\IPurviewControllable.cs" />
     <Compile Include="Sys\ISummaryView.cs" />
-    <Compile Include="Sys\IToolbarRegister.cs" />
+    <Compile Include="UpdateType.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\failDynamicModeules\Metro.DynamicModeules\Metro.DynamicModeules.Common\Metro.DynamicModeules.Common.csproj">
-      <Project>{269ECEFF-B6C2-4708-86BA-AFBB1A2B045C}</Project>
-      <Name>Metro.DynamicModeules.Common</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\failDynamicModeules\Metro.DynamicModeules\Metro.DynamicModeules.Models\Metro.DynamicModeules.Models.csproj">
       <Project>{937E0D53-9696-48AB-B12F-736BC6D43F15}</Project>
       <Name>Metro.DynamicModeules.Models</Name>
