@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MahApps.Metro.IconPacks;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,17 +11,8 @@ namespace Metro.DynamicModeules.Interface.Sys
     /// </summary>
     public interface IMdiChildWindow
     {
-        /// <summary>
-        /// 主窗体的Toolbar对象引用
-        /// </summary>
-        //IToolbarRegister ToolbarRegister { get; set; }
-
-        /// <summary>
-        /// 登记主窗体的Toolbar对象，用于向主窗体的Toolbar对象创建本窗体的按钮
-        /// </summary>
-        /// <param name="toolBarRegister">主窗体的Toolbar对象</param>
-       // void RegisterToolBar(IToolbarRegister toolBarRegister);
-
+        PackIconControl<object> Icon { get; set; }
+        string FormMenuName { get; set; }
         /// <summary>
         /// 登记子窗体的观察者
         /// </summary>
