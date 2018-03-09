@@ -1,4 +1,5 @@
 ﻿using Metro.DynamicModeules.Models;
+using Metro.DynamicModeules.Models.Sys;
 using System.Windows.Controls;
 
 namespace Metro.DynamicModeules.Interface.Sys

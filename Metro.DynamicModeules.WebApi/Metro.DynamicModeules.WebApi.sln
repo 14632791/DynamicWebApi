@@ -17,6 +17,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Metro.DynamicModeules.Models", "..\..\failDynamicModeules\Metro.DynamicModeules\Metro.DynamicModeules.Models\Metro.DynamicModeules.Models.csproj", "{937E0D53-9696-48AB-B12F-736BC6D43F15}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibraryTest", "ClassLibraryTest\ClassLibraryTest.csproj", "{B53163B0-701F-47D7-899F-4334B9FBF58C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -73,6 +75,14 @@ Global
 		{937E0D53-9696-48AB-B12F-736BC6D43F15}.Release|Any CPU.Build.0 = Release|Any CPU
 		{937E0D53-9696-48AB-B12F-736BC6D43F15}.Release|x86.ActiveCfg = Release|Any CPU
 		{937E0D53-9696-48AB-B12F-736BC6D43F15}.Release|x86.Build.0 = Release|Any CPU
+		{B53163B0-701F-47D7-899F-4334B9FBF58C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B53163B0-701F-47D7-899F-4334B9FBF58C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B53163B0-701F-47D7-899F-4334B9FBF58C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B53163B0-701F-47D7-899F-4334B9FBF58C}.Debug|x86.Build.0 = Debug|Any CPU
+		{B53163B0-701F-47D7-899F-4334B9FBF58C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B53163B0-701F-47D7-899F-4334B9FBF58C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B53163B0-701F-47D7-899F-4334B9FBF58C}.Release|x86.ActiveCfg = Release|Any CPU
+		{B53163B0-701F-47D7-899F-4334B9FBF58C}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -12,12 +12,12 @@ namespace Metro.DynamicModeules.Interface.Sys
     public interface IMdiChildWindow
     {
         PackIconControl<object> Icon { get; set; }
-        string FormMenuName { get; set; }
+       // string FormMenuName { get; set; }
         /// <summary>
         /// 登记子窗体的观察者
         /// </summary>
         /// <param name="observers">所有观察者</param>
-        void RegisterObserver(IObserver[] observers);
+       // void RegisterObserver(IObserver[] observers);
 
         /// <summary>
         /// 子窗体的按钮列表
@@ -32,12 +32,12 @@ namespace Metro.DynamicModeules.Interface.Sys
         /// <summary>
         /// 窗体是否进入关闭状态
         /// </summary>
-        bool IsClosing { get; set; }
+       // bool IsClosing { get; set; }
 
         /// <summary>
         /// 是否允许打开多个子窗体实例
         /// </summary>
-        bool AllowMultiInstatnce { get; set; }
+       // bool AllowMultiInstatnce { get; set; }
     }
 
     /// <summary>

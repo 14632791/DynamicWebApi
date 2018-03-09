@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Metro.DynamicModeules.Service.Base;
+using Metro.DynamicModeules.Models.Sys;
 
-namespace Metro.DynamicModeules.WebApi.Controllers
+namespace Metro.DynamicModeules.WebApi.Controllers.Sys
 {
-    public class UserGroupReController : ApiControllerBase<tb_MyUserGroupRe>
+    public class UserGroupRoleController : ApiControllerBase<tb_MyUserGroupRole>
     {        
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Metro.DynamicModeules.Common;
 using Metro.DynamicModeules.Models;
+using Metro.DynamicModeules.Models.Sys;
 using Metro.DynamicModeules.Service.Base;
 using System;
 using System.Collections.Generic;

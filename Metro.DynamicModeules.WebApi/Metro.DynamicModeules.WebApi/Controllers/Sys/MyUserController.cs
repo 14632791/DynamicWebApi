@@ -12,8 +12,9 @@ using System.Xml.Linq;
 using Metro.DynamicModeules.Common.ExpressionSerialization;
 using System.Linq.Expressions;
 using System.Threading;
+using Metro.DynamicModeules.Models.Sys;
 
-namespace Metro.DynamicModeules.WebApi.Controllers
+namespace Metro.DynamicModeules.WebApi.Controllers.Sys
 {
     public class MyUserController : ApiControllerBase<tb_MyUser>
     { 
