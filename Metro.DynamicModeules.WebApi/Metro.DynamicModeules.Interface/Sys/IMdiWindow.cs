@@ -12,16 +12,7 @@ namespace Metro.DynamicModeules.Interface.Sys
     /// MDI主窗体接口,每个模块唯一的主界面
     /// </summary>
     public interface IMdiWindow
-    {
-        /// <summary>
-        ///主窗体的工具栏 
-        /// </summary>
-        //IToolbarRegister MdiToolbar { get; set; }
-
-        /// <summary>
-        /// 主窗体的观察者
-        /// </summary>
-        IObserver[] MdiObservers { get; }
+    {       
 
         /// <summary>
         /// 注册主窗体工具栏的按钮
