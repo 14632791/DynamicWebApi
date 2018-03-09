@@ -8,7 +8,7 @@ namespace ClassLibraryTest
     public partial class Model1 : DbContext
     {
         public Model1()
-            : base("name=Model12")
+            : base("name=Model13")
         {
         }
 
@@ -33,6 +33,12 @@ namespace ClassLibraryTest
             modelBuilder.Entity<tb_MyMenu>()
                 .Property(e => e.MenuType)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<tb_MyMenu>()
+                .HasMany(e => e.tb_MyUserGroupRole)
+                .WithRequired(e => e.tb_MyMenu)
+                .HasForeignKey(e => e.MenuId)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<tb_MyMenu>()
                 .HasMany(e => e.tb_MyAuthorityItem)

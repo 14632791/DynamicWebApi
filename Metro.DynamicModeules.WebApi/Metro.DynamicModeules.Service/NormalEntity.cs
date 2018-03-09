@@ -709,9 +709,6 @@ namespace Metro.DynamicModeules.Service
                 .IsFixedLength()
                 .IsUnicode(false);
 
-            //modelBuilder.Entity<tb_MyFormTagName>()
-            //    .Property(e => e.MenuName)
-            //    .IsUnicode(false);
             modelBuilder.Entity<sys_Modules>()
                .HasMany(e => e.tb_MyMenu)
                .WithRequired(e => e.sys_Modules)

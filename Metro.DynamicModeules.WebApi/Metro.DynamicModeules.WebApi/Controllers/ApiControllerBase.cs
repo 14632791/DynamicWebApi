@@ -78,7 +78,7 @@ namespace Metro.DynamicModeules.WebApi.Controllers
         }
 
         [System.Web.Http.HttpPost]
-        public TModel Find(object[] keyValues)
+        public virtual TModel Find(object[] keyValues)
         {
             return _service.Find(keyValues);
         }

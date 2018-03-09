@@ -8,5 +8,10 @@ namespace Metro.DynamicModeules.WebApi.Controllers.Sys
 {
     public class ModulesController : ApiControllerBase<sys_Modules>
     {
+        public override sys_Modules Find(object[] keyValues)
+        {
+            var module = base.Find(keyValues);
+            return module;
+        }
     }
 }

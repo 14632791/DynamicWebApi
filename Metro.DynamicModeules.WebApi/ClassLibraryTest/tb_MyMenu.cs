@@ -11,6 +11,7 @@ namespace ClassLibraryTest
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tb_MyMenu()
         {
+            tb_MyUserGroupRole = new HashSet<tb_MyUserGroupRole>();
             tb_MyAuthorityItem = new HashSet<tb_MyAuthorityItem>();
         }
 
@@ -33,6 +34,9 @@ namespace ClassLibraryTest
         public string MenuType { get; set; }
 
         public virtual sys_Modules sys_Modules { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tb_MyUserGroupRole> tb_MyUserGroupRole { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tb_MyAuthorityItem> tb_MyAuthorityItem { get; set; }

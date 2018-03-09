@@ -30,6 +30,8 @@ namespace ClassLibraryTest
         [StringLength(50)]
         public string LastUpdatedBy { get; set; }
 
+        public virtual tb_MyMenu tb_MyMenu { get; set; }
+
         public virtual tb_MyUserGroup tb_MyUserGroup { get; set; }
     }
 }
