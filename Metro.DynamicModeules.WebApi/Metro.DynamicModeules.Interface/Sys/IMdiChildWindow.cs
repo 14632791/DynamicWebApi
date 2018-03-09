@@ -1,6 +1,7 @@
 ﻿using MahApps.Metro.IconPacks;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 
@@ -9,35 +10,20 @@ namespace Metro.DynamicModeules.Interface.Sys
     /// <summary>
     /// MDI子窗体的接口
     /// </summary>
-    public interface IMdiChildWindow
-    {
-        PackIconControl<object> Icon { get; set; }
-       // string FormMenuName { get; set; }
-        /// <summary>
-        /// 登记子窗体的观察者
-        /// </summary>
-        /// <param name="observers">所有观察者</param>
-       // void RegisterObserver(IObserver[] observers);
+    public interface IMdiChildWindow: IModuleBase
+    {  
 
         /// <summary>
         /// 子窗体的按钮列表
         /// </summary>
-        List<IButtonInfo> Buttons { get; }
+        ObservableCollection<IButtonInfo> Buttons { get; }
 
         /// <summary>
         /// 初始化子窗体的按钮
         /// </summary>
         void InitButtons();
 
-        /// <summary>
-        /// 窗体是否进入关闭状态
-        /// </summary>
-       // bool IsClosing { get; set; }
-
-        /// <summary>
-        /// 是否允许打开多个子窗体实例
-        /// </summary>
-       // bool AllowMultiInstatnce { get; set; }
+        
     }
 
     /// <summary>
@@ -67,14 +53,5 @@ namespace Metro.DynamicModeules.Interface.Sys
         void DoPrint(IButtonInfo button);
     }
 
-    /// <summary>
-    /// 观察者接口
-    /// </summary>
-    public interface IObserver
-    {
-        /// <summary>
-        /// 发送通知
-        /// </summary>
-        void Notify();
-    }
+    
 }

@@ -1,4 +1,5 @@
-﻿using Metro.DynamicModeules.Models;
+﻿using MahApps.Metro.IconPacks;
+using Metro.DynamicModeules.Models;
 using Metro.DynamicModeules.Models.Sys;
 using System.Windows.Controls;
 
@@ -14,7 +15,7 @@ namespace Metro.DynamicModeules.Interface.Sys
         /// </summary>
         /// <returns></returns>
         sys_Modules Module { get; set; }
-               
+
 
         /// <summary>
         /// 该模块的窗体
@@ -25,9 +26,9 @@ namespace Metro.DynamicModeules.Interface.Sys
         /// <summary>
         /// 要显示的图标
         /// </summary>
-        object Icon { get; set; }
-
+        PackIconControl<object> Icon { get; set; }
+        void InitMenu();
         void Initialize();
     }
-    
-    }
+
+}
