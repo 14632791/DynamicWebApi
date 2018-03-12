@@ -53,6 +53,7 @@
     <Compile Include="NormalEntity.cs" />
     <Compile Include="PayTypeService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserGroupService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\failDynamicModeules\Metro.DynamicModeules\Metro.DynamicModeules.Common\Metro.DynamicModeules.Common.csproj">
