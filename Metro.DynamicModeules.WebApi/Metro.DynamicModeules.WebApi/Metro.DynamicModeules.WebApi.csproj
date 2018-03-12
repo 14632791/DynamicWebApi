@@ -190,6 +190,7 @@
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Converter\JsonDateTimeConverter.cs" />
     <Compile Include="Filter\AuthFilterAttribute.cs" />
+    <Compile Include="Filter\CustomExceptionAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

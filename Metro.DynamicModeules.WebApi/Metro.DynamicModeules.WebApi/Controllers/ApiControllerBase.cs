@@ -2,6 +2,7 @@
 using Metro.DynamicModeules.Common.ExpressionSerialization;
 using Metro.DynamicModeules.Interface.Service.Base;
 using Metro.DynamicModeules.Service.Base;
+using Metro.DynamicModeules.WebApi.Filter;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -15,6 +16,7 @@ namespace Metro.DynamicModeules.WebApi.Controllers
     /// <summary>
     /// API控制器基类
     /// </summary>
+    [CustomException]
     public class ApiControllerBase<TModel> : ApiController, IApiControllerBase<TModel> where TModel : class
     {
         #region 私有方法

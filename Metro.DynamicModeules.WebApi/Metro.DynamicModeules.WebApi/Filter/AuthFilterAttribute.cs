@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace Metro.DynamicModeules.WebApi.Filter
 {
-    public class AuthFilterAttribute : ActionFilterAttribute
+    public class AuthFilterAttribute : AuthorizeAttribute
     {
         /// <summary>
         /// 匿名可访问
@@ -24,49 +24,19 @@ namespace Metro.DynamicModeules.WebApi.Filter
         /// </summary>
         public string PowerName { get; set; }
 
-
-        public sealed override void OnActionExecuting(ActionExecutingContext filterContext)
+        protected override bool AuthorizeCore(HttpContextBase httpContext)
         {
-            //跨域时，客户端会用OPTIONS请求来探测服务器
-            if (filterContext.HttpContext.Request.HttpMethod == "OPTIONS")
-            {
-                var origin = filterContext.HttpContext.Request.Headers["Origin"];
-                if (true) //可以维护一个允许跨域的域名集合，类判断是否可以跨域
-                {
-                    filterContext.HttpContext.Response.Headers.Add("Access-Control-Allow-Origin", origin ?? "*");
-                }
-                filterContext.Result = new EmptyResult();
-                return;
-            }
-
-            if (AllowAnonymous) return;
-            //var user = LoginUser.GetUser();
-            //if (user == null)
+            var hasPower = true; //可以根据 user和url等信息判断是否有权限
+            //if (!hasPower)
             //{
             //    filterContext.Result = new ApiResult
             //    {
-            //        ResultData = new ResultObject { Code = -1, Msg = "未登录" },
+            //        ResultData = new ResultObject { Code = -2, Msg = "无权限" },
             //        JsonRequestBehavior = JsonRequestBehavior.AllowGet
             //    };
-            //    return;
             //}
-            if (OnlyLogin) return;
-            var url = PowerName;
-            if (string.IsNullOrEmpty(url))
-            {
-                url = "/" + filterContext.ActionDescriptor.ControllerDescriptor.ControllerName + "/" + filterContext.ActionDescriptor.ActionName;
-            }
-
-            var hasPower = true; //可以根据 user和url等信息判断是否有权限
-            if (!hasPower)
-            {
-                filterContext.Result = new ApiResult
-                {
-                    ResultData = new ResultObject { Code = -2, Msg = "无权限" },
-                    JsonRequestBehavior = JsonRequestBehavior.AllowGet
-                };
-            }
+            return base.AuthorizeCore(httpContext);
         }
-
+    
     }
 }
