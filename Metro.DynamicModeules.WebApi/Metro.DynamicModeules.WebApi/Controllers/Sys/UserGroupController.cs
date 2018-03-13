@@ -6,6 +6,7 @@ using System.Web;
 using Metro.DynamicModeules.Service.Base;
 using Metro.DynamicModeules.Models.Sys;
 using Metro.DynamicModeules.Service;
+using System.Web.Http;
 
 namespace Metro.DynamicModeules.WebApi.Controllers.Sys
 {
@@ -18,10 +19,9 @@ namespace Metro.DynamicModeules.WebApi.Controllers.Sys
             return _groupService;
         }
         [System.Web.Http.HttpPost]
-        public IEnumerable<tb_MyUserGroup> GetGroupsByAccount(string userAccount)
+        public IEnumerable<tb_MyUserGroup> GetGroupsByAccount([FromBody]string userAccount)
         {
             return _groupService.GetGroupsByAccount(userAccount);
         }
-       
     }
 }
