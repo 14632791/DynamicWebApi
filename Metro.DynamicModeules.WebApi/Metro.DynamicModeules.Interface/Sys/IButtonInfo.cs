@@ -23,7 +23,7 @@ namespace Metro.DynamicModeules.Interface.Sys
         /// <summary>
         /// 按钮矢量图片类型
         /// </summary>
-        PackIconControl<object> Icon { get; set; }
+        object Icon { get; set; }
 
         /// <summary>
         /// 显示顺序

@@ -26,7 +26,7 @@ namespace Metro.DynamicModeules.Interface.Sys
         /// <summary>
         /// 要显示的图标
         /// </summary>
-        PackIconControl<object> Icon { get; set; }
+        object Icon { get; set; }
         void InitMenu();
         void Initialize();
     }
