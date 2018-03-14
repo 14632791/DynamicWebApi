@@ -10,7 +10,7 @@ namespace Metro.DynamicModeules.Interface.Sys
     /// <summary>
     /// 数据窗体主表资料显示视图
     /// </summary>
-    public interface ISummaryView<T>  where T : class,new()
+    public interface ISummaryView<T> where T : class, new()
     {
         /// <summary>
         /// 记录数
@@ -33,27 +33,15 @@ namespace Metro.DynamicModeules.Interface.Sys
         ListCollectionView View { get; }
 
         /// <summary>
-        /// 获取指定资料行
+        /// 当前选中行
         /// </summary>
-        /// <param name="rowHandle">资料行索引</param>
-        /// <returns></returns>
-        T GetDataRow(int rowHandle);
+        T FocusedRow { get; set; }
 
         /// <summary>
         /// 刷新数据源，重新显示数据
         /// </summary>
         void RefreshDataSource();
 
-        /// <summary>
-        /// 绑定双击事件
-        /// </summary>
-        /// <param name="eventHandler">事件</param>
-        void BindingDoubleClick(EventHandler eventHandler);
-
-        /// <summary>
-        /// 设置焦点
-        /// </summary>
-        void SetFocus();
 
         /// <summary>
         /// 移动到第一条记录
@@ -75,17 +63,7 @@ namespace Metro.DynamicModeules.Interface.Sys
         /// </summary>
         void MoveLast();
 
-        /// <summary>
-        /// 资料行索引是否有效
-        /// </summary>
-        /// <param name="rowHandle">资料行索引</param>
-        /// <returns></returns>
-        bool IsValidRowHandle(int rowHandle);
 
-        /// <summary>
-        /// 刷新资料行的数据
-        /// </summary>
-        /// <param name="rowHandle">资料行索引</param>
-        void RefreshRow(int rowHandle);
+
     }
 }
