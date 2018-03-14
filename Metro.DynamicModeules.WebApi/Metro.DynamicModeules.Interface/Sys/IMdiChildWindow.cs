@@ -1,6 +1,7 @@
 ﻿using MahApps.Metro.IconPacks;
 using Metro.DynamicModeules.Models.Sys;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -22,11 +23,11 @@ namespace Metro.DynamicModeules.Interface.Sys
         /// 关闭窗口command
         /// </summary>
         ICommand CloseCommand { get; }
-        
+
         /// <summary>
         /// 子窗体的按钮列表
         /// </summary>
-        ObservableCollection<IButtonInfo> Buttons { get; }
+        IList Buttons { get; }
         
 
         tb_MyMenu MenuItem { get; set; }
@@ -37,9 +38,9 @@ namespace Metro.DynamicModeules.Interface.Sys
     /// </summary>
     public interface ISystemButtons
     {
-        List<IButtonInfo> GetSystemButtons();
-        //void DoClose(IButtonInfo button); //关闭窗体
-        //void DoHelp(IButtonInfo button); //打开帮助
+        IList GetSystemButtons();
+        void DoClose( ); //关闭窗体
+        void DoHelp( ); //打开帮助
     }
 
     /// <summary>
@@ -51,7 +52,7 @@ namespace Metro.DynamicModeules.Interface.Sys
         /// 按钮列表
         /// </summary>
         /// <returns></returns>
-        List<IButtonInfo> GetPrintableButtons();
+        IList GetPrintableButtons();
         /// <summary>
         /// 打开打印窗体
         /// </summary>

@@ -12,28 +12,28 @@ namespace Metro.DynamicModeules.Interface.Sys
     /// <summary>
     /// 自定义按钮接口
     /// </summary>
-    public interface IButtonInfo
-    {
-        /// <summary>
-        /// 对应的实体
-        /// </summary>
-        tb_MyAuthorityItem AuthorityItem { get; set; }
+    //public interface IButtonInfo
+    //{
+    //    /// <summary>
+    //    /// 对应的实体
+    //    /// </summary>
+    //    tb_MyAuthorityItem AuthorityItem { get; set; }
 
 
-        /// <summary>
-        /// 按钮矢量图片类型
-        /// </summary>
-        object Icon { get; set; }
+    //    /// <summary>
+    //    /// 按钮矢量图片类型
+    //    /// </summary>
+    //    object Icon { get; set; }
 
-        /// <summary>
-        /// 显示顺序
-        /// </summary>
-        int Index { get; set; }
+    //    /// <summary>
+    //    /// 显示顺序
+    //    /// </summary>
+    //    int Index { get; set; }
 
-        /// <summary>
-        /// 要执行的action
-        /// </summary>
-        ICommand ClickCommand { get;}
+    //    /// <summary>
+    //    /// 要执行的action
+    //    /// </summary>
+    //    ICommand ClickCommand { get;}
 
-    }
+    //}
 }

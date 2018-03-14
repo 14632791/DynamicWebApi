@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 
@@ -14,19 +16,19 @@ namespace Metro.DynamicModeules.Interface.Sys
         /// 返回业务单据窗体的按钮数组
         /// </summary>
         /// <returns></returns>
-        IButtonInfo[] GetBusinessButtons();
+        IList GetBusinessButtons();
 
         /// <summary>
         /// (审核)(批准)
         /// </summary>
         /// <param name="button"></param>
-        void DoApproval(IButtonInfo button);
+        void DoApproval(object button);
 
         /// <summary>
         /// 查看单据的修改历史记录
         /// </summary>
         /// <param name="button"></param>
-        void DoShowModifyHistory(IButtonInfo button);//
+        void DoShowModifyHistory(object button);//
 
         /// <summary>
         /// 显示指定单号的业务单据数据

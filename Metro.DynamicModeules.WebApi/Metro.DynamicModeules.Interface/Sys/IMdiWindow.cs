@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,7 +23,7 @@ namespace Metro.DynamicModeules.Interface.Sys
         /// <summary>
         /// 主窗体上的按钮集合
         /// </summary>
-        IList<IButtonInfo> MdiButtons { get; }
+        IList MdiButtons { get; }
 
         /// <summary>
         /// 所有模块主菜单的集合

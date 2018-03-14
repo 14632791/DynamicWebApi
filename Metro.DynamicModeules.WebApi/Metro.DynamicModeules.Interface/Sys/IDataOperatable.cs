@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 
 namespace Metro.DynamicModeules.Interface.Sys
 {
@@ -11,7 +12,7 @@ namespace Metro.DynamicModeules.Interface.Sys
         /// 返回数据操作窗体的按钮
         /// </summary>
         /// <returns></returns>
-        List<IButtonInfo> GetDataOperatableButtons();
+        IList GetDataOperatableButtons();
 
         /// <summary>
         /// 查看/显示数据
