@@ -1,9 +1,11 @@
 ﻿using MahApps.Metro.IconPacks;
+using Metro.DynamicModeules.Models.Sys;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Windows.Input;
 
 namespace Metro.DynamicModeules.Interface.Sys
 {
@@ -11,19 +13,23 @@ namespace Metro.DynamicModeules.Interface.Sys
     /// MDI子窗体的接口
     /// </summary>
     public interface IMdiChildWindow: IModuleBase
-    {  
-
+    {
+        /// <summary>
+        /// 打开窗口command
+        /// </summary>
+        ICommand OpenOwnerCommand { get; }
+        /// <summary>
+        /// 关闭窗口command
+        /// </summary>
+        ICommand CloseCommand { get; }
+        
         /// <summary>
         /// 子窗体的按钮列表
         /// </summary>
         ObservableCollection<IButtonInfo> Buttons { get; }
-
-        /// <summary>
-        /// 初始化子窗体的按钮
-        /// </summary>
-        void InitButtons();
-
         
+
+        tb_MyMenu MenuItem { get; set; }
     }
 
     /// <summary>
@@ -32,8 +38,8 @@ namespace Metro.DynamicModeules.Interface.Sys
     public interface ISystemButtons
     {
         List<IButtonInfo> GetSystemButtons();
-        void DoClose(IButtonInfo button); //关闭窗体
-        void DoHelp(IButtonInfo button); //打开帮助
+        //void DoClose(IButtonInfo button); //关闭窗体
+        //void DoHelp(IButtonInfo button); //打开帮助
     }
 
     /// <summary>
@@ -50,7 +56,7 @@ namespace Metro.DynamicModeules.Interface.Sys
         /// 打开打印窗体
         /// </summary>
         /// <param name="button"></param>
-        void DoPrint(IButtonInfo button);
+        void DoPrint();
     }
 
     

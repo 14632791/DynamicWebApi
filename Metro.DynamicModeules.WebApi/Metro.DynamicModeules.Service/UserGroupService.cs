@@ -20,7 +20,8 @@ namespace Metro.DynamicModeules.Service
         /// <returns></returns>
         public IEnumerable<tb_MyUserGroup> GetGroupsByAccount(string userAccount)
         {
-            using (NormalEntity normalContext = (NormalEntity)DbContext)
+            NormalEntity normalContext = (NormalEntity)DbContext;
+            try
             {
                 var gups = from g in normalContext.tb_MyUserGroup
                            where (from r in normalContext.tb_MyUserGroupRe
@@ -29,6 +30,14 @@ namespace Metro.DynamicModeules.Service
                            Distinct().Contains(g.GroupCode)
                            select g;
                 return gups.ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                normalContext.Dispose();
             }
         }
     }

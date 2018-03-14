@@ -17,7 +17,7 @@ namespace Metro.DynamicModeules.Interface.Sys
         /// <summary>
         /// 对应的实体
         /// </summary>
-        tb_MyAuthorityItem MyAuthorityItem { get; set; }
+        tb_MyAuthorityItem AuthorityItem { get; set; }
 
 
         /// <summary>
