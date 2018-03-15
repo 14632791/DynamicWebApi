@@ -68,6 +68,10 @@ namespace Metro.DynamicModeules.Service
                .Property(e => e.AuthorityCode)
                .IsUnicode(false);
 
+            modelBuilder.Entity<tb_MyAuthorityItem>()
+             .Property(e => e.Code)
+             .IsUnicode(false);
+
             modelBuilder.Entity<sys_BusinessTables>()
                 .Property(e => e.FormName)
                 .IsUnicode(false);

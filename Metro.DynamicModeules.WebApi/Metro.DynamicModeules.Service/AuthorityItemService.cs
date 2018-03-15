@@ -47,7 +47,15 @@ namespace Metro.DynamicModeules.Service
             NormalEntity normalContext = (NormalEntity)DbContext;
             try
             {
-               return normalContext.tb_MyAuthorityByItem.ToList();
+               var items= normalContext.tb_MyAuthorityByItem.Where(i=>i.MenuId>-1);
+                if (items.Count() > 0)
+                {
+                    return items.ToList();
+                }
+                else
+                {
+                    return null;
+                }
             }
             catch (Exception ex)
             {
