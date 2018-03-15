@@ -31,10 +31,6 @@ namespace Metro.DynamicModeules.Interface.Sys
         /// 子窗体拥有的权限
         /// </summary>
         int ChildAuthorities { get; set; }
-
-        /// <summary>
-        /// 打开本窗体的菜单名
-        /// </summary>
-        string MenuName { get; set; }
+        
     }
 }
