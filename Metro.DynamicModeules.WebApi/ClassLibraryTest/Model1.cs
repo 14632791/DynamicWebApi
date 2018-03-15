@@ -8,7 +8,7 @@ namespace ClassLibraryTest
     public partial class Model1 : DbContext
     {
         public Model1()
-            : base("name=Model15")
+            : base("name=Model16")
         {
         }
 
@@ -23,6 +23,14 @@ namespace ClassLibraryTest
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<tb_MyAuthorityByItem>()
+                .Property(e => e.AuthorityCode)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<tb_MyAuthorityItem>()
+                .Property(e => e.code)
+                .IsUnicode(false);
+
             modelBuilder.Entity<tb_MyMenu>()
                 .Property(e => e.MenuName)
                 .IsUnicode(false);

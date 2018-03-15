@@ -8,12 +8,13 @@ namespace ClassLibraryTest
 
     public partial class tb_MyAuthorityItem
     {
-        [Key]
-        public int isid { get; set; }
-
         [StringLength(20)]
         public string AuthorityName { get; set; }
 
         public int? AuthorityValue { get; set; }
+
+        [Key]
+        [StringLength(20)]
+        public string code { get; set; }
     }
 }

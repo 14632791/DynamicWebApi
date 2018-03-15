@@ -128,12 +128,7 @@ namespace Metro.DynamicModeules.Interface.Sys
         /// 当前操作状态
         /// </summary>
         UpdateType UpdateType { get; }
-
-        /// <summary>
-        /// 当前要操作的数据
-        /// </summary>
-        object Data { get; set; }
-
+        
         /// <summary>
         /// 是否修改了数据
         /// </summary>

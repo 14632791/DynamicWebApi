@@ -64,13 +64,9 @@ namespace Metro.DynamicModeules.Service
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            //modelBuilder.Entity<dtproperties>()
-            //    .Property(e => e.property)
-            //    .IsUnicode(false);
-
-            //modelBuilder.Entity<dtproperties>()
-            //    .Property(e => e.value)
-            //    .IsUnicode(false);
+            modelBuilder.Entity<tb_MyAuthorityByItem>()
+               .Property(e => e.AuthorityCode)
+               .IsUnicode(false);
 
             modelBuilder.Entity<sys_BusinessTables>()
                 .Property(e => e.FormName)

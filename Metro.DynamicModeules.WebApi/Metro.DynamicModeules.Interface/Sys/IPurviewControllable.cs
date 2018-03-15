@@ -27,10 +27,6 @@ namespace Metro.DynamicModeules.Interface.Sys
         /// <returns></returns>
         bool HasPurview(int value);
 
-        /// <summary>
-        /// 子窗体拥有的权限
-        /// </summary>
-        int ChildAuthorities { get; set; }
-        
+       
     }
 }

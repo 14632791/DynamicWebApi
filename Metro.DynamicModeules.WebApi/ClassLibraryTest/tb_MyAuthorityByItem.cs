@@ -11,11 +11,11 @@ namespace ClassLibraryTest
         [Key]
         [Column(Order = 0)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int ItemId { get; set; }
+        public int MenuId { get; set; }
 
         [Key]
         [Column(Order = 1)]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int MenuId { get; set; }
+        [StringLength(20)]
+        public string AuthorityCode { get; set; }
     }
 }

@@ -30,7 +30,7 @@ namespace Metro.DynamicModeules.Interface.Sys
         IList Buttons { get; }
         
 
-        tb_MyMenu MenuItem { get; set; }
+        tb_MyMenu MyMenu { get; set; }
     }
 
     /// <summary>
