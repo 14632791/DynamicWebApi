@@ -28,7 +28,7 @@ namespace Metro.DynamicModeules.Interface.Sys
         /// <summary>
         /// 子窗体的按钮列表
         /// </summary>
-        IList Buttons { get; }
+        IList<IButtonInfo> Buttons { get; }
         
 
         tb_MyMenu MyMenu { get; set; }

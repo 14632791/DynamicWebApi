@@ -79,6 +79,7 @@
     <Compile Include="Service\Base\IServiceBase.cs" />
     <Compile Include="Sys\IAttachmentStorage.cs" />
     <Compile Include="Sys\IBusinessSupportable.cs" />
+    <Compile Include="Sys\IButtonInfo.cs" />
     <Compile Include="Sys\IDataOperatable.cs" />
     <Compile Include="Sys\IFuzzySearchSupportable.cs" />
     <Compile Include="Sys\IMdiChildView.cs" />
