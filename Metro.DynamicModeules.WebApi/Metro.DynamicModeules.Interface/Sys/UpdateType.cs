@@ -11,7 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Metro.DynamicModeules.Interface
+namespace Metro.DynamicModeules.Interface.Sys
 {
     /// <summary>
     /// 数据窗体的操作类型

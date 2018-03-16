@@ -13,8 +13,9 @@ namespace Metro.DynamicModeules.Interface.Sys
     /// <summary>
     /// MDI子窗体的接口
     /// </summary>
-    public interface IMdiChildWindow: IModuleBase
+    public interface IMdiChildView: IModuleBase
     {
+        IModuleBase IModule { get; set; }
         /// <summary>
         /// 打开窗口command
         /// </summary>

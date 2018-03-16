@@ -79,16 +79,14 @@
     <Compile Include="Service\Base\IServiceBase.cs" />
     <Compile Include="Sys\IAttachmentStorage.cs" />
     <Compile Include="Sys\IBusinessSupportable.cs" />
-    <Compile Include="Sys\IButtonInfo.cs" />
     <Compile Include="Sys\IDataOperatable.cs" />
     <Compile Include="Sys\IFuzzySearchSupportable.cs" />
-    <Compile Include="Sys\ILoginAuthorization.cs" />
-    <Compile Include="Sys\IMdiChildWindow.cs" />
-    <Compile Include="Sys\IMdiWindow.cs" />
+    <Compile Include="Sys\IMdiChildView.cs" />
+    <Compile Include="Sys\IMdiMainWindow.cs" />
     <Compile Include="Sys\IModuleBase.cs" />
     <Compile Include="Sys\IPurviewControllable.cs" />
     <Compile Include="Sys\ISummaryView.cs" />
-    <Compile Include="UpdateType.cs" />
+    <Compile Include="Sys\UpdateType.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -100,5 +98,6 @@
       <Name>Metro.DynamicModeules.Models</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

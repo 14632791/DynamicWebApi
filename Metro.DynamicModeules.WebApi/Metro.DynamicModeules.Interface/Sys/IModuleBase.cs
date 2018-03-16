@@ -27,6 +27,9 @@ namespace Metro.DynamicModeules.Interface.Sys
         /// 要显示的图标
         /// </summary>
         object Icon { get; set; }
+
+        IMdiMainWindow MdiMainWindow { get; set; }
+
         void InitMenu();
         void Initialize();
     }
