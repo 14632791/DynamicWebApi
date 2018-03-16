@@ -16,7 +16,17 @@ namespace Metro.DynamicModeules.Interface.Sys
         /// <returns></returns>
         sys_Modules Module { get; set; }
 
+        /// <summary>
+        /// 初始化所有子界面
+        /// </summary>
+        void InitMenu();
+    }
 
+    /// <summary>
+    /// 构件的通用接口
+    /// </summary>
+    public interface ICommonModuleBase
+    {
         /// <summary>
         /// 该模块的窗体
         /// </summary>
@@ -28,10 +38,15 @@ namespace Metro.DynamicModeules.Interface.Sys
         /// </summary>
         object Icon { get; set; }
 
+        /// <summary>
+        /// 宿主窗体
+        /// </summary>
         IMdiMainWindow MdiMainWindow { get; set; }
 
-        void InitMenu();
+       
+        /// <summary>
+        /// 初始化
+        /// </summary>
         void Initialize();
     }
-
 }
