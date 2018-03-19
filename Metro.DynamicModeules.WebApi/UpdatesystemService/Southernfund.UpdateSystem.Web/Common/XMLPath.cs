@@ -4,7 +4,7 @@ using System.Configuration;
 using System.Linq;
 using System.Web;
 
-namespace Common
+namespace UpdateSystem.Web.Common
 {
     public enum XmlFileType
     {

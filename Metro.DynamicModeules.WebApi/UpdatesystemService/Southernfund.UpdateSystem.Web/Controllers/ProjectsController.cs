@@ -1,12 +1,10 @@
-﻿using Microsoft.Practices.Unity;
+﻿using Metro.DynamicModeules.Interface.Service.Update;
+using Metro.DynamicModeules.Models.Update;
+using Microsoft.Practices.Unity;
 using PagedList;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System.Linq.Expressions;
 using System.Web.Mvc;
-using UpdateSystem.IService;
-using UpdateSystem.Model;
 using UpdateSystem.Web.Common;
 
 namespace UpdateSystem.Web.Controllers
@@ -15,17 +13,22 @@ namespace UpdateSystem.Web.Controllers
     public class ProjectsController : Controller
     {
         [Dependency]
-        public IProjects PSer { get; set; }
+        public IUpProject PSer { get; set; }
 
         public ActionResult Index(int pageIndex = 1, string Name = "")
         {
             int pageSize = 10;
-            int totalCount;
-
-            var list = PSer.GetList(new ProjectsModel { Name = Name, PagedIndex = pageIndex, PageSize = pageSize }, out totalCount);
+            Expression<Func<tb_UpProject, bool>> where = u => !string.IsNullOrEmpty(u.name);
+            if (!string.IsNullOrEmpty(Name))
+            {
+                where = u => u.name.Contains(Name);
+            }
+            int totalCount = (int)PSer.GetListCount(where);
+            tb_UpProject[] list = PSer.GetSearchListByPage<string>(where, u => u.code, 10, pageIndex);
+            //GetList(new tb_UpProject { Name = Name, PagedIndex = pageIndex, PageSize = pageSize }, out totalCount);
             if (list != null)
             {
-                var pageList = new StaticPagedList<ProjectsModel>(list, pageIndex, pageSize, totalCount);
+                var pageList = new StaticPagedList<tb_UpProject>(list, pageIndex, pageSize, totalCount);
                 return View(pageList);
             }
             return View();
@@ -33,10 +36,10 @@ namespace UpdateSystem.Web.Controllers
 
         public ActionResult COE(string id ="")// 0)
         {
-            ProjectsModel m = new ProjectsModel();
+            tb_UpProject m = new tb_UpProject();
             if (!string.IsNullOrEmpty(id))// > 0)
             {
-                m = PSer.GetModel(id);
+                m = PSer.Find(new object[] { id });//GetModel(id);
             }
             return View(m);
         }
@@ -44,19 +47,19 @@ namespace UpdateSystem.Web.Controllers
         //
         // POST: /Projects/Create
         [HttpPost]
-        public ActionResult Save(ProjectsModel form)
+        public ActionResult Save(tb_UpProject form)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    if (!string.IsNullOrEmpty(form.ID))// > 0)
+                    if (!string.IsNullOrEmpty(form.code))// > 0)
                     {
                         ViewData["msg"] = PSer.Update(form) ? "修改成功！" : "修改失败！";
                     }
                     else
                     {
-                        ViewData["msg"] = PSer.Add(form) ? "新增成功！" : "新增失败！";
+                        ViewData["msg"] =null!=PSer.Add(form) ? "新增成功！" : "新增失败！";
                     }
                 }
             }
@@ -71,7 +74,7 @@ namespace UpdateSystem.Web.Controllers
         {
             try
             {
-                ViewData["msg"] = PSer.Delete(id) ? "删除成功！" : "删除失败！";
+                ViewData["msg"] = PSer.Delete(true,new object[] { id }) ? "删除成功！" : "删除失败！";
                 return View("~/Views/shared/_msg.cshtml");
             }
             catch

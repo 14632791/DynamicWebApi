@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using Metro.DynamicModeules.Interface.Service;
+using Metro.DynamicModeules.Models.Sys;
 using Microsoft.Practices.Unity;
 using PagedList;
-using UpdateSystem.IService;
-using UpdateSystem.Model;
-using UpdateSystem.Model.Util;
-using UpdateSystem.Web.Common;
+using System;
+using System.Linq;
 using System.Linq.Expressions;
-using Metro.DynamicModeules.Interface.Service;
-using Metro.DynamicModeules.Models.Sys;
+using System.Web.Mvc;
+using UpdateSystem.Web.Common;
 
 namespace UpdateSystem.Web.Controllers
 {
@@ -26,9 +21,15 @@ namespace UpdateSystem.Web.Controllers
         public ActionResult Index(int pageIndex = 1, string unameText = "")
         {
             int pgsize = 10;
-            int totalCount;
-            
-            var list = Us.GetUserModels(new tb_MyUser { MerId = "", search_name = unameText, page = pageIndex, pageSize = pgsize }, out totalCount);
+            Expression<Func<tb_MyUser, bool>> where = u => !string.IsNullOrEmpty(u.Account);
+            if (!string.IsNullOrEmpty(unameText))
+            {
+                where = u => u.Account.Contains(unameText);
+            }
+            int totalCount = (int)Us.GetListCount(where);
+
+            tb_MyUser[] list = Us.GetSearchListByPage<DateTime>(where, u => u.CreateTime.Value, 10, pageIndex);
+                //GetUserModels(new tb_MyUser { MerId = "", search_name = unameText, page = pageIndex, pageSize = pgsize }, out totalCount);
             if (list == null)
             {
                 return View("~/Views/System/User/List.cshtml", null);
@@ -42,7 +43,7 @@ namespace UpdateSystem.Web.Controllers
         {
             tb_MyUser model = new tb_MyUser();
             if (!string.IsNullOrEmpty(id))// > 0) 
-                model = Us.GetUserInfoById(id);
+                model = Us.Find(new object[] {id });//GetUserInfoById(id);
             return View("~/Views/System/User/Create.cshtml", model);
         }
 
@@ -56,16 +57,16 @@ namespace UpdateSystem.Web.Controllers
             //}
             //if (ModelState.IsValid)
             //{
-                if (!string.IsNullOrEmpty(model.UsId))
+                if (!string.IsNullOrEmpty(model.Account))
                 {
-                    model.ModifiedBy = Session["UserName"].ToString();
+                    model.LastUpdatedBy = Session["UserName"].ToString();
                     ViewData["msg"] = Us.Update(model) ? "编辑成功！" : "编辑失败！";
                 }
                 else
                 {
-                    model.MerId = "";// Session["MerId"].ToString();
                     model.CreatedBy = Session["UserName"].ToString();
-                    ViewData["msg"] = Us.Add(model) ? "新增成功！" : "新增失败！";
+
+                    ViewData["msg"] =null!= Us.Add(model) ? "新增成功！" : "新增失败！";
                 }
             //}
             return View("~/Views/shared/_msg.cshtml");
@@ -75,11 +76,10 @@ namespace UpdateSystem.Web.Controllers
         {
             bool b = true;
             string[] ids = id.Split(',');
-            foreach (var s in ids.Where(s => !Us.Delete(s)))//Convert.ToInt64(s))))
+            foreach (var s in ids.Where(s => !Us.Delete(true,new object[] { s })))
             {
                 b = false;
             }
-
             ViewData["msg"] = b ? "删除成功！" : "删除失败！";
             return View("~/Views/shared/_msg.cshtml");
         }
@@ -98,7 +98,7 @@ namespace UpdateSystem.Web.Controllers
             //var list = Us.GetUserModels(new tb_MyUser() { is_validate = true, search_merId = 1, search_name = userName, page = 1, pageSize = 100 }, out totalCount);
 
             //如果已经存在
-            if (Us.CheckUserName(userName) || string.IsNullOrEmpty(userName))//list.Count > 0 && userName.Trim() != editName)/
+            if (Us.GetListCount(u=>u.Account== userName) >0 || string.IsNullOrEmpty(userName))//list.Count > 0 && userName.Trim() != editName)/
             {
                 return Json(false, JsonRequestBehavior.AllowGet);
             }

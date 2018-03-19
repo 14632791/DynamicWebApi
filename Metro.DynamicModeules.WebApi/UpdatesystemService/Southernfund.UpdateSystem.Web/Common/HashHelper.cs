@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Common.Hash
+namespace UpdateSystem.Web.Common
 {
     /// <summary>
     /// 提供用于计算指定文件哈希值的方法

@@ -5,7 +5,7 @@ using ICSharpCode.SharpZipLib.Checksums;
 using ICSharpCode.SharpZipLib.Zip;
 using ICSharpCode.SharpZipLib.GZip;
 
-namespace Common
+namespace UpdateSystem.Web.Common
 {
     public class ZipHelper
     {
@@ -111,7 +111,7 @@ namespace Common
                 //找到该目录下的所有文件
                 string[] filenames = Directory.GetFiles(args[0]);
 
-                Crc32 crc = new Crc32();
+                ICSharpCode.SharpZipLib.Checksums.Crc32 crc = new ICSharpCode.SharpZipLib.Checksums.Crc32();
 
                 s.SetLevel(6); // 0 - store only to 9 - means best compression
 
@@ -166,7 +166,7 @@ namespace Common
         public void ZipFileMain(string[] filenames, string name, int Level)
         {
             ZipOutputStream s = new ZipOutputStream(File.Create(name));
-            Crc32 crc = new Crc32();
+            ICSharpCode.SharpZipLib.Checksums.Crc32 crc = new ICSharpCode.SharpZipLib.Checksums.Crc32();
             //压缩级别
             s.SetLevel(Level); // 0 - store only to 9 - means best compression
             try

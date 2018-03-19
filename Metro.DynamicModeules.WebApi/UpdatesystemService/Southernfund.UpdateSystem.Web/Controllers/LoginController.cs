@@ -5,13 +5,18 @@ using System.Web;
 using System.Web.Mvc;
 using UpdateSystem.Model;
 using Microsoft.Practices.Unity;
+using Metro.DynamicModeules.Service;
+using Metro.DynamicModeules.Interface.Service.Update;
+using Metro.DynamicModeules.Common;
+using Metro.DynamicModeules.Models.Sys;
+using UpdateSystem.Web.Models;
 
 namespace UpdateSystem.Web.Controllers
 {
     public class LoginController : Controller
     {
         [Dependency]
-        public IUserService Us { get; set; }
+        public MyUserService Us { get; set; }
         [Dependency]
         public IUpdate US { get; set; }
 
@@ -61,11 +66,11 @@ namespace UpdateSystem.Web.Controllers
                 //    return View("~/Views/LogOn.cshtml", user);
                 //}
                 //if (!ModelState.IsValid) return View("~/Views/LogOn.cshtml", user);
-                user.Password = Md5Manger.Md5Encrypt(user.Password);
-                var t = Us.ValidateUser(user.UserName, user.Password);
+                user.Password = CEncoder.Encode(user.Password);
+                tb_MyUser t = Us.GetSearchList(u => u.Account == user.UserName && u.Password == user.Password)[0];//ValidateUser(user.UserName, user.Password);
                 if (t != null)
                 {
-                    Session["MerId"] = t.MerId;
+                    //Session["MerId"] = t.MerId;
                     Session["UserName"] = t.UserName;
                     // 在新会话启动时运行的代码 ,设置一个月不失效
                     Session.Timeout =60*24;

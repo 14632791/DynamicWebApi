@@ -13,7 +13,7 @@ namespace UpdateSystem.Web.APIControllers
         {
             try
             {
-                tb_Update uModel = _updateSvc.GetSearchList(u=>u.type==cType//.GetVersionModel(pcode, cType);
+                tb_Update uModel = _updateSvc.GetSearchList(u => u.updateType == cType && u.projectCode == pcode)[0];//.GetVersionModel(pcode, cType);
                 Version serverVersion = new Version(version);
                 Version cVersion = new Version(uModel.version);
                 return cVersion < serverVersion;
@@ -28,20 +28,21 @@ namespace UpdateSystem.Web.APIControllers
             UpdateInfo info = new UpdateInfo { NeedUpdate = false, Version = version, FileDownloadURL = "", Mandatory = false, Description = "无" };
             try
             {
-                UpdateModel uModel = _updateSvc.GetVersionModel(pcode, cType);
+                tb_Update uModel = _updateSvc.GetSearchList(u => u.projectCode == pcode && u.updateType == cType)[0];//GetVersionModel(pcode, cType);
                 if (uModel == null)
                 {
                     return null;
                 }
                 Version cVersion = new Version(version);
-                Version serverVersion = new Version(uModel.Version);
+                Version serverVersion = new Version(uModel.version);
                 if (cVersion < serverVersion)
                 {
                     string websiteUrl = System.Configuration.ConfigurationManager.AppSettings["WebSiteURL"];
                     info.NeedUpdate = true;
-                    info.Version = uModel.Version;
-                    info.Mandatory = _updateSvc.GetMandatory(pcode, cType, version);
-                    info.Description = uModel.UpdateLog;
+                    info.Version = uModel.version;
+                    info.Mandatory = _updateSvc.GetSearchList(u => u.projectCode == pcode && u.updateType == cType && u.version == version)[0].mandatory.Value;
+                        //GetMandatory(pcode, cType, version);
+                    info.Description = uModel.updatelog;
                     string typePath = ((UpdateType)cType).ToString();
                     info.FileDownloadURL = string.Format(@"{0}/UpdateFiles/{1}/{2}/", websiteUrl, pcode, typePath);
                     info.XmlDownloadURL = string.Format(@"{0}/XMLFiles/{1}/{2}/ProgrameList.XML", websiteUrl, pcode, typePath);

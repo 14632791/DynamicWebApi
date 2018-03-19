@@ -6,7 +6,7 @@ using System.Text;
 using System.Collections;
 using System.Xml;
 
-namespace Common
+namespace UpdateSystem.Web.Common
 {
     /// <summary>
     /// XmlHelper类提供对XML数据库的读写

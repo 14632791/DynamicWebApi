@@ -1,22 +1,19 @@
-﻿using Common;
-using Common.Hash;
+﻿using Metro.DynamicModeules.Common;
+using Metro.DynamicModeules.Interface.Service.Update;
+using Metro.DynamicModeules.Models.Update;
+using Metro.DynamicModeules.Service.Update;
 using Microsoft.Practices.Unity;
 using PagedList;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Xml;
-using UpdateSystem.IService;
-using UpdateSystem.Model;
-using UpdateSystem.Model.Util;
 using UpdateSystem.Web.Common;
-using System.Threading;
-using UpdateSystem.Service;
 using XH.UpdateSystem.Web.Common;
-using System.Threading.Tasks;
 
 namespace UpdateSystem.Web.Controllers
 {
@@ -26,7 +23,7 @@ namespace UpdateSystem.Web.Controllers
         [Dependency]
         public IUpdate US { get; set; }
         [Dependency]
-        public IProjects UP { get; set; }
+        public IUpProject UP { get; set; }
 
         /// <summary>
         /// 
@@ -41,15 +38,16 @@ namespace UpdateSystem.Web.Controllers
                 return View();
             }
             int pageSize = 10;
-            int totalCount;
-            var list = US.GetList(new UpdateModel { PagedIndex = pageIndex, PageSize = pageSize, ProjectsID = id, Type = type }, out totalCount);
+            int totalCount = (int)US.GetListCount(u => u.projectCode == id && u.updateType == type);
+            var list = US.GetSearchListByPage(u => u.projectCode == id && u.updateType == type, u => u.createdon.Value, 10, pageIndex);
+          //GetList(new tb_Update { PagedIndex = pageIndex, PageSize = pageSize, ProjectsID = id, Type = type }, out totalCount);
             ViewBag.ProjectsID = id;
             ViewBag.type = type;
             //获取项目名称 2017.7.7 陈刚
-            ViewBag.AddProjectName = "添加-" + UP.Get(id)?.Name;
+            ViewBag.AddProjectName = "添加-" + UP.Find(new object[] { id })?.name;
             if (list != null)
             {
-                var pageList = new StaticPagedList<UpdateModel>(list, pageIndex, pageSize, totalCount);
+                var pageList = new StaticPagedList<tb_Update>(list, pageIndex, pageSize, totalCount);
                 return View(pageList);
             }
             return View();
@@ -58,7 +56,7 @@ namespace UpdateSystem.Web.Controllers
 
 
         [HttpPost]
-        public ActionResult Save(UpdateModel form, HttpPostedFileBase UpdateFile)
+        public ActionResult Save(tb_Update form, HttpPostedFileBase UpdateFile)
         {
             string msg = "";
             try
@@ -67,18 +65,19 @@ namespace UpdateSystem.Web.Controllers
                 {
                     return RtnMsg("验证未通过！");
                 }
-                var pModel = UP.GetModel(form.ProjectsID);
+                var pModel = UP.Find(new object[] {form.projectCode });//GetModel(form.ProjectsID);
                 if (pModel == null)
                 {
                     return RtnMsg("无法找到项目！");
                 }
-                form.ID = Guid.NewGuid().ToString("N");
+                form.id = Guid.NewGuid().ToString("N");
                 Version curVersion;
                 Version newVersion;
                 try
                 {
-                    curVersion = new Version(US.GetVersion(pModel.ID, (int)form.Type));
-                    newVersion = new Version(form.Version);
+                    curVersion = new Version(US.GetSearchList(u => u.projectCode == pModel.code && u.updateType == form.updateType)[0].version);
+                    //GetVersion(pModel.ID, (int)form.updateType));
+                    newVersion = new Version(form.version);
                 }
                 catch (Exception ex)
                 {
@@ -90,9 +89,9 @@ namespace UpdateSystem.Web.Controllers
                     return RtnMsg(msg);
                 }
                 string filePath = "";
-                string dir = ((UpdateType)form.Type).ToString();
+                string dir = ((UpdateType)form.updateType).ToString();
                 string strUploadFilesDirPath = "/UploadFiles/" + dir + "/";
-                string strCodeTypePath = pModel.Code + "/" + dir;
+                string strCodeTypePath = pModel.code + "/" + dir;
                 string strPhysicsUnzipDirPath = Server.MapPath("/UpdateFiles/" + strCodeTypePath); //解压文件的保存目录
 
                 bool isSaveFile = false;
@@ -100,7 +99,7 @@ namespace UpdateSystem.Web.Controllers
                     Task.Factory.StartNew(()=>{
                 isSaveFile=SaveFile(UpdateFile, strUploadFilesDirPath, out filePath, out msg);}),
                     Task.Factory.StartNew(()=>{
-                         string backupZipDir = Server.MapPath(string.Format("/BackupFiles/{0}/before_{1}.zip", strCodeTypePath, form.Version));
+                         string backupZipDir = Server.MapPath(string.Format("/BackupFiles/{0}/before_{1}.zip", strCodeTypePath, form.version));
                         HandleZip(strPhysicsUnzipDirPath, backupZipDir);
                     })
                 });
@@ -108,7 +107,7 @@ namespace UpdateSystem.Web.Controllers
                 {
                     return RtnMsg(msg);
                 }
-                form.DownloadURL = filePath;
+                form.downloadurl = filePath;
                 if (!HandleUnZip(filePath, strCodeTypePath, out strPhysicsUnzipDirPath))
                     return RtnMsg("解压处理失败！");
 
@@ -120,9 +119,9 @@ namespace UpdateSystem.Web.Controllers
                 }
                 XmlDocument xdClientUpdateConfig = new XmlDocument();
                 xdClientUpdateConfig.Load(strClientUpdateConfigPath);
-                xdClientUpdateConfig.SelectSingleNode("UpdateInfo/CurrentVersion").InnerText = form.Version;
-                xdClientUpdateConfig.SelectSingleNode("UpdateInfo/type").InnerText = form.Type.ToString();
-                xdClientUpdateConfig.SelectSingleNode("UpdateInfo/code").InnerText = pModel.Code;
+                xdClientUpdateConfig.SelectSingleNode("UpdateInfo/CurrentVersion").InnerText = form.version;
+                xdClientUpdateConfig.SelectSingleNode("UpdateInfo/type").InnerText = form.updateType.ToString();
+                xdClientUpdateConfig.SelectSingleNode("UpdateInfo/code").InnerText = pModel.code;
                 xdClientUpdateConfig.Save(strClientUpdateConfigPath);
                 //获取所有文件HASHMD5值
                 XmlDocument xdNewFileList = GetProgrameHASHValue(strPhysicsUnzipDirPath);
@@ -133,7 +132,7 @@ namespace UpdateSystem.Web.Controllers
                 }
                 form.createdon = DateTime.Now;
                 xdNewFileList.Save(strXMLSavePath + "ProgrameList.XML");
-                bool isAdd = US.Add(form);
+                bool isAdd =null !=US.Add(form);
                 string resultMsg = "新增成功！";
                 if (isAdd)
                 {
@@ -158,7 +157,7 @@ namespace UpdateSystem.Web.Controllers
             }
             catch (Exception ex)
             {
-                LogHelper.WriteLog("保存异常：", ex);
+                LogHelper.Error( ex);
                 return RtnMsg("保存异常：" + ex.Message);
             }
 
@@ -184,12 +183,12 @@ namespace UpdateSystem.Web.Controllers
                 List<FileInfo> files = fileHelper.GetAllFilesInDirectory(physicsPath);
                 if (null != files)
                 {
-                    ZipTools.GetCompressPath(backupZipPath, files.Select(f => f.FullName).ToList(), physicsPath);
+                    UpdateSystem.Web.Common.ZipTools.GetCompressPath(backupZipPath, files.Select(f => f.FullName).ToList(), physicsPath);
                 }
             }
             catch (Exception ex)
             {
-                LogHelper.WriteLog("压缩文件异常：", ex);
+                LogHelper.Error(ex);
             }
         }
         /// <summary>
@@ -261,7 +260,7 @@ namespace UpdateSystem.Web.Controllers
         {
             try
             {
-                ViewData["msg"] = US.Delete(id) ? "删除成功！" : "删除失败！";
+                ViewData["msg"] = US.Delete(true,new object[] { id }) ? "删除成功！" : "删除失败！";
                 return View("~/Views/shared/_msg.cshtml");
             }
             catch
@@ -270,20 +269,24 @@ namespace UpdateSystem.Web.Controllers
                 return View("~/Views/shared/_msg.cshtml");
             }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id">projectCode</param>
+        /// <returns></returns>
         public ActionResult Create(string id = "")
-        {
-            UpdateModel m = new UpdateModel();
-            var model = US.GetLatest(id);
+        {   
+            tb_Update m = new tb_Update();
+            var model = US.GetSearchList(u=>u.projectCode==id)[0];
             if (null != model)
             {
-                Version curVersion = new Version(model.Version);
+                Version curVersion = new Version(model.version);
                 Version newVersion = new Version(curVersion.Major, curVersion.Minor, curVersion.Build, curVersion.Revision + 1);
-                m.Version = newVersion.ToString();//赋默认值
+                m.version = newVersion.ToString();//赋默认值
             }
             if (!string.IsNullOrEmpty(id))
             {
-                m.ProjectsID = id;
+                m.projectCode = id;
                 return View(m);
             }
             else
@@ -305,7 +308,7 @@ namespace UpdateSystem.Web.Controllers
             {
                 UpdateService upSvc = US as UpdateService;
                 string resultMsg;
-                UpdateModel result = upSvc.RollBack(vision, code, type, out resultMsg);
+                tb_Update result = upSvc.RollBack(vision, code, type, out resultMsg);
                 //if (null == result)
                 //{
                 ViewData["msg"] = resultMsg;

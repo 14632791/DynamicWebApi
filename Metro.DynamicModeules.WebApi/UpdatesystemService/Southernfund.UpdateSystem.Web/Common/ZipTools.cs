@@ -17,9 +17,9 @@ using System.Data;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Collections;
 using Ionic.Zip;
-using UpdateSystem.Model.Util;
+using Metro.DynamicModeules.Common;
 
-namespace Common
+namespace UpdateSystem.Web.Common
 {
     public class ZipTools
     {
@@ -325,7 +325,7 @@ namespace Common
             }
             catch (Exception ex)
             {
-                LogHelper.ErrorLog("当前重复的文件：" + filemem, ex);
+                LogHelper.Error("当前重复的文件：" + filemem, ex);
             }
         }
         #endregion
