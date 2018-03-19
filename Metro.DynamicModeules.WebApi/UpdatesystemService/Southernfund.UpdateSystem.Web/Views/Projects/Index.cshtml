@@ -1,0 +1,82 @@
+﻿@model StaticPagedList<ProjectsModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_List.cshtml";
+}
+
+<div class="operate_layer">
+    @using (Html.BeginForm("Index", "Projects", 0))
+    {
+        <table>
+            <tr>
+                <td style="font-size:12px;">
+                    项目名称：
+                </td>
+                <td>
+                    @Html.TextBox("Name", null, new { @class = "search_text_box", @maxlength = "20" })
+                </td>
+                <td>
+                    <input id="sbSearch" type="submit" value="搜索" class="list_search_btn" />
+                </td>
+            </tr>
+        </table>
+    }
+
+    <ul class="operationlist">
+        <li>
+            <a href="javascript:void(0)" class="add_btn" onclick="top.EasyuiPublic.openDialog('@Url.Content("~/Projects/COE")' ,520,480,'添加','icon-add')">
+                <img src="~/Content/system/images/New.png" />添加
+            </a>
+        </li>
+    </ul>
+</div>
+
+<div id="d">
+    @if (Model != null && Model.Count() > 0)
+    {
+        var i = Model.PageSize * (Model.PageNumber - 1);
+        <table class="common_list" cellpadding="0" cellspacing="0">
+            <tr>
+                <th style="width: 4%">序号</th>
+                <th style="width: 6%"> 项目名称</th>
+                <th style="width: 4%">项目代码</th>
+                <th style="width: 4%">服务器地址</th>
+                <th style="width: 10%">备注</th>
+                <th style="width: 12%">
+                    管理
+                </th>
+
+                @foreach (var item in Model)
+                {
+                <tr class="trcls">
+                    <td>
+                        @{ i++;}
+                        @i
+                    </td>
+                    <td>
+                        @item.Name
+                    </td>
+                    <td>
+                        @item.Code
+                    </td>
+                    <td>
+                        @item.DownloadServerURL
+                    </td>
+                    <td>@item.Remark</td>
+                    <td>
+                        <a href="javascript:void(0)" onclick="top.EasyuiPublic.openDialog('@Url.Content("~/Projects/COE/" + item.ID)', 520, 480, '编辑', 'icon-edit')" class="edit_btn">编辑</a>
+                        @Html.ActionLink("删除", "Delete", "Projects", null, new { id = item.ID, onclick = "return EasyuiBusiness.deleted('" + item.ID + "','" + item.ID + "')", @class = "del_btn" })
+                    </td>
+                </tr>
+                }
+            </table>
+            <div class="common_page_layer">
+                @Html.PagedListPager(Model, pageIndex => Url.Action("Index", new { pageIndex }))
+            </div>
+    }
+    else
+    {
+        <div class="nodata">暂无数据</div>
+    }
+</div>

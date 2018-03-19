@@ -1,0 +1,426 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Model.Store" Provider="System.Data.SqlServerCe.4.0" ProviderManifestToken="4.0" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“__ExtendedProperties”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="__ExtendedProperties">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Type" />
+            <PropertyRef Name="Value" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="ParentName" Type="nvarchar" MaxLength="128" />
+          <Property Name="ObjectName" Type="nvarchar" MaxLength="128" />
+          <Property Name="Value" Type="nvarchar" MaxLength="4000" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UP_ADMINUSER">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="nchar" MaxLength="32" Nullable="false" />
+          <Property Name="username" Type="nvarchar" MaxLength="50" />
+          <Property Name="pwd" Type="nvarchar" MaxLength="128" />
+          <Property Name="realname" Type="nvarchar" MaxLength="50" />
+          <Property Name="sex" Type="int" Nullable="false" />
+          <Property Name="phone" Type="nvarchar" MaxLength="20" />
+          <Property Name="type" Type="int" />
+          <Property Name="remark" Type="nvarchar" MaxLength="250" />
+          <Property Name="createdon" Type="datetime" />
+          <Property Name="createdby" Type="nvarchar" MaxLength="50" />
+          <Property Name="modifiedon" Type="datetime" />
+          <Property Name="modifiedby" Type="nvarchar" MaxLength="50" />
+          <Property Name="birthday" Type="datetime" />
+          <Property Name="department" Type="int" Nullable="false" />
+          <Property Name="isdisabled" Type="bit" Nullable="false" />
+          <Property Name="isvalidate" Type="bit" Nullable="false" />
+          <Property Name="merid" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="UP_PROJECT">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="nchar" MaxLength="32" Nullable="false" />
+          <Property Name="code" Type="nvarchar" MaxLength="50" />
+          <Property Name="name" Type="nvarchar" MaxLength="60" />
+          <Property Name="disable" Type="bit" Nullable="false" />
+          <Property Name="type" Type="int" Nullable="false" />
+          <Property Name="description" Type="nvarchar" MaxLength="1000" />
+          <Property Name="remark" Type="nvarchar" MaxLength="1000" />
+          <Property Name="downloadserverurl" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="UP_ROLE">
+          <Key>
+            <PropertyRef Name="rlid" />
+          </Key>
+          <Property Name="rlid" Type="nchar" MaxLength="32" Nullable="false" />
+          <Property Name="merid" Type="int" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="remark" Type="nvarchar" MaxLength="300" />
+          <Property Name="createdon" Type="datetime" />
+          <Property Name="createdby" Type="nvarchar" MaxLength="50" />
+          <Property Name="modifiedon" Type="datetime" />
+          <Property Name="modifiedby" Type="nvarchar" MaxLength="50" />
+          <Property Name="is_validate" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UP_UPDATE">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="nchar" MaxLength="32" Nullable="false" />
+          <Property Name="projectsid" Type="nchar" MaxLength="32" Nullable="false" />
+          <Property Name="type" Type="int" />
+          <Property Name="version" Type="nvarchar" MaxLength="50" />
+          <Property Name="mandatory" Type="bit" />
+          <Property Name="downloadurl" Type="nvarchar" MaxLength="200" />
+          <Property Name="updatelog" Type="nvarchar" MaxLength="500" />
+          <Property Name="remark" Type="nvarchar" MaxLength="500" />
+          <Property Name="serverurl" Type="nvarchar" MaxLength="200" />
+          <Property Name="createdon" Type="datetime" />
+        </EntityType>
+        <EntityType Name="UP_USERINROLE">
+          <Key>
+            <PropertyRef Name="urid" />
+          </Key>
+          <Property Name="urid" Type="nchar" MaxLength="32" Nullable="false" />
+          <Property Name="usid" Type="nchar" MaxLength="32" Nullable="false" />
+          <Property Name="rlid" Type="nchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <Association Name="UP_USERINROLE_RLID">
+          <End Role="UP_ROLE" Type="Self.UP_ROLE" Multiplicity="1" />
+          <End Role="UP_USERINROLE" Type="Self.UP_USERINROLE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UP_ROLE">
+              <PropertyRef Name="rlid" />
+            </Principal>
+            <Dependent Role="UP_USERINROLE">
+              <PropertyRef Name="rlid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UP_USERINROLE_USID">
+          <End Role="UP_ADMINUSER" Type="Self.UP_ADMINUSER" Multiplicity="1" />
+          <End Role="UP_USERINROLE" Type="Self.UP_USERINROLE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UP_ADMINUSER">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UP_USERINROLE">
+              <PropertyRef Name="usid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UPDATE_PROJECTSID">
+          <End Role="UP_PROJECT" Type="Self.UP_PROJECT" Multiplicity="1" />
+          <End Role="UP_UPDATE" Type="Self.UP_UPDATE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UP_PROJECT">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UP_UPDATE">
+              <PropertyRef Name="projectsid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="UP_ADMINUSER" EntityType="Self.UP_ADMINUSER" store:Type="Tables" />
+          <EntitySet Name="UP_PROJECT" EntityType="Self.UP_PROJECT" store:Type="Tables" />
+          <EntitySet Name="UP_ROLE" EntityType="Self.UP_ROLE" store:Type="Tables" />
+          <EntitySet Name="UP_UPDATE" EntityType="Self.UP_UPDATE" store:Type="Tables" />
+          <EntitySet Name="UP_USERINROLE" EntityType="Self.UP_USERINROLE" store:Type="Tables" />
+          <EntitySet Name="__ExtendedProperties" EntityType="Self.__ExtendedProperties" store:Type="Tables">
+            <DefiningQuery>SELECT 
+[__ExtendedProperties].[Id] AS [Id], 
+[__ExtendedProperties].[Type] AS [Type], 
+[__ExtendedProperties].[ParentName] AS [ParentName], 
+[__ExtendedProperties].[ObjectName] AS [ObjectName], 
+[__ExtendedProperties].[Value] AS [Value]
+FROM [__ExtendedProperties] AS [__ExtendedProperties]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="UP_USERINROLE_RLID" Association="Self.UP_USERINROLE_RLID">
+            <End Role="UP_ROLE" EntitySet="UP_ROLE" />
+            <End Role="UP_USERINROLE" EntitySet="UP_USERINROLE" />
+          </AssociationSet>
+          <AssociationSet Name="UP_USERINROLE_USID" Association="Self.UP_USERINROLE_USID">
+            <End Role="UP_ADMINUSER" EntitySet="UP_ADMINUSER" />
+            <End Role="UP_USERINROLE" EntitySet="UP_USERINROLE" />
+          </AssociationSet>
+          <AssociationSet Name="UPDATE_PROJECTSID" Association="Self.UPDATE_PROJECTSID">
+            <End Role="UP_PROJECT" EntitySet="UP_PROJECT" />
+            <End Role="UP_UPDATE" EntitySet="UP_UPDATE" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="UP_ADMINUSER">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="String" MaxLength="32" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="pwd" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="realname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="sex" Type="Int32" Nullable="false" />
+          <Property Name="phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="type" Type="Int32" />
+          <Property Name="remark" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="createdon" Type="DateTime" Precision="3" />
+          <Property Name="createdby" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="modifiedon" Type="DateTime" Precision="3" />
+          <Property Name="modifiedby" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="birthday" Type="DateTime" Precision="3" />
+          <Property Name="department" Type="Int32" Nullable="false" />
+          <Property Name="isdisabled" Type="Boolean" Nullable="false" />
+          <Property Name="isvalidate" Type="Boolean" Nullable="false" />
+          <Property Name="merid" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="UP_USERINROLE" Relationship="Self.UP_USERINROLE_USID" FromRole="UP_ADMINUSER" ToRole="UP_USERINROLE" />
+        </EntityType>
+        <EntityType Name="UP_PROJECT">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="String" MaxLength="32" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="name" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="disable" Type="Boolean" Nullable="false" />
+          <Property Name="type" Type="Int32" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="remark" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="downloadserverurl" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="UP_UPDATE" Relationship="Self.UPDATE_PROJECTSID" FromRole="UP_PROJECT" ToRole="UP_UPDATE" />
+        </EntityType>
+        <EntityType Name="UP_ROLE">
+          <Key>
+            <PropertyRef Name="rlid" />
+          </Key>
+          <Property Name="rlid" Type="String" MaxLength="32" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="merid" Type="Int32" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="remark" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="createdon" Type="DateTime" Precision="3" />
+          <Property Name="createdby" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="modifiedon" Type="DateTime" Precision="3" />
+          <Property Name="modifiedby" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="is_validate" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="UP_USERINROLE" Relationship="Self.UP_USERINROLE_RLID" FromRole="UP_ROLE" ToRole="UP_USERINROLE" />
+        </EntityType>
+        <EntityType Name="UP_UPDATE">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="String" MaxLength="32" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="projectsid" Type="String" MaxLength="32" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="type" Type="Int32" />
+          <Property Name="version" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="mandatory" Type="Boolean" />
+          <Property Name="downloadurl" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="updatelog" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="serverurl" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="createdon" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="UP_PROJECT" Relationship="Self.UPDATE_PROJECTSID" FromRole="UP_UPDATE" ToRole="UP_PROJECT" />
+        </EntityType>
+        <EntityType Name="UP_USERINROLE">
+          <Key>
+            <PropertyRef Name="urid" />
+          </Key>
+          <Property Name="urid" Type="String" MaxLength="32" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="usid" Type="String" MaxLength="32" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="rlid" Type="String" MaxLength="32" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="UP_ADMINUSER" Relationship="Self.UP_USERINROLE_USID" FromRole="UP_USERINROLE" ToRole="UP_ADMINUSER" />
+          <NavigationProperty Name="UP_ROLE" Relationship="Self.UP_USERINROLE_RLID" FromRole="UP_USERINROLE" ToRole="UP_ROLE" />
+        </EntityType>
+        <EntityType Name="C__ExtendedProperties">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Type" />
+            <PropertyRef Name="Value" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="ParentName" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ObjectName" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Value" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <Association Name="UP_USERINROLE_USID">
+          <End Role="UP_ADMINUSER" Type="Self.UP_ADMINUSER" Multiplicity="1" />
+          <End Role="UP_USERINROLE" Type="Self.UP_USERINROLE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UP_ADMINUSER">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UP_USERINROLE">
+              <PropertyRef Name="usid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UPDATE_PROJECTSID">
+          <End Role="UP_PROJECT" Type="Self.UP_PROJECT" Multiplicity="1" />
+          <End Role="UP_UPDATE" Type="Self.UP_UPDATE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UP_PROJECT">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UP_UPDATE">
+              <PropertyRef Name="projectsid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UP_USERINROLE_RLID">
+          <End Role="UP_ROLE" Type="Self.UP_ROLE" Multiplicity="1" />
+          <End Role="UP_USERINROLE" Type="Self.UP_USERINROLE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UP_ROLE">
+              <PropertyRef Name="rlid" />
+            </Principal>
+            <Dependent Role="UP_USERINROLE">
+              <PropertyRef Name="rlid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="UP_ADMINUSER" EntityType="Self.UP_ADMINUSER" />
+          <EntitySet Name="UP_PROJECT" EntityType="Self.UP_PROJECT" />
+          <EntitySet Name="UP_ROLE" EntityType="Self.UP_ROLE" />
+          <EntitySet Name="UP_UPDATE" EntityType="Self.UP_UPDATE" />
+          <EntitySet Name="UP_USERINROLE" EntityType="Self.UP_USERINROLE" />
+          <EntitySet Name="C__ExtendedProperties" EntityType="Self.C__ExtendedProperties" />
+          <AssociationSet Name="UP_USERINROLE_USID" Association="Self.UP_USERINROLE_USID">
+            <End Role="UP_ADMINUSER" EntitySet="UP_ADMINUSER" />
+            <End Role="UP_USERINROLE" EntitySet="UP_USERINROLE" />
+          </AssociationSet>
+          <AssociationSet Name="UPDATE_PROJECTSID" Association="Self.UPDATE_PROJECTSID">
+            <End Role="UP_PROJECT" EntitySet="UP_PROJECT" />
+            <End Role="UP_UPDATE" EntitySet="UP_UPDATE" />
+          </AssociationSet>
+          <AssociationSet Name="UP_USERINROLE_RLID" Association="Self.UP_USERINROLE_RLID">
+            <End Role="UP_ROLE" EntitySet="UP_ROLE" />
+            <End Role="UP_USERINROLE" EntitySet="UP_USERINROLE" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="UP_ADMINUSER">
+            <EntityTypeMapping TypeName="Model.UP_ADMINUSER">
+              <MappingFragment StoreEntitySet="UP_ADMINUSER">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="pwd" ColumnName="pwd" />
+                <ScalarProperty Name="realname" ColumnName="realname" />
+                <ScalarProperty Name="sex" ColumnName="sex" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="remark" ColumnName="remark" />
+                <ScalarProperty Name="createdon" ColumnName="createdon" />
+                <ScalarProperty Name="createdby" ColumnName="createdby" />
+                <ScalarProperty Name="modifiedon" ColumnName="modifiedon" />
+                <ScalarProperty Name="modifiedby" ColumnName="modifiedby" />
+                <ScalarProperty Name="birthday" ColumnName="birthday" />
+                <ScalarProperty Name="department" ColumnName="department" />
+                <ScalarProperty Name="isdisabled" ColumnName="isdisabled" />
+                <ScalarProperty Name="isvalidate" ColumnName="isvalidate" />
+                <ScalarProperty Name="merid" ColumnName="merid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UP_PROJECT">
+            <EntityTypeMapping TypeName="Model.UP_PROJECT">
+              <MappingFragment StoreEntitySet="UP_PROJECT">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="disable" ColumnName="disable" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="remark" ColumnName="remark" />
+                <ScalarProperty Name="downloadserverurl" ColumnName="downloadserverurl" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UP_ROLE">
+            <EntityTypeMapping TypeName="Model.UP_ROLE">
+              <MappingFragment StoreEntitySet="UP_ROLE">
+                <ScalarProperty Name="rlid" ColumnName="rlid" />
+                <ScalarProperty Name="merid" ColumnName="merid" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="remark" ColumnName="remark" />
+                <ScalarProperty Name="createdon" ColumnName="createdon" />
+                <ScalarProperty Name="createdby" ColumnName="createdby" />
+                <ScalarProperty Name="modifiedon" ColumnName="modifiedon" />
+                <ScalarProperty Name="modifiedby" ColumnName="modifiedby" />
+                <ScalarProperty Name="is_validate" ColumnName="is_validate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UP_UPDATE">
+            <EntityTypeMapping TypeName="Model.UP_UPDATE">
+              <MappingFragment StoreEntitySet="UP_UPDATE">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="projectsid" ColumnName="projectsid" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="mandatory" ColumnName="mandatory" />
+                <ScalarProperty Name="downloadurl" ColumnName="downloadurl" />
+                <ScalarProperty Name="updatelog" ColumnName="updatelog" />
+                <ScalarProperty Name="remark" ColumnName="remark" />
+                <ScalarProperty Name="serverurl" ColumnName="serverurl" />
+                <ScalarProperty Name="createdon" ColumnName="createdon" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UP_USERINROLE">
+            <EntityTypeMapping TypeName="Model.UP_USERINROLE">
+              <MappingFragment StoreEntitySet="UP_USERINROLE">
+                <ScalarProperty Name="urid" ColumnName="urid" />
+                <ScalarProperty Name="usid" ColumnName="usid" />
+                <ScalarProperty Name="rlid" ColumnName="rlid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="C__ExtendedProperties">
+            <EntityTypeMapping TypeName="Model.C__ExtendedProperties">
+              <MappingFragment StoreEntitySet="__ExtendedProperties">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="ParentName" ColumnName="ParentName" />
+                <ScalarProperty Name="ObjectName" ColumnName="ObjectName" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

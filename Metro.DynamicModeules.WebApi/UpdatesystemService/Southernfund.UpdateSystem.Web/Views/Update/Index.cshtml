@@ -1,0 +1,140 @@
+﻿@model StaticPagedList<UpdateModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_List.cshtml";
+}
+
+@section css{
+    @Styles.Render("~/bundles/easyuicss")
+}
+
+<div class="operate_layer">
+    @*@using (Html.BeginForm("Index", "Update", 0))
+    {
+        <table>
+            <tr>
+                <td style="font-size:12px;">
+                    版本号：
+                </td>
+                <td>
+                    @Html.TextBox("Name", null, new { @class = "search_text_box", @maxlength = "20" })
+                </td>
+                <td>
+                    <input id="sbSearch" type="submit" value="搜索" class="list_search_btn" />
+                </td>
+                <td>
+                    <input id="resetSearch" type="button" value="取消" class="list_cancel_search_btn" onclick="location.href = '@Url.Content("~/Update/Index")'" />
+                </td>
+            </tr>
+        </table>
+    }*@
+
+    <ul class="operationlist">
+        <li>
+            <a href="javascript:void(0)" class="add_btn" onclick="top.EasyuiPublic.openDialog('@Url.Content("~/Update/Create/" + ViewBag.ProjectsID)' ,520,480,'@ViewBag.AddProjectName','icon-add')">
+                <img src="~/Content/system/images/New.png" />添加
+            </a>
+        </li>
+    </ul>
+</div>
+
+<div id="tt" class="easyui-tabs" style="width:100%;height:30px;">
+    <div id="dXPx86" title="Xp32位" style="padding:10px;"></div>
+    <div id="dXPx64" title="Xp64位" style="padding:10px;"></div>
+    <div id="dWin7x86" title="win7及以上32位" style="padding:10px;"></div>
+    <div id="dWin7x64" title="win7及以上64位" style="padding:10px;"></div>
+</div>
+@*<script>
+    $("#dWin7x86").attr("selected", "selected");
+</script>*@
+
+<div id="d">
+    @if (Model != null && Model.Count() > 0)
+    {
+        var i = Model.PageSize * (Model.PageNumber - 1);
+        <table class="common_list" cellpadding="0" cellspacing="0">
+            <tr>
+                <th style="width: 4%">序号</th>
+                <th style="width: 6%"> 版本号</th>
+                <th style="width: 4%">强制更新</th>
+                <th style="width: 25%">地址</th>
+                <th style="width: 20%">更新日志</th>
+                <th style="width: 10%">更新日期</th>
+                <th style="width: auto">备注</th>
+                <th style="width: 4%">管理</th>
+
+                @foreach (var item in Model)
+                {
+                <tr class="trcls">
+                    <td>
+                        @{ i++;}
+                        @i
+                    </td>
+                    <td>@item.Version</td>
+                    <td>@item.getBoolText</td>
+                    <td>@item.DownloadURL</td>
+                    <td>@item.UpdateLog</td>
+                    <td>@item.createdon</td>
+                    <td>@item.Remark</td>
+                    <td>
+                        @*<a href="javascript:void(0)" onclick="top.EasyuiPublic.openDialog('@Url.Content("~/Update/COE/" + item.ID)', 520, 480, '编辑', 'icon-edit')" class="edit_btn">编辑</a>*@
+                        @Html.ActionLink("删除", "Delete", "Update", null, new { id = item.ID, onclick = "return EasyuiBusiness.deleted('" + item.ID + "','" + item.ID + "')", @class = "del_btn" })
+                    </td>
+                </tr>
+                }
+            </table>
+            <div class="common_page_layer">
+                @Html.PagedListPager(Model, pageIndex => Url.Action("Index", new { id = ViewBag.ProjectsID, pageIndex, type = ViewBag.type }))
+            </div>
+    }
+    else
+    {
+        <div class="nodata">暂无数据</div>
+    }
+</div>
+
+@section script{
+    <script src="~/Scripts/easyui/jquery.easyui.min.js"></script>
+    <script>
+        $(function () {
+
+            $('#tt').tabs({
+                onSelect: function (title, index) {
+                    openLink(index);
+                }
+            });
+        });
+        var index = (@(ViewBag.type));
+        switch(index){
+            case 0:
+                $("#dXPx86").attr("selected", "selected");
+                break;
+            case 1:
+                $("#dXPx64").attr("selected", "selected");
+                break;
+            case 2:
+                $("#dWin7x86").attr("selected", "selected");
+                break;
+            case 3:
+                $("#dWin7x64").attr("selected", "selected");
+                break;
+        }
+
+
+        function openLink(index) {
+            document.location.href = "/Update/Index/@(ViewBag.ProjectsID)?type=" + index;
+            @*switch (index) {
+                case 0: document.location.href = "/Update/Index/@(ViewBag.ProjectsID)?type=" + index;
+                    break;
+                case 1: document.location.href = "/Update/Index/@(ViewBag.ProjectsID)?type=" + index ;
+                    break;
+                case 2: document.location.href = "/Update/Index/@(ViewBag.ProjectsID)?type=" + index;
+                    break;
+                case 3: document.location.href = "/Update/Index/@(ViewBag.ProjectsID)?type=" + index;
+                    break;
+                default:
+                    break;
+            }*@
+        }
+    </script>
+}

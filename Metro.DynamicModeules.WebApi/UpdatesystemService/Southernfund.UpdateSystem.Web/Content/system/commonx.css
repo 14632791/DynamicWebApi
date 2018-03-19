@@ -1,0 +1,265 @@
+﻿
+/********* 登录页 begin *************/
+.login_body
+{
+    padding:0;
+    margin:0;
+    width:100%;
+    height:100%;
+    background-color:#0195d1;
+    /*background: url(../../Content/system/images/indexbg.png) repeat;*/
+}
+.login_main
+{
+    width:100%;
+    max-width:1280px;
+    /*height:768px;*/
+    height:auto;
+    margin:0 auto;
+    background: url(../../Content/system/images/indexbg.png) no-repeat;
+}
+.a1
+{
+    /*padding-top:200px;*/
+    padding-top:10%;
+}
+.login_tit
+{
+    width:460px;
+    height:58px;
+    background: url(../../Content/system/images/login_titbg.png) no-repeat;
+    margin:0 auto;
+    padding-top:30px;
+}
+.login_wrapbg
+{
+    /*width:471px;
+    height:285px;*/
+    margin:0 auto;
+    /*padding-top:160px;*/
+    /*background: url(../../Content/system/images/loginbg.png) no-repeat;*/
+
+    width:630px;
+    height:309px;
+    padding-top:200px;
+    background: url(../../Content/system/images/loginbg1.png) no-repeat;
+}
+.a1a
+{
+    font-family:微软雅黑;
+    font-size:16px;
+    color:#fefdfd;
+    padding:0 0 8px 110px;
+}
+.txt_box,.txt_val
+{
+    width:140px;
+    height:20px;
+    line-height:20px;
+}
+.a1a img
+{
+    height:35px;
+    vertical-align:text-top;
+}
+.login_btn
+{
+    width:100px;
+    height:30px;
+    border:0;
+    font-family:黑体;
+    font-size:18px;
+    color:#ffffff;
+    margin-right:20px;
+    background: url(../../Content/system/images/button1.png) no-repeat;
+}
+.a1b
+{
+    text-align:center;
+}
+.field-validation-valid,.field-validation-error
+{
+    color:red;
+}
+/********* 登录页 end *************/
+
+/********* 列表 begin *************/
+.operate_layer {
+        width: 100%;
+        height: 40px;
+        background-color: #f6fafd;
+        border-bottom: 1px solid #cfe0ec;
+    }
+
+        .operate_layer form {
+            display: inline-block;
+            padding: 5px 0 0 15px;
+        }
+
+    .operationlist {
+        float: right;
+        margin: 8px 15px 0 0;
+    }
+
+        .operationlist li {
+            float: left;
+            list-style: none;
+        }
+
+            .operationlist li a {
+                display: inline-block;
+                width: 79px;
+                height: 24px;
+                line-height: 24px;
+                text-align: center;
+                font-family: 宋体;
+                font-size: 12px;
+                color: #4c4c4c;
+                text-decoration: none;
+                border: 1px solid #aaaaaa;
+                margin-right: -1px;
+            }
+
+                .operationlist li a img {
+                    vertical-align: sub;
+                    padding-right: 3px;
+                    border:none;
+                }
+
+    .common_list {
+        width: 100%;
+        padding-top: 10px;
+
+        border-collapse:collapse;
+        border-spacing:0;
+        border-left:1px solid #e4e8eb;
+        border-top:1px solid #e4e8eb;
+    }
+
+        .common_list tr th, .common_list tr td {
+            /*border: 1px solid #e4e8eb;*/
+            text-align: center;
+            height: 35px;
+            line-height: 35px;
+            font-family: 宋体;
+            font-size: 12px;
+            color: #595959;
+
+            border-right:1px solid #e4e8eb;
+            border-bottom:1px solid #e4e8eb;
+        }
+
+        .common_list tr th {
+            color: #333333;
+            background: url(../../Content/system/images/tabletrBg.png) repeat-x left bottom;
+        }
+
+        .common_list tr td a {
+            color: #3797d3;
+            margin: 0 2px;
+        }
+
+            .common_list tr td a:hover {
+                color: red;
+            }
+        .nodata
+        {
+            width:200px;
+            margin:10px auto;
+        }
+
+        .search_text_box
+        {
+            width:120px;
+        }
+.textbox
+{
+    width:50%;
+}
+.easyui-datebox
+    {
+        width:90px;
+    }
+/********* 列表 end *************/
+
+/****** 新增编辑弹出窗 begin *********/
+.two_colspan_table
+{
+    width:100%;
+    border-collapse:collapse;
+    border-spacing:0;
+    border-left:1px solid #e4e8eb;
+    border-top:1px solid #e4e8eb;
+}
+.two_colspan_table tr td,.two_colspan_table tr th
+{
+    /*border: 1px solid #e4e8eb;*/
+    text-align: center;
+    height: 35px;
+    line-height: 35px;
+    font-family: 宋体;
+    font-size: 12px;
+    color: #595959;
+    border-right:1px solid #e4e8eb;
+    border-bottom:1px solid #e4e8eb;
+}
+.two_colspan_table tr td.left
+{
+    text-align:right;
+    width:30%;
+}
+.two_colspan_table tr td.right
+{
+    text-align:left;
+    padding-left:8px;
+    width:70%;
+}
+.two_colspan_table tr td.right input.rolelst
+{
+    vertical-align:text-bottom;
+    margin-right:8px;
+}
+.common_button_layer
+{
+    width:60%;
+    margin:15px auto;
+}
+.common_button_layer input
+{
+    width:90px;
+    height:30px;
+}
+/****** 新增编辑弹出窗 end *********/
+
+/****** 分页控件 begin *********/
+.pagination
+{
+    float:right;
+    padding-right:10px;
+}
+.pagination li
+{
+    float:left;
+    list-style:none;
+    margin-right:6px;
+}
+.pagination li a
+{
+    display:inline-block;    
+    padding:4px 6px;
+    border:1px solid #e8e8e8;
+    background-color:#fff;
+    font-family:宋体;
+    font-size:12px;
+    color:#999999;
+    text-decoration:none;
+}
+.pagination li a:hover,.pagination li.active a
+{
+    color:#fff;
+    background-color:#5fb7ff;
+}
+
+
+
+/****** 分页控件 end *********/

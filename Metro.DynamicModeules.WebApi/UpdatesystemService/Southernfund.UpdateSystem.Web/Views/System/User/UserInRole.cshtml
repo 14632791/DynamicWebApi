@@ -1,0 +1,72 @@
+﻿@using Southernfund.UpdateSystem.Model
+@model List<Southernfund.UpdateSystem.Model.RoleModel>
+@{
+    Layout = null;
+    List<UserInRoleModel> userroles = ViewBag.User as List<UserInRoleModel>;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>角色分配</title>
+    @Styles.Render("~/Content/css")
+    <link rel="stylesheet" type="text/css" href="~/Scripts/easyui/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="~/Scripts/easyui/themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="~/Scripts/easyui/demo.css">
+    <script type="text/javascript" src="~/Scripts/easyui/jquery.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/easyui/jquery.easyui.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="~/Content/system/commonx.css">
+    @Scripts.Render("~/bundles/jqueryval")
+
+</head>
+<body style="padding:0;">   
+    <div class="common_fieldset_outlayer">
+        @using (Html.BeginForm("UserInRole", "User"))
+        {
+            <table class="two_colspan_table" cellpadding="0" cellspacing="0">
+                @if (Model == null || Model.Count <= 0)
+                {
+                    <tr>
+                        <td>
+                            暂无数据
+                        </td>
+                    </tr>
+                }
+                else
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="right">
+                                <input class="rolelst" type="checkbox" value="@item.RlId" @Html.Raw(userroles.Exists(r => r.RlId == item.RlId) ? "checked" : "") />@item.Name
+                            </td>
+                        </tr>
+                    }
+                }
+                </table>
+                <div class="common_button_layer" style="width:20%;">
+                    <input type="hidden" id="uid" name="uid" value="@ViewBag.UId" />
+                    <input id="sbAdd" type="submit" value="确定" class="common_btn" onclick="top.EasyuiBusiness.closeDialog();" />
+                </div>
+        }
+    </div>
+    <script type="text/javascript">
+   
+        $(function () {
+            var istrue = true;
+            $(".rolelst").click(function () {
+                var uid = $("#uid").val();
+                var rid = $(this).attr("value");
+                var t = this.checked ? 1 : 0;
+                var str = "uid=" + uid + "&rid=" + rid + "&t=" + t;
+                $.post("/user/updateuserrole", str, function (data) {
+                    
+                });
+            });
+
+            $("#sbAdd").click(function () {
+                top.EasyuiBusiness.createMsg("角色分配成功！");
+            });
+        });
+    </script>
+</body>
+</html>

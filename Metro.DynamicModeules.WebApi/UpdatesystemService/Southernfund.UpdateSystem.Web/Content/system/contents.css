@@ -1,0 +1,184 @@
+﻿body {
+     font-family:宋体,新宋体,宋体-18030, verdana, arial, helvetica, sans-serif; font-size:12px;   font-family: Microsoft YaHei;
+}
+.head_bg{
+ width:100%; height:80px; background:url(images/logotit.png) repeat-x; overflow:hidden; border:none;
+}
+.head_menu{float:right;margin-top:52px;/*height: 30px;margin:80px 0 0 0;background-color: #F2F2F2;*/}
+.user{
+   height:30px; line-height:30px; padding:0 15px 0 0;/*float: right;*/ color:#616161;display:inline-block;
+}
+.menu_right {
+    float: left;padding-left: 10px; margin:2px; 
+}
+.menu_right li {
+    float: left;list-style: none; 
+    background:url(images/topmenu_line.png)  no-repeat;
+}
+.menu_right li a {
+  cursor: pointer;
+    /*background:url(images/topMenu_normal.png) no-repeat;*/
+    background:url(images/topmenua.png) no-repeat;
+    width:70px;
+    height:27px;
+    line-height:27px;
+    display:block;
+    text-align:center;
+    color:#1a5977;
+   text-decoration:none;
+}
+.menu_right li a:hover,.menu_right li a.menutopslct {
+     cursor: pointer;
+    /*background:url(images/topMenu_selected.png) no-repeat;*/
+    background:url(images/topmenuaho.png) no-repeat;
+    width:70px;
+    height:27px;
+    line-height:27px;
+    display:block;
+    text-align:center;
+    color:#ffffff;
+}
+/***** add by xhr 15-08-10 ****/
+#west
+{
+    /*background-color:#c4eafe;*/
+    background-color:#EFF5FF;
+}
+#mu
+{
+    width:156px;
+    height:auto;
+    margin:0 auto;
+    padding:0px;
+}
+#mu li
+{
+    width:116px;
+    height:40px;
+    line-height:40px;
+    text-align:left;
+    padding-left:40px;
+    list-style:none;
+    background:url(images/linebot.png) left bottom no-repeat;
+}
+#mu li a
+{
+    font-family:微软雅黑;
+    font-size:12px;
+    color:#1b1414;
+    text-decoration:none;
+    background:url(images/bcrike.png) left center no-repeat;
+    padding-left:10px;
+}
+#mu li a:hover,#mu li a.muaselect
+{
+    color:red;
+    background:url(images/bhovercrike.png) left center no-repeat;
+}
+.messager-body
+{
+    font-weight:bold;
+    font-size:16px;
+    text-align:center;
+}
+/*****************/
+
+
+
+
+.login_info{ float:right;  height:26px; line-height:26px; margin:69px 0 0 0;}
+.login_info span{
+ height:26px; line-height:26px; margin:0 20px 0 0;
+}
+.exit_btn{
+height:26px; line-height:26px;text-decoration:none;margin-left: 10px; color:#686868; padding-left:25px; background:url(images/exit_icon.png) no-repeat left center; display:inline-block;   font-family: Microsoft YaHei;
+}
+.user_info{
+   height:26px; line-height:26px; background:url(images/user_icon.png) no-repeat left center; text-align:left;color:#686868; padding-left:25px; display:inline-block;   font-family: Microsoft YaHei;}
+   .user_information{
+   height:26px; line-height:26px;margin-left: 10px;  background:url(images/edite_information.png) no-repeat left center; text-align:left;color:#686868; padding-left:25px; display:inline-block;   font-family: Microsoft YaHei;}
+   .user_psw{
+   height:26px; line-height:26px; margin-left: 10px; background:url(images/edite_psw.png) no-repeat left center; text-align:left;color:#686868; padding-left:25px; display:inline-block;   font-family: Microsoft YaHei;}
+.head_link{ float:right; margin:60px 15px 0 0;}
+.menu_left{ float:left; width:16px; height:35px; background:url(images/main_menu_left.jpg) no-repeat; display:block;}
+.head_link ul
+{
+    margin: 0 auto;padding: 0;float: left; list-style-type:none;
+}
+.head_link ul li
+{
+    list-style-type: none;float: left; margin:0 auto;width:113px; height:34px;  background:url(images/menu_line.png) no-repeat right center;display:block; 
+}
+.head_link ul li a{
+width:111px; height:34px; line-height:34px; background:url(images/main_menu_bg.jpg) no-repeat left center;text-align:center; font-size:15px;display:block;  border:none; cursor:pointer; text-decoration:none; color:#494949;   font-family: Microsoft YaHei;
+}
+.head_link ul li a:hover{
+width:111px; height:34px; line-height:34px; background:url(images/main_menu_hover.jpg) no-repeat left center;text-align:center; font-size:15px;display:block;  border:none; cursor:pointer; text-decoration:none; color:#494949;   font-family: Microsoft YaHei; overflow:hidden;color:#fff;
+}
+.head_link ul li a.current{
+width:111px; height:34px; line-height:34px; background:url(images/main_menu_hover.jpg) no-repeat left center;text-align:center; font-size:15px;display:block;  border:none; cursor:pointer; text-decoration:none; color:#494949;   font-family: Microsoft YaHei; overflow:hidden; color:#fff;
+}
+
+
+.document_table{
+display:block;  width:88px;height:38px; line-height:38px;background:url(images/top_menu_item2.png) no-repeat left center; position:relative; top:19px; overflow:hidden;padding-left:41px; 
+}
+.administrator_workbench{
+ display:block;width:88px;height:38px; line-height:38px; background:url(images/top_menu_item2.png) no-repeat -129px center;position:relative; top:19px;overflow:hidden;padding-left:41px; 
+}
+.functional_unit{
+display:block;width:88px;height:38px; line-height:38px;background:url(images/top_menu_item2.png) no-repeat -258px center; position:relative; top:19px;overflow:hidden;padding-left:41px; 
+}
+.system_management{
+display:block;width:88px;height:38px; line-height:38px;background:url(images/top_menu_item2.png) no-repeat -387px center; position:relative; top:19px;overflow:hidden; padding-left:41px; 
+}
+
+.document_table_visited{
+ background:url(images/document_table_visited.png) no-repeat left center;display:block;width:91px;height:46px; line-height:46px; position:relative; top:11px;z-index:999; 
+}
+.administrator_workbench_visited{
+ background:url(images/administrator_workbench_visited.png) no-repeat left center;display:block; width:129px;height:46px; line-height:46px; position:relative; top:11px;z-index:999; 
+}
+.functional_unit_visited{
+ background:url(images/functional_unit_visited.png) no-repeat left center;display:block; width:91px;height:46px; line-height:46px; position:relative; top:11px;z-index:999; 
+}
+.system_management_visited{
+ background:url(images/system_management_visited.png) no-repeat left center;display:block; width:91px;height:46px; line-height:46px; position:relative; top:11px;z-index:999; 
+}
+
+.head_link_current a{ background:url(images/top_menu_hover.png) no-repeat left center;display:block;  width:133px;height:46px; line-height:46px; position:relative; top:11px;z-index:999; }
+
+
+.foot_bg{ 
+  width:100%; height:30px; line-height:30px; background:url(images/sys_foot_bg.jpg) repeat-x; 
+  text-align:center; color:#525252; border:none; overflow:hidden;   font-family: Microsoft YaHei;
+}
+.main_menu{
+ width:220px; height:49px; background:url(images/main_menu.png) no-repeat center center;  overflow:hidden; display:inline-block; text-align:center;font-family: Microsoft YaHei; color:#5e5e5e; font-weight:bold; font-size:15px; 
+}
+
+.center_west{
+	width: 100%;  height:36px; line-height:36px;/* background:url(images/tree_menu_item_bg.png) repeat-x;*/ text-align:left; color:#aaa; overflow:hidden; display:inline-block;padding-left: 20px;
+}
+.center_west a{ cursor: pointer;padding: 5px 2px 5px 20px;text-align:center; font-size:12px; text-decoration:none;margin-left: 3px;color: #222;}
+
+.center_center{
+	width: 100%;  height:36px; line-height:36px;/* background:url(images/tree_menu_item_bg.png) repeat-x;*/ text-align:left; color:#aaa; overflow:hidden; display:inline-block;padding-left: 20px;
+}
+.center_center a{ cursor: pointer;padding: 5px 2px 5px 20px;text-align:center; font-size:12px; text-decoration:none;margin-left: 3px;color: #222;}
+
+.welcom_a
+{
+    position: relative;
+    margin: 0 auto;
+    text-align: center;
+    height: 100%;
+}
+.welcome_b
+{
+    width: 750px;
+    height: 550px;
+    background: url(Images/welcome.jpg) no-repeat center center;
+    margin: 0 auto;
+}
+

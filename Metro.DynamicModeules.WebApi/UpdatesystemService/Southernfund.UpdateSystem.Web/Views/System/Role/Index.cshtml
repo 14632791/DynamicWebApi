@@ -1,0 +1,107 @@
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<Southernfund.UpdateSystem.Model.RoleModel>
+
+
+@{
+   
+    Layout = "~/Views/Shared/_List.cshtml";
+}
+
+<div class="operate_layer">
+    @using (Html.BeginForm("Index", "Role", 0))
+    {
+        <table>
+            <tr>
+                <td style="font-size:12px;">
+                    角色名称：
+                </td>
+                <td>
+                    @Html.TextBox("uroleText", null, new { @class = "search_text_box", @maxlength = "20" })
+                </td>
+                <td>
+                    <input id="sbSearch" type="submit" value="搜索" class="list_search_btn" />
+                </td>
+                <td>
+                    <input id="resetSearch" type="button" value="取消" class="list_cancel_search_btn" onclick="location.href='@Url.Content("~/Role/Index")'" />
+                </td>
+            </tr>
+        </table>
+    }
+    <ul class="operationlist">
+
+        <li>
+            <a href="javascript:void(0)" class="add_btn" onclick="top.EasyuiPublic.openDialog('@Url.Content("~/Role/Create")' ,520,280,'新增角色','icon-add')">
+                <img src="~/Content/system/images/New.png" />新增
+            </a>
+        </li>
+
+        @*<li>
+            <a href="javascript:void(0)" class="del_all_btn" onclick="IframePage.batchDeleted('@Url.Content("~/Role/Delete")')">
+                <img src="../Content/system/images/delete.png" />批量删除
+            </a>
+        </li>*@
+
+
+    </ul>
+</div>
+
+<div id="dvUsers">
+    @if (Model == null || Model.Count > 0)
+    {
+        var i = Model.PageSize * (Model.PageNumber - 1);  
+        <table class="common_list" cellpadding="0" cellspacing="0">
+            <tr>
+                @*<th class="noborder_L" style="width: 3%">
+                    <input id="ckbAll" type="checkbox" />
+                </th>*@
+                <th style="width: 4%">
+                    序号
+                </th>
+                <th style="width: 6%">
+                    角色名称
+                </th>
+                <th style="width: 7%">
+                    备注
+                </th>
+                <th style="width: 10%">
+                    管理
+                </th>
+                @*<th class="noborder_R">
+                    </th>*@
+            </tr>
+        @foreach (var item in Model)
+        {
+            <tr class="trcls">
+                @*<td>
+                    <input type="checkbox" value="@item.RlId" class="ckbcls" />
+                </td>*@
+                <td>
+                    @{ i++;}
+                    @i
+                </td>
+                <td>
+                    @item.Name
+                </td>
+                <td>
+                    @item.Remark
+                </td>
+                <td>
+                    <a href="javascript:void(0)" onclick="top.EasyuiPublic.openDialog('@Url.Content("~/Role/Create/" + item.RlId)',520,280,'编辑','icon-edit')" class="edit_btn">编辑</a>
+                    @*<a href="javascript:void(0)" onclick="top.EasyuiBusiness.openDialog('',  520,280,'分配权限','icon-add')" class="rold_btn">分配权限</a>
+                    @Html.ActionLink("删除", "Delete", "Role", null, new { id = item.RlId, onclick = "return IframePage.deleted(" + item.RlId + ")", @class = "del_btn" })*@
+                </td>
+            </tr>
+        }
+        </table>
+        <div class="common_page_layer">
+            @Html.PagedListPager(Model, pageIndex => Url.Action("Index", new { pageIndex }))
+        </div>
+    }
+    else
+    {
+        <div class="nodata">暂无数据</div>
+    }
+</div>
+
+
+

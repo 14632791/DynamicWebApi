@@ -1,0 +1,81 @@
+﻿@model Southernfund.UpdateSystem.Model.LogOnModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html id="html_hide">
+<head>
+    <title>用户登录</title>
+    <link href="@Url.Content("~/Content/system/commonx.css")" rel="stylesheet" type="text/css" />
+</head>
+<body class="login_body">
+    <div class="login_main">
+        <div class="a">
+            <div class="a1">
+                @*<div class="login_tit">
+
+                    </div>*@
+                <div class="login_wrapbg">
+                    @using (Html.BeginForm("LogOn", "Login"))
+                    {
+                        <div class="a1a">
+                            <span>
+                                帐 &nbsp; 号：
+                            </span>
+                            @Html.TextBoxFor(model => model.UserName, new { @maxlength = "20", @class = "txt_box" })
+                            @Html.ValidationMessageFor(model => model.UserName)
+                        </div>
+                        <div class="a1a">
+                            <span>
+                                密 &nbsp; 码：
+                            </span>@Html.PasswordFor(model => model.Password, new { @maxlength = "30", @class = "txt_box" })
+                            @Html.ValidationMessageFor(model => model.Password)
+                        </div>
+                        @*<div class="a1a">
+                            <span>
+                                验证码：
+                            </span>@Html.TextBoxFor(model => model.Code, new { @maxlength = "6", @class = "txt_val" })
+                            <img id="valiCode" style="cursor: pointer;" src='@Url.Content("~/ImgCode/GetImgCode/")' alt="点击刷新验证码" />
+                            @Html.ValidationMessageFor(model => model.Code)
+                        </div>*@
+                        <div class="a1a" style="padding:5px 0 0 130px;">
+                            <div>
+                            </div>
+                            <input type="submit" value="登 录" class="login_btn" />
+                            <input type="reset" value="重 置" class="login_btn" />
+                        </div>
+                        @*<div style="padding-left: 70px">
+                                @Html.ValidationMessageFor(model => model.Code)
+                            </div>*@
+                    }
+                </div>
+                <div class="a1b">
+                    版权所有&copy;南方基金管理有限公司
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+@*@Scripts.Render("~/bundles/jquery")*@
+@Scripts.Render("~/bundles/jqueryval")
+<script type="text/javascript">
+    if (window.self != window.top) top.location.href = '@Url.Content("~/Login/Login?state=0")';
+    @*$(document).ready(function () {
+        alert("1111");
+        $("#valiCode").bind("click", function () {
+            var url = '@Url.Content("~/ImgCode/GetImgCode")' + "?time=" + (new Date()).getTime();
+            $(this).attr("src", url);
+        });
+    });*@
+
+    window.onload = function () {
+        $("#valiCode").bind("click", function () {
+            var url = '@Url.Content("~/ImgCode/GetImgCode")' + "?time=" + (new Date()).getTime();
+            $(this).attr("src", url);
+        });
+    }
+
+
+</script>

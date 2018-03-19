@@ -1,0 +1,70 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width"/>
+    <title>南方基金升级系统后台</title>
+    @Styles.Render("~/bundles/easyuicss")
+    <link href="~/Content/system/contents.css" rel="stylesheet" type="text/css"/>
+
+</head>
+<body class="easyui-layout" scroll="no">
+<noscript>
+    <div class="easy_script">
+        <img src="~/Content/system/images/noscript.gif" alt="抱歉，请开启脚本支持！"/>
+    </div>
+</noscript>
+
+<!--顶部-->
+<div data-options="region:'north',border:false" class="head_bg">
+    <div class="head_menu">
+        <div class="user">
+            <a href="javascript:void(0)" onclick=" easyuibusiness.opendialog('', 520, 380, '修改信息', 'icon-add') " class="user_information">
+                @Session["UserName"].ToString()
+                @*@if(Session["UserName"]!=null)
+                {
+                    Html.Raw(Session["UserName"].ToString());
+                }*@
+                </a>
+
+            @*<a href="javascript:void(0)" onclick="EasyuiBusiness.openDialog('', 520, 380, '修改密码', 'icon-add') "  class="user_psw">
+                修改密码</a>*@
+            <a href="@Url.Content("~/Login/LogOut")" class="exit_btn">退出</a>
+        </div>
+        <ul class="menu_right">
+            @*<li >
+                        <a @if (ViewBag.linkindex == 4)
+                           {<text>class='selected'</text>}href="@Url.Content("~/System/List")" >系统管理</a>
+                    </li>*@
+        </ul>
+    </div>
+
+</div>
+
+<!--主模块页面内容-->
+@RenderBody()
+<!--中心框架-->
+<div data-options="region:'center'" style="height: 100%; overflow: hidden">
+    <div id="tabs" class="easyui-tabs" data-options="fit:true,border:false">
+        <div class="welcome_outer" title="欢迎使用" style="padding: 0px; overflow: hidden; color: red;"
+             id="defaultTab" data-options="closable:false">
+            <div class="welcom_a">
+                <div class="welcome_b">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--底部-->
+<div data-options="region:'south'" class="foot_bg">
+    版权所有&copy;南方基金管理有限公司
+</div>
+<div style="display: none;">
+    <div id="popContainer" style="overflow: hidden;">
+        <iframe id="popIframe" src="about:blank" scrolling="auto" style="width: 100%; height: 100%;"></iframe>
+    </div>
+</div>
+
+</body>
+</html>
+@Scripts.Render("~/bundles/easyui")

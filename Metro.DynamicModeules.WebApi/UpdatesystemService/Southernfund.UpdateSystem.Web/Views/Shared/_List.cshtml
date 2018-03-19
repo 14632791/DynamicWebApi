@@ -1,0 +1,18 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+
+    <link rel="stylesheet" type="text/css" href="~/Content/system/commonx.css">
+    @RenderSection("css", required: false)
+    @Scripts.Render("~/pages/list")
+</head>
+<body>
+
+    @RenderBody()
+
+
+</body>
+</html>
+@RenderSection("script", required: false)

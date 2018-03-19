@@ -1,0 +1,100 @@
+﻿@model ProjectsModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>项目管理</title>
+    @Styles.Render("~/bundles/easyuicss")
+    <link rel="stylesheet" type="text/css" href="~/Content/system/commonx.css">
+
+</head>
+<body>
+    <div class="common_fieldset_outlayer">
+        @using (Html.BeginForm("Save", "Projects"))
+        {
+            @Html.HiddenFor(m=>m.ID)
+            @*@Html.Partial("_ViewToken")*@
+            <table class="two_colspan_table" cellpadding="0" cellspacing="0">
+                <tr>
+                    <td class="left">
+                        <span style="color: red;">*</span>项目名称：
+                    </td>
+                    <td class="right">
+                        @Html.TextBoxFor(model => model.Name, new { @style = "width:50%;", @maxlength = "20" })
+                        @Html.ValidationMessageFor(model => model.Name)
+                    </td>
+                </tr>
+                <tr>
+                    <td class="left">
+                        <span style="color: red;">*</span>项目代码：
+                    </td>
+                    <td class="right">
+                        @Html.TextBoxFor(model => model.Code, new { @style = "width:50%;" })
+                        @Html.ValidationMessageFor(model => model.Code)
+                    </td>
+                </tr>
+                <tr>
+                    <td class="left">
+                        <span style="color: red;">*</span>服务器地址：
+                    </td>
+                    <td class="right">
+                        @Html.TextBoxFor(model => model.DownloadServerURL, new { @style = "width:50%;" })
+                        @Html.ValidationMessageFor(model => model.DownloadServerURL)
+                    </td>
+                </tr>
+                <tr>
+                    <td class="left">
+                        备注：
+                    </td>
+                    <td class="right">
+                        @Html.TextAreaFor(model => model.Remark, new { @style = "width:50%;height:100px;" })
+                        @Html.ValidationMessageFor(model => model.Remark)
+                    </td>
+                </tr>
+                @*<tr>
+                    <td class="left">
+                        性别：
+                    </td>
+                    <td class="right">
+                        @Html.RadioButtonFor(model => model.Sex, 0, new { @checked = "checked" })男
+                        @Html.RadioButtonFor(model => model.Sex, 1)女
+                    </td>
+                </tr>*@
+            </table>
+
+            <div class="common_button_layer">
+                <input id="sbAdd" type="submit" value="保存" class="common_btn" />
+                <input id="Rs" type="reset" class="common_btn" value="重置" />
+                <input id="btnCancle" type="button" value="取消" class="common_btn" onclick="top.EasyuiPublic.closeDialog();" />
+            </div>
+        }
+    </div>
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript" src="~/Scripts/easyui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/easyui/locale/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript">
+        function myformatter(date) {
+            var y = date.getFullYear();
+            var m = date.getMonth() + 1;
+            var d = date.getDate();
+            var date = y + '/' + (m < 10 ? ('0' + m) : m) + '/' + (d < 10 ? ('0' + d) : d);
+            return date;
+        }
+        function myparser(s) {
+            if (!s) return new Date();
+            var ss = (s.split('/'));
+            var y = parseInt(ss[0], 10);
+            var m = parseInt(ss[1], 10);
+            var d = parseInt(ss[2], 10);
+            if (!isNaN(y) && !isNaN(m) && !isNaN(d)) {
+                return new Date(y, m - 1, d);
+            } else {
+                return new Date();
+            }
+        }
+    </script>
+</body>
+</html>

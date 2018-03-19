@@ -1,0 +1,19 @@
+﻿@model List<ProjectsModel>
+@{
+    Layout = "~/Views/Shared/_Backend.cshtml";
+}
+
+
+<!--左侧菜单-->
+<div id="west" data-options="region:'west',title:'系统管理'" style="width:175px;">
+    <ul id="mu">
+        <li><a href="javascript:void(0)" rel="@Url.Content("~/Projects/Index")">项目管理</a></li>
+        @foreach (var item in Model)
+        {
+            <li><a href="javascript:void(0)" rel="@Url.Content("~/Update/Index/" + item.ID)">@item.Name 更新</a></li>
+        }
+
+        <li><a href="javascript:void(0)" rel="@Url.Content("~/User/Index")">用户管理</a></li>
+
+    </ul>
+</div>

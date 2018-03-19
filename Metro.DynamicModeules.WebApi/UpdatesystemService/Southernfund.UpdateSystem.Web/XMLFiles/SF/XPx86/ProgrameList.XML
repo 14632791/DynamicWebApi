@@ -1,0 +1,77 @@
+<FileList>
+  <File HashMD5="022f9b81f25f300aafdc4787a36ed0cb" Directory="\Sofa\\External dependencies\\Mef.Codeplex\" Name="System.ComponentModel.Composition.Codeplex.dll" />
+  <File HashMD5="4b7e677f072af04dc9448a6ccc7ce55f" Directory="\Sofa\\External dependencies\\Mef.Codeplex\" Name="System.ComponentModel.Composition.Registration.dll" />
+  <File HashMD5="0a066c797b4edd66cfa69163f3754a7a" Directory="\Sofa\\External dependencies\\Mef.Codeplex\" Name="System.Reflection.Context.dll" />
+  <File HashMD5="aa40837ce829f94fdd1baccde898b3bc" Directory="\Sofa\\External dependencies\\Prism.Mef_Codeplex\\EntLib\" Name="Microsoft.Practices.EnterpriseLibrary.Common.dll" />
+  <File HashMD5="feafe7321ec1037e64171312c6538b24" Directory="\Sofa\\External dependencies\\Prism.Mef_Codeplex\\EntLib\" Name="Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.dll" />
+  <File HashMD5="a8d9f1132116fb3fb4a23371e5994663" Directory="\Sofa\\External dependencies\\Prism.Mef_Codeplex\\EntLib\" Name="Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.Logging.dll" />
+  <File HashMD5="fb1d92ca90e12ab53a413d364c80287d" Directory="\Sofa\\External dependencies\\Prism.Mef_Codeplex\\EntLib\" Name="Microsoft.Practices.EnterpriseLibrary.Logging.dll" />
+  <File HashMD5="c16cfcfe60b5d3f50d148503801298a1" Directory="\Sofa\\External dependencies\\Prism.Mef_Codeplex\" Name="Microsoft.Practices.Prism.dll" />
+  <File HashMD5="37d862309b8c724150c5f370119535d9" Directory="\Sofa\\External dependencies\\Prism.Mef_Codeplex\" Name="Microsoft.Practices.Prism.Interactivity.dll" />
+  <File HashMD5="55583b4b674d9e717cba0a86d650408d" Directory="\Sofa\\External dependencies\\Prism.Mef_Codeplex\" Name="Microsoft.Practices.Prism.MefExtensions.dll" />
+  <File HashMD5="fb6bbcb4d98d9f6abf9f2109a784d64c" Directory="\Sofa\\External dependencies\\Prism.Mef_Codeplex\" Name="Microsoft.Practices.Prism.UnityExtensions.dll" />
+  <File HashMD5="6df78bb163d443d95b21f58808320af7" Directory="\Sofa\\External dependencies\\Prism.Mef_Codeplex\" Name="Microsoft.Practices.ServiceLocation.dll" />
+  <File HashMD5="b69c180ad707913247eb85ee2e6e3d16" Directory="\Sofa\\External dependencies\\Prism.Mef_Codeplex\" Name="Microsoft.Practices.Unity.dll" />
+  <File HashMD5="d5911921e2ef61b6fa1bef2d3d81965f" Directory="\Sofa\\External dependencies\\Prism.Mef_Codeplex\" Name="Microsoft.Practices.Unity.Interception.dll" />
+  <File HashMD5="b89cb7f3f1a1e2807e708f5435deb13d" Directory="\Sofa\\External dependencies\" Name="log4net.dll" />
+  <File HashMD5="45fc40ce07cec7d5185f8e96525ad4db" Directory="\Sofa\\External dependencies\" Name="WPF.Themes.dll" />
+  <File HashMD5="2540afa416a8741b180f3f19b137f0a6" Directory="\Sofa\\External dependencies\" Name="WPFToolkit.dll" />
+  <File HashMD5="9ee405c203d9beb98d632c1939f63a13" Directory="\Sofa\\Libraries\" Name="ExternalFrameworks.dll" />
+  <File HashMD5="9f54b3b3810508cdb89c43334cce3eaa" Directory="\Sofa\\Libraries\" Name="Sofa.Commons.dll" />
+  <File HashMD5="27e63bd8b929cfb7d6c6268e3af1f327" Directory="\Sofa\\Libraries\" Name="Sofa.Component.dll" />
+  <File HashMD5="7e696381eaa544bb0b4c7689cf2fcfa5" Directory="\Sofa\\Libraries\" Name="Sofa.Container.dll" />
+  <File HashMD5="0c07b685fb04e2af2202d8637d29a0c1" Directory="\Sofa\\Libraries\" Name="Sofa.Themes.dll" />
+  <File HashMD5="8c446d5a9d3e513c827d8455df6d7a96" Directory="\Sofa\" Name="Sofa.xml" />
+  <File HashMD5="bb5bc0adbbe2a2dd70ec473404d30b0d" Directory="" Name="Aga.Controls.dll" />
+  <File HashMD5="4adc7c4656dbc9aa2cf8ab4686b9d501" Directory="" Name="app.config" />
+  <File HashMD5="76b45c24f72de3078938a700bdae650b" Directory="" Name="ClientMarket.dll" />
+  <File HashMD5="340bfe7dcff2d56c99f2dc49bf789611" Directory="" Name="ClientMarket.ini" />
+  <File HashMD5="24ed7f6d942bb405b1b985b7a2521e77" Directory="" Name="ClientTDF.dll" />
+  <File HashMD5="aa32ae0f9383e615496b321999927750" Directory="" Name="ClientTDF.ini" />
+  <File HashMD5="64a23842c98db62a46eb945d3fdd755e" Directory="" Name="ClientTest.dll" />
+  <File HashMD5="75a49a1b993367c2f9460d7741870e76" Directory="" Name="config.txt" />
+  <File HashMD5="9ee405c203d9beb98d632c1939f63a13" Directory="" Name="ExternalFrameworks.dll" />
+  <File HashMD5="377600f37922efc998bf4001e0ae605b" Directory="" Name="HHTDB.dll" />
+  <File HashMD5="6e6b573e0a57a62128b36381c00fd021" Directory="" Name="itextsharp.dll" />
+  <File HashMD5="57305b0d5b1382b3c7beedb9a8fd8c0c" Directory="" Name="libsodium.dll" />
+  <File HashMD5="0b042413d3e3f15a9a2f4cf7c11e9a6e" Directory="" Name="libzmq.dll" />
+  <File HashMD5="b89cb7f3f1a1e2807e708f5435deb13d" Directory="" Name="log4net.dll" />
+  <File HashMD5="77fab5515a6c6c50c5e92e3a01346bcc" Directory="" Name="MahApps.Metro.dll" />
+  <File HashMD5="4cd91c3cc0b69b23dec00aba7b0428df" Directory="" Name="MahApps.Metro.pdb" />
+  <File HashMD5="dac4508f155c154ed4bcf76d9aeed8ee" Directory="" Name="MahApps.Metro.xml" />
+  <File HashMD5="94bfdb0e5ead8a7500a5c61ac82fd60b" Directory="" Name="menu.xml" />
+  <File HashMD5="01f66667767264f1095d7e47acd1e0b7" Directory="" Name="Microsoft.Exchange.WebServices.dll" />
+  <File HashMD5="93abb77c21c0306ca81a95dfc8ea79d8" Directory="" Name="Microsoft.Windows.Design.Extensibility.dll" />
+  <File HashMD5="03e9314004f504a14a61c3d364b62f66" Directory="" Name="msvcp100.dll" />
+  <File HashMD5="67ec459e42d3081dd8fd34356f7cafc1" Directory="" Name="msvcr100.dll" />
+  <File HashMD5="5e02ddaf3b02e43e532fc6a52b04d14b" Directory="" Name="Newtonsoft.Json.dll" />
+  <File HashMD5="6ec76ec4a4738dbf44de94093913de11" Directory="" Name="Newtonsoft.Json.xml" />
+  <File HashMD5="fa8666ed03a7df1b9259d54bd546257e" Directory="" Name="O2S.Components.PDFRender4NET.dll" />
+  <File HashMD5="c762cd386c0d0fb32cfa6f38525b0b94" Directory="" Name="protobuf-net.dll" />
+  <File HashMD5="9f54b3b3810508cdb89c43334cce3eaa" Directory="" Name="Sofa.Commons.dll" />
+  <File HashMD5="27e63bd8b929cfb7d6c6268e3af1f327" Directory="" Name="Sofa.Component.dll" />
+  <File HashMD5="7e696381eaa544bb0b4c7689cf2fcfa5" Directory="" Name="Sofa.Container.dll" />
+  <File HashMD5="0c07b685fb04e2af2202d8637d29a0c1" Directory="" Name="Sofa.Themes.dll" />
+  <File HashMD5="fc079464122e847202f2ed59f96a7649" Directory="" Name="SouthernFund.Common.dll" />
+  <File HashMD5="1a69bb3a285e0f132c32830ac05444b9" Directory="" Name="SouthernFund.Plugin.Core.dll" />
+  <File HashMD5="e39878c993a362b86387ab026abde1d5" Directory="" Name="SouthernFund.TradeClient.Common.dll" />
+  <File HashMD5="26b2046e915270707d881ae5b4dfba99" Directory="" Name="Southernfund.UpdateClient.exe" />
+  <File HashMD5="9d887ac015e5c5fce5eed6e37daeb68c" Directory="" Name="Southernfund.UpdateClient.exe.config" />
+  <File HashMD5="50715c6db353f2317c01e0f7567180e3" Directory="" Name="SouthernFund.WebService.ClientInterpect.dll" />
+  <File HashMD5="1226fb948f52cef9679e0ad86f265882" Directory="" Name="SouthernFund.WebService.dll" />
+  <File HashMD5="022f9b81f25f300aafdc4787a36ed0cb" Directory="" Name="System.ComponentModel.Composition.Codeplex.dll" />
+  <File HashMD5="4b7e677f072af04dc9448a6ccc7ce55f" Directory="" Name="System.ComponentModel.Composition.Registration.dll" />
+  <File HashMD5="0a066c797b4edd66cfa69163f3754a7a" Directory="" Name="System.Reflection.Context.dll" />
+  <File HashMD5="6813ebecd58e557e1d65c08e2b1030af" Directory="" Name="System.Windows.Controls.DataVisualization.Toolkit.dll" />
+  <File HashMD5="3ab57a33a6e3a1476695d5a6e856c06a" Directory="" Name="System.Windows.Interactivity.dll" />
+  <File HashMD5="f8e6748ba96773a2d3608c9e1bcc2006" Directory="" Name="UpdateConfig.XML" />
+  <File HashMD5="3f421d0997bb1eb757be8929d0f17ad4" Directory="" Name="userlogin.tmp" />
+  <File HashMD5="a6ec626e120f8a7a8924d2facafd81cb" Directory="" Name="WPFTaskbarNotifier.dll" />
+  <File HashMD5="195ed09e0b4f3b09ea4a3b67a0d3f396" Directory="" Name="WPFToolkit.dll" />
+  <File HashMD5="4bfe6f312c5fd396c7989f58d596257c" Directory="" Name="WPFTradeClient.application" />
+  <File HashMD5="a395a16c00c9e64b26738fdfefc2c8fd" Directory="" Name="WPFTradeClient.exe" />
+  <File HashMD5="4adc7c4656dbc9aa2cf8ab4686b9d501" Directory="" Name="WPFTradeClient.exe.config" />
+  <File HashMD5="6fa4924db4cdbd1c8b09e0819ad62dc4" Directory="" Name="WPFTradeClient.exe.manifest" />
+  <File HashMD5="a5f0bdde804e6f55ee4ac3abd92657ce" Directory="" Name="WPFVisifire.Charts.dll" />
+  <File HashMD5="5a5341a6d2026373c47aa9e8849aeefd" Directory="" Name="ZeroMQ.dll" />
+</FileList>

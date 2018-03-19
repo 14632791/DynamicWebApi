@@ -16,11 +16,7 @@ namespace Metro.DynamicModeules.Interface.Sys
         /// 记录数
         /// </summary>
         int RowCount { get; }
-
-        /// <summary>
-        /// 当前选中的资料行
-        /// </summary>
-        int FocusedRowHandle { get; set; }
+        
 
         /// <summary>
         /// 数据源

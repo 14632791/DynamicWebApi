@@ -1,0 +1,92 @@
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<Southernfund.UpdateSystem.Model.UserModel>
+
+
+@{
+    Layout = "~/Views/Shared/_List.cshtml";
+}
+
+<div class="operate_layer">
+    @using (Html.BeginForm("Index", "User", 0))
+    {
+        <table>
+            <tr>
+                <td style="font-size:12px;">
+                    用户名：
+                </td>
+                <td>
+                    @Html.TextBox("unameText", null, new { @class = "search_text_box", @maxlength = "20" })
+                </td>
+                <td>
+                    <input id="sbSearch" type="submit" value="搜索" class="list_search_btn" />
+                </td>
+                <td>
+                    <input id="resetSearch" type="button" value="取消" class="list_cancel_search_btn" onclick="location.href = '@Url.Content("~/User/Index")'" />
+                </td>
+            </tr>
+        </table>
+    } <ul class="operationlist">
+
+        <li>
+            <a href="javascript:void(0)" class="add_btn" onclick="top.EasyuiPublic.openDialog('@Url.Content("~/User/Create")' ,520,480,'新增用户','icon-add')">
+                <img src="~/Content/system/images/New.png" />新增
+            </a>
+        </li>
+
+        @*<li>
+                <a href="javascript:void(0)" class="del_all_btn" onclick="IframePage.batchDeleted('@Url.Content("~/User/Delete")')">
+                    <img src="~/Content/system/images/delete.png" />批量删除
+                </a>
+            </li>*@
+
+
+    </ul>
+</div>
+
+<div id="dvUsers">
+    @if (Model != null && Model.Count > 0)
+    {
+        var i = Model.PageSize * (Model.PageNumber - 1);
+        <table class="common_list" cellpadding="0" cellspacing="0">
+            <tr>
+                @*<th class="noborder_L" style="width: 3%">
+                        <input id="ckbAll" type="checkbox"/>
+                    </th>*@
+                <th style="width: 4%">序号</th>
+                <th style="width: 6%"> 用户名</th>
+                <th style="width: 4%">性别</th>
+                <th style="width: 10%">电话</th>
+                <th style="width: 12%">
+                    管理
+                </th>
+
+                @foreach (var item in Model)
+                {
+                <tr class="trcls">
+                    <td>
+                        @{ i++;}
+                        @i
+                    </td>
+                    <td>
+                        @item.UserName
+                    </td>
+                    <td>
+                        @item.SexText
+                    </td>
+                    <td>@item.Phone</td>
+                    <td>
+                        <a href="javascript:void(0)" onclick="top.EasyuiPublic.openDialog('@Url.Content("~/User/Create/" + item.UsId)', 520, 480, '编辑', 'icon-edit')" class="edit_btn">编辑</a>
+                        @Html.ActionLink("删除", "Delete", "User", null, new { id = item.UsId, onclick = "return EasyuiBusiness.deleted('" + item.UsId + "','" + item.UsId + "')", @class = "del_btn" })
+                    </td>
+                </tr>
+                }
+            </table>
+            <div class="common_page_layer">
+                @Html.PagedListPager(Model, pageIndex => Url.Action("Index", new { pageIndex }))
+            </div>
+    }
+    else
+    {
+        <div class="nodata">暂无数据</div>
+    }
+</div>
