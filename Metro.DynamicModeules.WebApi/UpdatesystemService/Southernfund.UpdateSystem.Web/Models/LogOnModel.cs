@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Web;
 
-namespace UpdateSystem.Model
+namespace UpdateSystem.Web.Models
 {
     public class LogOnModel
     {

@@ -63,11 +63,17 @@ namespace Metro.DynamicModeules.Service
         public virtual DbSet<tb_SOs> tb_SOs { get; set; }
 
 
-        public DbSet<tb_UpProject> tb_UpProject { get; set; }
-        public DbSet<tb_Update> tb_Update { get; set; }
+        //public DbSet<tb_UpProject> tb_UpProject { get; set; }
+        //public DbSet<tb_Update> tb_Update { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            //modelBuilder.Entity<tb_UpProject>().Property(e => e.name).IsUnicode(false);
+            //modelBuilder.Entity<tb_UpProject>().Property(e => e.description).IsUnicode(false);
+            //modelBuilder.Entity<tb_UpProject>().Property(e => e.remark).IsUnicode(false);
+            //modelBuilder.Entity<tb_Update>().Property(e => e.remark).IsUnicode(false);
+            //modelBuilder.Entity<tb_Update>().Property(e => e.updatelog).IsUnicode(false);
+
             modelBuilder.Entity<tb_MyAuthorityByItem>()
                .Property(e => e.AuthorityCode)
                .IsUnicode(false);

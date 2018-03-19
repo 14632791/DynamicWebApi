@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Metro.DynamicModeules.Common;
+using Metro.DynamicModeules.Interface.Service.Update;
+using Metro.DynamicModeules.Models.Sys;
+using Metro.DynamicModeules.Service;
+using Microsoft.Practices.Unity;
+using System;
 using System.Web;
 using System.Web.Mvc;
-using UpdateSystem.Model;
-using Microsoft.Practices.Unity;
-using Metro.DynamicModeules.Service;
-using Metro.DynamicModeules.Interface.Service.Update;
-using Metro.DynamicModeules.Common;
-using Metro.DynamicModeules.Models.Sys;
 using UpdateSystem.Web.Models;
 
 namespace UpdateSystem.Web.Controllers

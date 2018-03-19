@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UpdateSystem.Model
+namespace UpdateSystem.Web.Models
 {
     public class PagedModel
     {
