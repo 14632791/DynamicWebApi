@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // 有关程序集的常规信息是通过以下项进行控制的
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("Southernfund.UpdateSystem.Web")]
+[assembly: AssemblyTitle("UpdateSystem.Web")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Microsoft")]
-[assembly: AssemblyProduct("Southernfund.UpdateSystem.Web")]
+[assembly: AssemblyProduct("UpdateSystem.Web")]
 [assembly: AssemblyCopyright("版权所有(C) Microsoft 2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

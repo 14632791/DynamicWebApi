@@ -3,13 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Southernfund.UpdateSystem.Model.Util;
-using Southernfund.UpdateSystem.Model;
+using UpdateSystem.Model;
 using Microsoft.Practices.Unity;
-using Southernfund.UpdateSystem.IService;
-using Southernfund.UpdateSystem.Service;
 
-namespace Southernfund.UpdateSystem.Web.Controllers
+namespace UpdateSystem.Web.Controllers
 {
     public class LoginController : Controller
     {

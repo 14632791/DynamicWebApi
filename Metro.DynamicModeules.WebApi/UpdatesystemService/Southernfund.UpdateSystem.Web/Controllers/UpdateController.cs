@@ -9,16 +9,16 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Xml;
-using Southernfund.UpdateSystem.IService;
-using Southernfund.UpdateSystem.Model;
-using Southernfund.UpdateSystem.Model.Util;
-using Southernfund.UpdateSystem.Web.Common;
+using UpdateSystem.IService;
+using UpdateSystem.Model;
+using UpdateSystem.Model.Util;
+using UpdateSystem.Web.Common;
 using System.Threading;
-using Southernfund.UpdateSystem.Service;
+using UpdateSystem.Service;
 using XH.UpdateSystem.Web.Common;
 using System.Threading.Tasks;
 
-namespace Southernfund.UpdateSystem.Web.Controllers
+namespace UpdateSystem.Web.Controllers
 {
     [Authority]
     public class UpdateController : Controller

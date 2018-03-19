@@ -1,4 +1,5 @@
 ﻿using Metro.DynamicModeules.Common;
+using Metro.DynamicModeules.Interface.Service;
 using Metro.DynamicModeules.Models;
 using Metro.DynamicModeules.Models.Sys;
 using Metro.DynamicModeules.Service.Base;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Metro.DynamicModeules.Service
 {
-    public class MyUserService : ServiceBase<tb_MyUser>
+    public class MyUserService : ServiceBase<tb_MyUser>, IMyUser
     {
         /// <summary>
         /// 实体查询

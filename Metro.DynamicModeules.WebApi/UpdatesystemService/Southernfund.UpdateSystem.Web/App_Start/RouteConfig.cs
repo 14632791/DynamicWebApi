@@ -5,14 +5,14 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace Southernfund.UpdateSystem.Web
+namespace UpdateSystem.Web
 {
     public class RouteConfig
     {
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-            string[] n = { "Southernfund.UpdateSystem.Web.Controllers" };
+            string[] n = { "UpdateSystem.Web.Controllers" };
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

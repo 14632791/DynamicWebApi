@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Optimization;
 
-namespace Southernfund.UpdateSystem.Web
+namespace UpdateSystem.Web
 {
     public class BundleConfig
     {

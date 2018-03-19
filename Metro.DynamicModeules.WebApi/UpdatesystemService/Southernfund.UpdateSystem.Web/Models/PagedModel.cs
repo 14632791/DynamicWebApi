@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Southernfund.UpdateSystem.Model
+namespace UpdateSystem.Model
 {
     public class PagedModel
     {

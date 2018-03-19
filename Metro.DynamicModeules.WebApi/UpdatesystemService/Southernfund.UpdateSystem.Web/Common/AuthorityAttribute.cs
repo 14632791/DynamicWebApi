@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Web.Mvc;
 
-namespace Southernfund.UpdateSystem.Web.Common
+namespace UpdateSystem.Web.Common
 {
 
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]

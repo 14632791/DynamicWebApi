@@ -77,6 +77,9 @@
     <Compile Include="ResultObject.cs" />
     <Compile Include="Service\Base\IServiceAsyncBase.cs" />
     <Compile Include="Service\Base\IServiceBase.cs" />
+    <Compile Include="Service\IMyUser.cs" />
+    <Compile Include="Service\Update\IUpProject.cs" />
+    <Compile Include="Service\Update\IUpdate.cs" />
     <Compile Include="Sys\IAttachmentStorage.cs" />
     <Compile Include="Sys\IBusinessSupportable.cs" />
     <Compile Include="Sys\IButtonInfo.cs" />

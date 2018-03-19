@@ -1,16 +1,10 @@
-﻿using Microsoft.Practices.Unity;
+﻿using Metro.DynamicModeules.Models.Update;
+using Metro.DynamicModeules.Service.Update;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
-using Southernfund.UpdateSystem.IService;
-using Southernfund.UpdateSystem.Model;
-using Southernfund.UpdateSystem.Service;
-using Southernfund.UpdateSystem.Web.Models;
+using UpdateSystem.Web.Models;
 
-namespace Southernfund.UpdateSystem.Web.APIControllers
+namespace UpdateSystem.Web.APIControllers
 {
     public class VersionController : ApiController
     {
@@ -19,9 +13,9 @@ namespace Southernfund.UpdateSystem.Web.APIControllers
         {
             try
             {
-                UpdateModel uModel = _updateSvc.GetVersionModel(pcode, cType);
+                tb_Update uModel = _updateSvc.GetSearchList(u=>u.type==cType//.GetVersionModel(pcode, cType);
                 Version serverVersion = new Version(version);
-                Version cVersion = new Version(uModel.Version);
+                Version cVersion = new Version(uModel.version);
                 return cVersion < serverVersion;
             }
             catch

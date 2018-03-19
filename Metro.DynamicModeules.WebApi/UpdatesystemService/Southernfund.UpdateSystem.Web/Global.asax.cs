@@ -8,7 +8,7 @@ using System.Web.Routing;
 using System.Web.Http;
 using Southernfund.Web;
 
-namespace Southernfund.UpdateSystem.Web
+namespace UpdateSystem.Web
 {
     public class MvcApplication : System.Web.HttpApplication
     {

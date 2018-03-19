@@ -5,18 +5,21 @@ using System.Web;
 using System.Web.Mvc;
 using Microsoft.Practices.Unity;
 using PagedList;
-using Southernfund.UpdateSystem.IService;
-using Southernfund.UpdateSystem.Model;
-using Southernfund.UpdateSystem.Model.Util;
-using Southernfund.UpdateSystem.Web.Common;
+using UpdateSystem.IService;
+using UpdateSystem.Model;
+using UpdateSystem.Model.Util;
+using UpdateSystem.Web.Common;
 using System.Linq.Expressions;
-namespace Southernfund.UpdateSystem.Web.Controllers
+using Metro.DynamicModeules.Interface.Service;
+using Metro.DynamicModeules.Models.Sys;
+
+namespace UpdateSystem.Web.Controllers
 {
 
     public class UserController : Controller
     {
         [Dependency]
-        public IUserService Us { get; set; }
+        public IMyUser Us { get; set; }
 
 
         [Authority]
@@ -25,26 +28,26 @@ namespace Southernfund.UpdateSystem.Web.Controllers
             int pgsize = 10;
             int totalCount;
             
-            var list = Us.GetUserModels(new UserModel { MerId = "", search_name = unameText, page = pageIndex, pageSize = pgsize }, out totalCount);
+            var list = Us.GetUserModels(new tb_MyUser { MerId = "", search_name = unameText, page = pageIndex, pageSize = pgsize }, out totalCount);
             if (list == null)
             {
                 return View("~/Views/System/User/List.cshtml", null);
             }
-            var pageList = new StaticPagedList<UserModel>(list, pageIndex, pgsize, totalCount);
+            var pageList = new StaticPagedList<tb_MyUser>(list, pageIndex, pgsize, totalCount);
             return View("~/Views/System/User/List.cshtml", pageList);
         }
 
 
         public ActionResult Create(string id = "")// 0)
         {
-            UserModel model = new UserModel();
+            tb_MyUser model = new tb_MyUser();
             if (!string.IsNullOrEmpty(id))// > 0) 
                 model = Us.GetUserInfoById(id);
             return View("~/Views/System/User/Create.cshtml", model);
         }
 
         [HttpPost]
-        public ActionResult Save(UserModel model)
+        public ActionResult Save(tb_MyUser model)
         {
             //if (model.Password != model.PasswordCheck)
             //{
@@ -92,7 +95,7 @@ namespace Southernfund.UpdateSystem.Web.Controllers
         public JsonResult CheckUserName(string userName, string editName)
         {
             //int totalCount;
-            //var list = Us.GetUserModels(new UserModel() { is_validate = true, search_merId = 1, search_name = userName, page = 1, pageSize = 100 }, out totalCount);
+            //var list = Us.GetUserModels(new tb_MyUser() { is_validate = true, search_merId = 1, search_name = userName, page = 1, pageSize = 100 }, out totalCount);
 
             //如果已经存在
             if (Us.CheckUserName(userName) || string.IsNullOrEmpty(userName))//list.Count > 0 && userName.Trim() != editName)/

@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Mvc;
 
-namespace Southernfund.UpdateSystem.Web
+namespace UpdateSystem.Web
 {
     public class FilterConfig
     {

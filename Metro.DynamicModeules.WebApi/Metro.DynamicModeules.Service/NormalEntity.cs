@@ -6,7 +6,7 @@ namespace Metro.DynamicModeules.Service
     using System.Linq;
     using Metro.DynamicModeules.Models;
     using Metro.DynamicModeules.Models.Sys;
-
+    using Metro.DynamicModeules.Models.Update;
     public partial class NormalEntity : DbContext
     {
         public NormalEntity()
@@ -61,6 +61,10 @@ namespace Metro.DynamicModeules.Service
         public virtual DbSet<tb_ProductCategory> tb_ProductCategory { get; set; }
         public virtual DbSet<tb_SO> tb_SO { get; set; }
         public virtual DbSet<tb_SOs> tb_SOs { get; set; }
+
+
+        public DbSet<tb_UpProject> tb_UpProject { get; set; }
+        public DbSet<tb_Update> tb_Update { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

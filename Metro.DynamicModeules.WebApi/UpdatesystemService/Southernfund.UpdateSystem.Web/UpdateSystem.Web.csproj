@@ -11,8 +11,8 @@
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>XH.UpdateSystem.Web</RootNamespace>
-    <AssemblyName>XH.UpdateSystem.Web</AssemblyName>
+    <RootNamespace>UpdateSystem.Web</RootNamespace>
+    <AssemblyName>UpdateSystem.Web</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
@@ -190,6 +190,8 @@
     </Compile>
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Models\FileUpdateInfo.cs" />
+    <Compile Include="Models\LogOnModel.cs" />
+    <Compile Include="Models\PagedModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -703,17 +705,21 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Southernfund.UpdateSystem.IService\Southernfund.UpdateSystem.IService.csproj">
-      <Project>{0bc3194a-58c3-4d23-890c-e02ce0e7bf21}</Project>
-      <Name>Southernfund.UpdateSystem.IService</Name>
+    <ProjectReference Include="..\..\..\..\failDynamicModeules\Metro.DynamicModeules\Metro.DynamicModeules.Common\Metro.DynamicModeules.Common.csproj">
+      <Project>{269eceff-b6c2-4708-86ba-afbb1a2b045c}</Project>
+      <Name>Metro.DynamicModeules.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Southernfund.UpdateSystem.Model\Southernfund.UpdateSystem.Model.csproj">
-      <Project>{4c9a62ca-9833-4907-a535-1da46a16633d}</Project>
-      <Name>Southernfund.UpdateSystem.Model</Name>
+    <ProjectReference Include="..\..\..\..\failDynamicModeules\Metro.DynamicModeules\Metro.DynamicModeules.Models\Metro.DynamicModeules.Models.csproj">
+      <Project>{937e0d53-9696-48ab-b12f-736bc6d43f15}</Project>
+      <Name>Metro.DynamicModeules.Models</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Southernfund.UpdateSystem.Service\Southernfund.UpdateSystem.Service.csproj">
-      <Project>{71a71277-b915-4251-932f-197d91cf2990}</Project>
-      <Name>Southernfund.UpdateSystem.Service</Name>
+    <ProjectReference Include="..\..\Metro.DynamicModeules.Interface\Metro.DynamicModeules.Interface.csproj">
+      <Project>{66b7a24b-9fb9-4436-a269-f6740e700c03}</Project>
+      <Name>Metro.DynamicModeules.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Metro.DynamicModeules.Service\Metro.DynamicModeules.Service.csproj">
+      <Project>{309ae467-67fa-4578-b25e-784e23e9266d}</Project>
+      <Name>Metro.DynamicModeules.Service</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

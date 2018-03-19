@@ -17,7 +17,7 @@ using System.Data;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Collections;
 using Ionic.Zip;
-using Southernfund.UpdateSystem.Model.Util;
+using UpdateSystem.Model.Util;
 
 namespace Common
 {

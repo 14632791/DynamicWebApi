@@ -1,10 +1,12 @@
-using System.Web.Mvc;
+using Metro.DynamicModeules.Interface.Service;
+using Metro.DynamicModeules.Interface.Service.Update;
+using Metro.DynamicModeules.Service;
+using Metro.DynamicModeules.Service.Update;
 using Microsoft.Practices.Unity;
+using System.Web.Mvc;
 using Unity.Mvc5;
-using Southernfund.UpdateSystem.IService;
-using Southernfund.UpdateSystem.Service;
 
-namespace Southernfund.UpdateSystem.Web
+namespace UpdateSystem.Web
 {
     public static class UnityConfig
     {
@@ -17,8 +19,8 @@ namespace Southernfund.UpdateSystem.Web
             
             // e.g. container.RegisterType<ITestService, TestService>();
             //container.RegisterType<IUserService, UserService>();
-            container.RegisterType<IUserService, UserService>(new ContainerControlledLifetimeManager());
-            container.RegisterType<IProjects, ProjectsService>(new ContainerControlledLifetimeManager());
+            container.RegisterType<IMyUser, MyUserService>(new ContainerControlledLifetimeManager());
+            container.RegisterType<IUpProject, UpProjectService>(new ContainerControlledLifetimeManager());
             container.RegisterType<IUpdate, UpdateService>(new ContainerControlledLifetimeManager());
             
             //container.RegisterType<IRoleService, RoleService>(new ContainerControlledLifetimeManager());

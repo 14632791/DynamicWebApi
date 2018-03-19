@@ -5,11 +5,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Southernfund.UpdateSystem.IService;
-using Southernfund.UpdateSystem.Model;
-using Southernfund.UpdateSystem.Web.Common;
+using UpdateSystem.IService;
+using UpdateSystem.Model;
+using UpdateSystem.Web.Common;
 
-namespace Southernfund.UpdateSystem.Web.Controllers
+namespace UpdateSystem.Web.Controllers
 {
     [Authority]
     public class ProjectsController : Controller
