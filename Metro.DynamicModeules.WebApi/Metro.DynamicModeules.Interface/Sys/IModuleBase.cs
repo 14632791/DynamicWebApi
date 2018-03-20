@@ -41,7 +41,7 @@ namespace Metro.DynamicModeules.Interface.Sys
         /// <summary>
         /// 宿主窗体
         /// </summary>
-        IMdiMainWindow MdiMainWindow { get; set; }
+        IMdiMainViewModel MdiMainWindow { get; set; }
 
        
         /// <summary>
