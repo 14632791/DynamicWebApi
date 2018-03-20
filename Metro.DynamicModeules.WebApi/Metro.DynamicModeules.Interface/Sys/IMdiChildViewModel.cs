@@ -1,11 +1,6 @@
-﻿using MahApps.Metro.IconPacks;
-using Metro.DynamicModeules.Models.Sys;
-using System;
+﻿using Metro.DynamicModeules.Models.Sys;
 using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 using System.Windows.Input;
 
 namespace Metro.DynamicModeules.Interface.Sys
