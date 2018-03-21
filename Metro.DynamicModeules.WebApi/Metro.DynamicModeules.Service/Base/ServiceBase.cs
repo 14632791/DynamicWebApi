@@ -198,12 +198,12 @@ namespace Metro.DynamicModeules.Service.Base
         /// <param name="pageSize"></param>
         /// <param name="pageIndex">第一页从0开始</param>
         /// <returns></returns>
-        public TModel[] GetSearchListByPage<TKey>(Expression<Func<TModel, bool>> where, Expression<Func<TModel, TKey>> orderBy, int pageSize, int pageIndex)//, out int totalRow)
+        public virtual TModel[] GetSearchListByPage<TKey>(Expression<Func<TModel, bool>> where, Expression<Func<TModel, TKey>> orderBy, int pageSize, int pageIndex)//, out int totalRow)
         {
             //totalRow = 0;
             try
             {
-                using (DbContext context = GetContext())//解决缓存问题，所以new 
+                using (DbContext context = GetContext())//解决缓存问题，所以new  LambdaExpression
                 {
                     var lstEf = context.Set<TModel>().Where(where).OrderByDescending(orderBy).Skip((pageIndex) * pageSize).Take(pageSize).ToArray();
                     //totalRow = lstEf.Count;

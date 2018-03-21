@@ -12,7 +12,7 @@ namespace Metro.DynamicModeules.Interface.Sys
         /// 返回数据操作窗体的按钮
         /// </summary>
         /// <returns></returns>
-        IList GetDataOperatableButtons();
+        //IList GetDataOperatableButtons();
 
       
         /// <summary>

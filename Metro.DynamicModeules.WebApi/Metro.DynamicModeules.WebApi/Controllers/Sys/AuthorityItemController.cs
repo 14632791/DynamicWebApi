@@ -6,6 +6,9 @@ using System.Web;
 using Metro.DynamicModeules.Service.Base;
 using Metro.DynamicModeules.Service;
 using System.Web.Http;
+using System.Xml.Linq;
+using Metro.DynamicModeules.Common.ExpressionSerialization;
+using System.Linq.Expressions;
 
 namespace Metro.DynamicModeules.WebApi.Controllers.Sys
 {
@@ -29,6 +32,12 @@ namespace Metro.DynamicModeules.WebApi.Controllers.Sys
         public IEnumerable<tb_MyAuthorityByItem> GetAllItems()
         {
             return _itemsService.GetAllItems();
+        }
+
+        public override tb_MyAuthorityItem[] GetSearchListByPage(XElement xmlPredicate, int pageSize, int pageIndex)
+        {
+            Expression<Func<tb_MyAuthorityItem, bool>> where = SerializeHelper.DeserializeExpression<tb_MyAuthorityItem, bool>(xmlPredicate);
+            return _service.GetSearchListByPage(where, g => g.Code, pageSize, pageIndex);
         }
     }
 }

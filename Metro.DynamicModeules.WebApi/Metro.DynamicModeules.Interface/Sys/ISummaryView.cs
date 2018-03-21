@@ -12,11 +12,7 @@ namespace Metro.DynamicModeules.Interface.Sys
     /// </summary>
     public interface ISummaryView<T> where T : class, new()
     {
-        /// <summary>
-        /// 记录数
-        /// </summary>
-        int RowCount { get; }
-        
+       
 
         /// <summary>
         /// 数据源
@@ -37,29 +33,5 @@ namespace Metro.DynamicModeules.Interface.Sys
         /// 刷新数据源，重新显示数据
         /// </summary>
         void RefreshDataSource();
-
-
-        /// <summary>
-        /// 移动到第一条记录
-        /// </summary>
-        void MoveFirst();
-
-        /// <summary>
-        /// 移动到前一条记录
-        /// </summary>
-        void MovePrior();
-
-        /// <summary>
-        /// 移动到下一条记录
-        /// </summary>
-        void MoveNext();
-
-        /// <summary>
-        /// 移动到最后一条记录
-        /// </summary>
-        void MoveLast();
-
-
-
     }
 }

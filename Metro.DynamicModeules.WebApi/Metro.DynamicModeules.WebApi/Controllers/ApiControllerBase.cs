@@ -17,7 +17,7 @@ namespace Metro.DynamicModeules.WebApi.Controllers
     /// API控制器基类
     /// </summary>
     [CustomException]
-    public class ApiControllerBase<TModel> : ApiController, IApiControllerBase<TModel> where TModel : class
+    public abstract class ApiControllerBase<TModel> : ApiController, IApiControllerBase<TModel> where TModel : class
     {
         #region 私有方法
         /// <summary>
@@ -100,12 +100,16 @@ namespace Metro.DynamicModeules.WebApi.Controllers
         }
 
         [System.Web.Http.HttpPost]
-        public TModel[] GetSearchListByPage<TKey>(XElement xmlPredicate, XElement xmlOrderBy, int pageSize, int pageIndex)//, out int totalRow)
-        {                //将xml反序列化为linq
-            Expression<Func<TModel, bool>> where = SerializeHelper.DeserializeExpression<TModel, bool>(xmlPredicate);
-            Expression<Func<TModel, TKey>> orderBy = SerializeHelper.DeserializeExpression<TModel, TKey>(xmlOrderBy);
-            return _service.GetSearchListByPage<TKey>(where, orderBy, pageSize, pageIndex);
-        }
+        public abstract TModel[] GetSearchListByPage(XElement xmlPredicate, int pageSize, int pageIndex);
+
+
+        //[System.Web.Http.HttpPost]
+        //public TModel[] GetSearchListByPage<TKey>(XElement xmlPredicate, XElement xmlOrderBy, int pageSize, int pageIndex)//, out int totalRow)
+        //{                //将xml反序列化为linq
+        //    Expression<Func<TModel, bool>> where = SerializeHelper.DeserializeExpression<TModel, bool>(xmlPredicate);
+        //    Expression<Func<TModel, TKey>> orderBy = SerializeHelper.DeserializeExpression<TModel, TKey>(xmlOrderBy);
+        //    return _service.GetSearchListByPage(where, orderBy, pageSize, pageIndex);
+        //}
         [System.Web.Http.HttpPost]
         public bool Update(TModel model, bool isSave = true)
         {

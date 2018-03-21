@@ -28,7 +28,7 @@ namespace Metro.DynamicModeules.Interface.Service.Base
         bool Update(XElement xmlPredicate, Dictionary<string, object> dic, bool isSave = true);
 
         TModel[] GetSearchList(XElement xmlPredicate);
-        TModel[] GetSearchListByPage<TKey>(XElement xmlPredicate, XElement xmlOrderBy, int pageSize, int pageIndex);//, out int totalRow);
+       // TModel[] GetSearchListByPage<TKey>(XElement xmlPredicate, XElement xmlOrderBy, int pageSize, int pageIndex);//, out int totalRow);
         long GetListCount(XElement xmlPredicate);
     }
     public interface ICommonServiceBase<TModel>

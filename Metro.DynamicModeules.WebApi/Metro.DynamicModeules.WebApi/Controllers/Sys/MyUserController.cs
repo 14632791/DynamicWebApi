@@ -45,5 +45,11 @@ namespace Metro.DynamicModeules.WebApi.Controllers.Sys
             await Task.Delay(500);
             return string.Format("task 执行线程:{0}", Thread.CurrentThread.ManagedThreadId);
         }
+
+        public override tb_MyUser[] GetSearchListByPage(XElement xmlPredicate, int pageSize, int pageIndex)
+        {
+            Expression<Func<tb_MyUser, bool>> where = SerializeHelper.DeserializeExpression<tb_MyUser, bool>(xmlPredicate);
+            return _service.GetSearchListByPage(where, g => g.CreateTime, pageSize, pageIndex);
+        }
     }
 }
