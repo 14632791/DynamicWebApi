@@ -27,10 +27,16 @@ namespace Metro.DynamicModeules.WebApi.Controllers.Sys
             return _groupService.GetGroupsByAccount(userAccount);
         }
 
-        public override tb_MyUserGroup[] GetSearchListByPage(XElement xmlPredicate, int pageSize, int pageIndex)
+        //public override tb_MyUserGroup[] GetSearchListByPage(XElement xmlPredicate, int pageSize, int pageIndex)
+        //{
+        //    Expression<Func<tb_MyUserGroup, bool>> where = SerializeHelper.DeserializeExpression<tb_MyUserGroup, bool>(xmlPredicate);
+        //     return _service.GetSearchListByPage(where, g=>g.CreatedTime, pageSize, pageIndex);
+        //}
+
+        protected override dynamic GetOrderBy()
         {
-            Expression<Func<tb_MyUserGroup, bool>> where = SerializeHelper.DeserializeExpression<tb_MyUserGroup, bool>(xmlPredicate);
-             return _service.GetSearchListByPage(where, g=>g.CreatedTime, pageSize, pageIndex);
+            Expression<Func<tb_MyUserGroup, DateTime?>> orderBy = g => g.CreatedTime;
+            return orderBy;
         }
     }
 }

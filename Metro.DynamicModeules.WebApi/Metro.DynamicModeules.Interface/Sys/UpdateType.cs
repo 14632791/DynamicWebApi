@@ -16,18 +16,18 @@ namespace Metro.DynamicModeules.Interface.Sys
     /// <summary>
     /// 数据窗体的操作类型
     /// </summary>
-    public enum UpdateType
-    {
-        None,
+    //public enum UpdateType
+    //{
+    //    None,
 
-        /// <summary>
-        /// 新增状态
-        /// </summary>
-        Add,
+    //    /// <summary>
+    //    /// 新增状态
+    //    /// </summary>
+    //    Add,
 
-        /// <summary>
-        /// 修改状态
-        /// </summary>
-        Modify
-    }
+    //    /// <summary>
+    //    /// 修改状态
+    //    /// </summary>
+    //    Modify
+    //}
 }

@@ -45,11 +45,17 @@ namespace Metro.DynamicModeules.WebApi.Controllers.Sys
             await Task.Delay(500);
             return string.Format("task 执行线程:{0}", Thread.CurrentThread.ManagedThreadId);
         }
+        [System.Web.Http.HttpPost]
+        //public override tb_MyUser[] GetSearchListByPage([FromBody]XElement xmlPredicate, int pageSize, int pageIndex)
+        //{
+        //    Expression<Func<tb_MyUser, bool>> where = SerializeHelper.DeserializeExpression<tb_MyUser, bool>(xmlPredicate);
+        //    return _service.GetSearchListByPage(where, g => g.CreateTime, pageSize, pageIndex);
+        //}
 
-        public override tb_MyUser[] GetSearchListByPage(XElement xmlPredicate, int pageSize, int pageIndex)
+        protected override dynamic GetOrderBy()
         {
-            Expression<Func<tb_MyUser, bool>> where = SerializeHelper.DeserializeExpression<tb_MyUser, bool>(xmlPredicate);
-            return _service.GetSearchListByPage(where, g => g.CreateTime, pageSize, pageIndex);
+            Expression<Func<tb_MyUser, DateTime?>> orderBy = g => g.CreatedTime;
+            return orderBy;
         }
     }
 }

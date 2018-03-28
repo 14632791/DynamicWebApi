@@ -34,10 +34,16 @@ namespace Metro.DynamicModeules.WebApi.Controllers.Sys
             return _itemsService.GetAllItems();
         }
 
-        public override tb_MyAuthorityItem[] GetSearchListByPage(XElement xmlPredicate, int pageSize, int pageIndex)
+        //public override tb_MyAuthorityItem[] GetSearchListByPage(XElement xmlPredicate, int pageSize, int pageIndex)
+        //{
+        //    Expression<Func<tb_MyAuthorityItem, bool>> where = SerializeHelper.DeserializeExpression<tb_MyAuthorityItem, bool>(xmlPredicate);
+        //    return _service.GetSearchListByPage(where, g => g.Code, pageSize, pageIndex);
+        //}
+
+        protected override dynamic GetOrderBy()
         {
-            Expression<Func<tb_MyAuthorityItem, bool>> where = SerializeHelper.DeserializeExpression<tb_MyAuthorityItem, bool>(xmlPredicate);
-            return _service.GetSearchListByPage(where, g => g.Code, pageSize, pageIndex);
+            Expression<Func<tb_MyAuthorityItem, string>> orderBy = g => g.Code;
+            return orderBy;
         }
     }
 }

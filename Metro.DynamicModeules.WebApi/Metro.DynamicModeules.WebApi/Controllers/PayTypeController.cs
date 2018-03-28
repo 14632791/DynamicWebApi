@@ -13,14 +13,19 @@ using System.Linq.Expressions;
 
 namespace Metro.DynamicModeules.WebApi.Controllers
 {
-    public class PayTypeController : ApiControllerBase<tb_PayType>
+    public  class PayTypeController : ApiControllerBase<tb_PayType>
     {
-        public override tb_PayType[] GetSearchListByPage(XElement xmlPredicate, int pageSize, int pageIndex)
-        {
-            Expression<Func<tb_PayType, bool>> where = SerializeHelper.DeserializeExpression<tb_PayType, bool>(xmlPredicate);
-            return _service.GetSearchListByPage(where, g => g.isid, pageSize, pageIndex);
-        }
+        //public override tb_PayType[] GetSearchListByPage(XElement xmlPredicate, int pageSize, int pageIndex)
+        //{
+        //    Expression<Func<tb_PayType, bool>> where = SerializeHelper.DeserializeExpression<tb_PayType, bool>(xmlPredicate);
+        //    return _service.GetSearchListByPage(where, g => g.isid, pageSize, pageIndex);
+        //}
 
+        protected override dynamic GetOrderBy()
+        {
+            Expression<Func<tb_PayType, int>> orderBy = g => g.isid;
+            return orderBy;
+        }
         public void PostAll([FromBody]string value)
         {
             var model = _service.Find(new object[] { "CASH" });

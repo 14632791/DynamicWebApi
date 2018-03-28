@@ -17,7 +17,7 @@ namespace Metro.DynamicModeules.WebApi.Controllers
     /// API控制器基类
     /// </summary>
     [CustomException]
-    public abstract class ApiControllerBase<TModel> : ApiController, IApiControllerBase<TModel> where TModel : class
+    public abstract class ApiControllerBase<TModel> : ApiController where TModel : class  //, IApiControllerBase<TModel>
     {
         #region 私有方法
         /// <summary>
@@ -42,7 +42,7 @@ namespace Metro.DynamicModeules.WebApi.Controllers
             _service = GetService();
         }
         #region 实现service的方法
-        public object JsonHelper { get; private set; }
+        //public object JsonHelper { get; private set; }
 
         protected virtual ServiceBase<TModel> GetService()
         {
@@ -50,32 +50,42 @@ namespace Metro.DynamicModeules.WebApi.Controllers
         }
 
         [System.Web.Http.HttpPost]
-        public object[] Add(TModel model, bool isSave = true)
+        public object[] Add(dynamic dyncObj)
         {
+            bool isSave = Convert.ToBoolean(dyncObj.isSave);
+            TModel model = JsonHelper.JsonDe<TModel>(Convert.ToString(dyncObj.model));
             return _service.Add(model, isSave);
         }
 
         [System.Web.Http.HttpPost]
         [System.Web.Http.ActionName("Add1")]
-        public bool Add(TModel[] paramList, bool isSave = true)
+        public bool Add1(dynamic dyncObj)
         {
+            bool isSave = Convert.ToBoolean(dyncObj.isSave);
+            TModel[] paramList = JsonHelper.JsonDe<TModel[]>(Convert.ToString(dyncObj.paramList));
             return _service.Add(paramList, isSave);
         }
         [System.Web.Http.HttpPost]
-        public bool Delete(bool isSave, params object[] keyValues)
+        public bool Delete(dynamic dyncObj)
         {
+            bool isSave = Convert.ToBoolean(dyncObj.isSave);
+            object[] keyValues = JsonHelper.JsonDe<object[]>(Convert.ToString(dyncObj.keyValues));
             return _service.Delete(isSave, keyValues);
         }
 
         [System.Web.Http.HttpPost]
         [System.Web.Http.ActionName("Delete1")]
-        public bool Delete(bool isSave, TModel[] entities)
+        public bool Delete1(dynamic dyncObj)
         {
+            bool isSave = Convert.ToBoolean(dyncObj.isSave);
+            TModel[] entities = JsonHelper.JsonDe<TModel[]>(Convert.ToString(dyncObj.entities));
             return _service.Delete(isSave, entities);
         }
         [System.Web.Http.ActionName("Delete2")]
-        public bool Delete(TModel model, bool isSave = true)
+        public bool Delete2(dynamic dyncObj)
         {
+            TModel model = JsonHelper.JsonDe<TModel>(Convert.ToString(dyncObj.model));
+            bool isSave = Convert.ToBoolean(dyncObj.isSave);
             return _service.Delete(model, isSave);
         }
 
@@ -93,31 +103,37 @@ namespace Metro.DynamicModeules.WebApi.Controllers
         }
 
         [System.Web.Http.HttpPost]
-        public long GetListCount([FromBody]XElement xmlPredicate)
+        public long GetListCount(XElement xmlPredicate)
         {
             Expression<Func<TModel, bool>> where = SerializeHelper.DeserializeExpression<TModel, bool>(xmlPredicate);
             return _service.GetListCount(where);
         }
 
         [System.Web.Http.HttpPost]
-        public abstract TModel[] GetSearchListByPage(XElement xmlPredicate, int pageSize, int pageIndex);
-
-
-        //[System.Web.Http.HttpPost]
-        //public TModel[] GetSearchListByPage<TKey>(XElement xmlPredicate, XElement xmlOrderBy, int pageSize, int pageIndex)//, out int totalRow)
-        //{                //将xml反序列化为linq
-        //    Expression<Func<TModel, bool>> where = SerializeHelper.DeserializeExpression<TModel, bool>(xmlPredicate);
-        //    Expression<Func<TModel, TKey>> orderBy = SerializeHelper.DeserializeExpression<TModel, TKey>(xmlOrderBy);
-        //    return _service.GetSearchListByPage(where, orderBy, pageSize, pageIndex);
-        //}
-        [System.Web.Http.HttpPost]
-        public bool Update(TModel model, bool isSave = true)
+        public TModel[] GetSearchListByPage(dynamic dyncObj)
         {
+            XElement xmlPredicate = JsonHelper.JsonDe<XElement>(Convert.ToString(dyncObj.xmlPredicate));
+            int pageSize = Convert.ToInt32(dyncObj.pageSize);
+            int pageIndex = (int)Convert.ToInt32(dyncObj.pageIndex);
+            Expression<Func<TModel, bool>> where = SerializeHelper.DeserializeExpression<TModel, bool>(xmlPredicate);
+            dynamic orderBy = GetOrderBy();
+            return _service.GetSearchListByPage(where, orderBy, pageSize, pageIndex);
+        }
+        protected abstract dynamic GetOrderBy();
+
+        [System.Web.Http.HttpPost]
+        public bool Update(dynamic dyncObj)
+        {
+            TModel model = JsonHelper.JsonDe<TModel>(Convert.ToString(dyncObj.model));
+            bool isSave = Convert.ToBoolean(dyncObj.isSave);
             return _service.Update(model, isSave);
         }
         [System.Web.Http.HttpPost]
-        public bool Update(XElement xmlPredicate, Dictionary<string, object> dic, bool isSave = true)
+        public bool Update2(dynamic dyncObj)
         {
+            XElement xmlPredicate = JsonHelper.JsonDe<XElement>(Convert.ToString(dyncObj.xmlPredicate));
+            Dictionary<string, object> dic = JsonHelper.JsonDe<Dictionary<string, object>>(Convert.ToString(dyncObj.dic));
+            bool isSave = Convert.ToBoolean(dyncObj.isSave);
             Expression<Func<TModel, bool>> where = SerializeHelper.DeserializeExpression<TModel, bool>(xmlPredicate);
             return _service.Update(where, dic, isSave);
         }

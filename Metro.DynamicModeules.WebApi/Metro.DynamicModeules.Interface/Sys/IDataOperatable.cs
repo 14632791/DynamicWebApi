@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 
 namespace Metro.DynamicModeules.Interface.Sys
 {
@@ -127,7 +128,7 @@ namespace Metro.DynamicModeules.Interface.Sys
         /// <summary>
         /// 当前操作状态
         /// </summary>
-        UpdateType UpdateType { get; }
+        DataRowState UpdateType { get; }
         
         /// <summary>
         /// 是否修改了数据
