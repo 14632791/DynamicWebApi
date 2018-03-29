@@ -21,18 +21,27 @@ namespace Metro.DynamicModeules.WebApi.Controllers.Sys
             _groupService = new UserGroupService();
             return _groupService;
         }
+
+        /// <summary>
+        /// 获取该用户对应的所有组
+        /// </summary>
+        /// <param name="userAccount"></param>
+        /// <returns></returns>
         [System.Web.Http.HttpPost]
         public IEnumerable<tb_MyUserGroup> GetGroupsByAccount([FromBody]string userAccount)
         {
             return _groupService.GetGroupsByAccount(userAccount);
         }
-
-        //public override tb_MyUserGroup[] GetSearchListByPage(XElement xmlPredicate, int pageSize, int pageIndex)
-        //{
-        //    Expression<Func<tb_MyUserGroup, bool>> where = SerializeHelper.DeserializeExpression<tb_MyUserGroup, bool>(xmlPredicate);
-        //     return _service.GetSearchListByPage(where, g=>g.CreatedTime, pageSize, pageIndex);
-        //}
-
+        
+        /// <summary>
+        /// 通过组code获取与用户的对应关系
+        /// </summary>
+        /// <param name="groupCode"></param>
+        /// <returns></returns>
+        public IEnumerable<tb_MyUserGroupRe> GetUserRelationByGroup([FromBody] string groupCode)
+        {
+            return _groupService.GetUserRelationByGroup(groupCode);
+        }
         protected override dynamic GetOrderBy()
         {
             Expression<Func<tb_MyUserGroup, DateTime?>> orderBy = g => g.CreatedTime;

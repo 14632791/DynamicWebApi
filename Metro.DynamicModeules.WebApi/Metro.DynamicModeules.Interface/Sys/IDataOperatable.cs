@@ -128,16 +128,16 @@ namespace Metro.DynamicModeules.Interface.Sys
         /// <summary>
         /// 当前操作状态
         /// </summary>
-        DataRowState UpdateType { get; }
-        
+        DataRowState UpdateType { get; set; }
+
         /// <summary>
         /// 是否修改了数据
         /// </summary>
-        bool DataChanged { get; }
+        bool DataHasChanged();
 
         /// <summary>
         /// 是否允许数据操作
         /// </summary>
-        bool AllowDataOperate { get; set; }
+       // bool AllowDataOperate { get; set; }
     }
 }

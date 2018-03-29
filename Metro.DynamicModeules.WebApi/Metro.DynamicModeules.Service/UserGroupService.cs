@@ -40,5 +40,24 @@ namespace Metro.DynamicModeules.Service
                 normalContext.Dispose();
             }
         }
+        public IEnumerable<tb_MyUserGroupRe> GetUserRelationByGroup( string groupCode)
+        {
+            NormalEntity normalContext = (NormalEntity)DbContext;
+            try
+            {
+                var grs = from r in normalContext.tb_MyUserGroupRe
+                           where r.GroupCode.Equals(groupCode)
+                           select r;
+                return grs.ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                normalContext.Dispose();
+            }
+        }
     }
 }
