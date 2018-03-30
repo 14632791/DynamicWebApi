@@ -14,7 +14,7 @@ namespace Metro.DynamicModeules.Interface.Sys
         /// 当前选中的page
         /// </summary>
         IMdiChildViewModel FocusedPage { get; set; }
-        
+        ObservableCollection<IModuleBase> Modules { get; set; }
     }
 
     /// <summary>

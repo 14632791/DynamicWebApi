@@ -1,4 +1,5 @@
 ﻿using Metro.DynamicModeules.Models.Sys;
+using System.Collections.ObjectModel;
 using System.Windows.Controls;
 
 namespace Metro.DynamicModeules.Interface.Sys
@@ -6,7 +7,7 @@ namespace Metro.DynamicModeules.Interface.Sys
     /// <summary>
     /// 模块主窗体接口
     /// </summary>
-    public interface IModuleBase
+    public interface IModuleBase: ICommonModuleBase
     {
         /// <summary>
         /// 模块信息
@@ -18,6 +19,8 @@ namespace Metro.DynamicModeules.Interface.Sys
         /// 初始化所有子界面
         /// </summary>
         void InitMenu();
+        ObservableCollection<IMdiChildViewModel> SubModuleList { get; set; }
+        IMdiChildViewModel FocusedChild { get; set; }
     }
 
     /// <summary>
