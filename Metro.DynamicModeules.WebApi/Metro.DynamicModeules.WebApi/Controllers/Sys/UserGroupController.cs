@@ -32,12 +32,13 @@ namespace Metro.DynamicModeules.WebApi.Controllers.Sys
         {
             return _groupService.GetGroupsByAccount(userAccount);
         }
-        
+
         /// <summary>
         /// 通过组code获取与用户的对应关系
         /// </summary>
         /// <param name="groupCode"></param>
         /// <returns></returns>
+        [System.Web.Http.HttpPost]
         public IEnumerable<tb_MyUserGroupRe> GetUserRelationByGroup([FromBody] string groupCode)
         {
             return _groupService.GetUserRelationByGroup(groupCode);
